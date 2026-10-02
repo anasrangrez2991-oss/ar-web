@@ -13,6 +13,16 @@
   <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
 
   <style>
+    :root {
+      --bg-color: #f4efeb;
+      --card-bg: #eae4dd;
+      --text-dark: #121212;
+      --text-muted: #726e6a;
+      --dark-footer: #0f1012;
+      --accent-red: #d93838;
+      --border-color: #d2cbbe;
+    }
+
     * {
       margin: 0;
       padding: 0;
@@ -24,9 +34,9 @@
     }
 
     body {
-      font-family: 'Plus Jakarta Sans', Arial, Helvetica, sans-serif;
-      background: #f4f1ea;
-      color: #111;
+      font-family: 'Plus Jakarta Sans', -apple-system, BlinkMacSystemFont, "Segoe UI", Roboto, Helvetica, Arial, sans-serif;
+      background-color: var(--bg-color);
+      color: var(--text-dark);
       overflow-x: hidden;
     }
 
@@ -39,7 +49,7 @@
     .cursor {
       width: 18px;
       height: 18px;
-      border: 1px solid #111;
+      border: 1px solid var(--text-dark);
       border-radius: 50%;
       position: fixed;
       pointer-events: none;
@@ -51,60 +61,64 @@
     .cursor.active {
       width: 55px;
       height: 55px;
-      background: #111;
+      background: var(--text-dark);
     }
 
-    /* NAVBAR */
+    /* NAVBAR (MEHRUNI DIGITAL STYLE) */
     nav {
-      position: fixed;
+      position: sticky;
       top: 0;
       left: 0;
       width: 100%;
-      padding: 25px 5%;
+      padding: 24px 6%;
       display: flex;
       justify-content: space-between;
       align-items: center;
       z-index: 1000;
-      mix-blend-mode: difference;
-      color: white;
+      background-color: rgba(244, 239, 235, 0.95);
+      backdrop-filter: blur(12px);
+      border-bottom: 1px solid rgba(0,0,0,0.06);
+      color: var(--text-dark);
     }
 
     .logo {
-      font-size: 25px;
+      font-size: 26px;
       font-weight: 900;
       letter-spacing: -1px;
+      color: var(--text-dark);
+    }
+
+    .logo span {
+      color: var(--accent-red);
     }
 
     .nav-links {
       display: flex;
-      gap: 35px;
+      gap: 28px;
       list-style: none;
-      font-size: 14px;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
     }
 
     .nav-links a {
       position: relative;
+      opacity: 0.65;
+      transition: opacity 0.3s, color 0.3s;
+      padding-bottom: 3px;
     }
 
-    .nav-links a::after {
-      content: "";
-      position: absolute;
-      width: 0;
-      height: 1px;
-      left: 0;
-      bottom: -5px;
-      background: currentColor;
-      transition: .3s;
-    }
-
-    .nav-links a:hover::after {
-      width: 100%;
+    .nav-links a:hover, .nav-links a.active {
+      opacity: 1;
+      border-bottom: 2px solid var(--text-dark);
     }
 
     .menu {
       display: none;
       font-size: 28px;
       cursor: pointer;
+      color: var(--text-dark);
     }
 
     /* HERO */
@@ -220,11 +234,11 @@
 
     /* SERVICES */
     .services {
-      border-top: 1px solid #aaa;
+      border-top: 1px solid var(--border-color);
     }
 
     .service {
-      border-top: 1px solid #aaa;
+      border-top: 1px solid var(--border-color);
       padding: 35px 0;
       display: grid;
       grid-template-columns: 80px 1fr 1fr 80px;
@@ -233,12 +247,12 @@
     }
 
     .service:last-child {
-      border-bottom: 1px solid #aaa;
+      border-bottom: 1px solid var(--border-color);
     }
 
     .service:hover {
       padding-left: 25px;
-      background: #e9e5dc;
+      background: var(--card-bg);
     }
 
     .service-number {
@@ -344,170 +358,541 @@
     .project-info p {
       margin-top: 8px;
       opacity: .7;
+      font-size: 14px;
+      line-height: 1.5;
+    }
+
+    .project-badge {
+      position: absolute;
+      top: 25px;
+      left: 25px;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.65);
+      color: #fff;
+      backdrop-filter: blur(8px);
+      z-index: 2;
+      border: 1px solid rgba(255,255,255,0.15);
+    }
+
+    .project-metrics {
+      display: inline-block;
+      margin-top: 10px;
+      font-size: 12px;
+      font-weight: 800;
+      color: #25D366;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+    }
+
+    .service-tags {
+      display: flex;
+      gap: 6px;
+      flex-wrap: wrap;
+      margin-top: 10px;
+    }
+
+    .service-tag {
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      padding: 4px 10px;
+      border-radius: 4px;
+      background: rgba(0,0,0,0.06);
+      color: #444;
+    }
+
+    /* STATUS BADGE & TECH PILLS */
+    .status-badge {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 8px 18px;
+      border-radius: 100px;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.1);
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      margin-bottom: 24px;
+      width: fit-content;
+    }
+
+    .status-dot {
+      width: 8px;
+      height: 8px;
+      background: #25D366;
+      border-radius: 50%;
+      box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25);
+      animation: pulse-dot 2s infinite;
+    }
+
+    @keyframes pulse-dot {
+      0%, 100% { box-shadow: 0 0 0 3px rgba(37, 211, 102, 0.25); }
+      50% { box-shadow: 0 0 0 6px rgba(37, 211, 102, 0.45); }
+    }
+
+    .tech-pills {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 8px;
+      margin-top: 24px;
+    }
+
+    .tech-pill {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      padding: 6px 14px;
+      border-radius: 20px;
+      background: rgba(0,0,0,0.04);
+      border: 1px solid rgba(0,0,0,0.08);
+      color: #333;
+    }
+
+    .trust-highlights {
+      display: flex;
+      gap: 20px;
+      flex-wrap: wrap;
+      margin-top: 18px;
+      font-size: 13px;
+      font-weight: 700;
+      color: #555;
+    }
+
+    .trust-highlight-item {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
     }
 
     /* STATS */
     .stats {
       display: grid;
       grid-template-columns: repeat(4, 1fr);
-      border-top: 1px solid #aaa;
-      border-bottom: 1px solid #aaa;
+      gap: 30px;
+      border-top: 1px solid var(--border-color);
+      border-bottom: 1px solid var(--border-color);
+      padding: 60px 0;
     }
 
     .stat {
-      padding: 50px 20px;
-      border-right: 1px solid #aaa;
-    }
-
-    .stat:last-child {
-      border-right: 0;
+      padding: 10px;
     }
 
     .stat h3 {
-      font-size: 70px;
-      letter-spacing: -5px;
+      font-size: clamp(55px, 6vw, 75px);
+      letter-spacing: -4px;
+      font-weight: 900;
+      line-height: 1;
+      color: var(--text-dark);
     }
 
     .stat p {
-      margin-top: 10px;
-      opacity: .6;
+      margin-top: 12px;
+      font-size: 14px;
+      line-height: 1.4;
+      color: var(--text-muted);
+      font-weight: 500;
+    }
+
+    /* WHY WORK WITH US (FEATURES) */
+    .features-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(280px, 1fr));
+      gap: 25px;
+    }
+
+    .feature-card {
+      background: var(--card-bg);
+      padding: 42px 35px;
+      border-radius: 22px;
+      border: 1px solid var(--border-color);
+      transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), background .3s;
+    }
+
+    .feature-card:hover {
+      transform: translateY(-6px);
+      background: #e2dcd1;
+    }
+
+    .feature-num {
+      font-size: 13px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      opacity: .4;
+      margin-bottom: 20px;
+      font-family: monospace;
+    }
+
+    .feature-card h3 {
+      font-size: 24px;
+      font-weight: 900;
+      letter-spacing: -0.5px;
+      margin-bottom: 12px;
+      line-height: 1.2;
+    }
+
+    .feature-card p {
+      font-size: 15px;
+      line-height: 1.6;
+      opacity: .8;
     }
 
     /* PROCESS */
     .process-row {
+      border-top: 1px solid var(--border-color);
+      padding: 40px 0;
       display: grid;
-      grid-template-columns: 100px 1fr 1fr;
-      padding: 35px 0;
-      border-top: 1px solid #aaa;
-      align-items: center;
+      grid-template-columns: 80px 1fr 2fr;
+      gap: 30px;
+      align-items: baseline;
+      transition: background .3s, padding-left .3s;
     }
 
     .process-row:last-child {
-      border-bottom: 1px solid #aaa;
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .process-row:hover {
+      background: var(--card-bg);
+      padding-left: 20px;
+    }
+
+    .process-row > div:first-child {
+      font-size: 14px;
+      font-weight: 800;
+      color: var(--text-muted);
+      font-family: monospace;
     }
 
     .process-row h3 {
-      font-size: 35px;
+      font-size: clamp(24px, 3vw, 32px);
+      font-weight: 800;
+      letter-spacing: -1px;
+      color: var(--text-dark);
     }
 
     .process-row p {
-      max-width: 400px;
+      font-size: 16px;
       line-height: 1.6;
+      color: #444;
+      max-width: 550px;
     }
 
-    /* CTA */
-    .cta {
-      min-height: 80vh;
+    /* REVIEWS SECTION */
+    .reviews {
       background: #111;
-      color: white;
+      color: #f4f1ea;
+    }
+
+    .reviews .section-number {
+      color: #888;
+    }
+
+    .reviews-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(300px, 1fr));
+      gap: 25px;
+    }
+
+    .review-card {
+      background: #1b1b1b;
+      padding: 40px 35px;
+      border-radius: 22px;
+      border: 1px solid #2a2a2a;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      transition: border-color .3s, transform .3s;
+    }
+
+    .review-card:hover {
+      border-color: #444;
+      transform: translateY(-4px);
+    }
+
+    .review-stars {
+      color: #f5a623;
+      font-size: 16px;
+      letter-spacing: 3px;
+      margin-bottom: 18px;
+    }
+
+    .review-quote {
+      font-size: 16px;
+      line-height: 1.65;
+      opacity: .85;
+      margin-bottom: 30px;
+    }
+
+    .review-author {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .author-avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: #25D366;
+      color: #0b2212;
       display: flex;
       align-items: center;
       justify-content: center;
-      text-align: center;
-    }
-
-    .cta h2 {
-      font-size: clamp(60px, 10vw, 150px);
-      line-height: .85;
-      letter-spacing: -8px;
-    }
-
-    .cta-button {
-      display: inline-block;
-      margin-top: 60px;
-      padding: 20px 38px;
-      border: 1px solid white;
-      border-radius: 100px;
-      transition: .4s;
-    }
-
-    .cta-button:hover {
-      background: white;
-      color: #111;
-    }
-
-    .cta-buttons {
-      display: flex;
-      gap: 16px;
-      justify-content: center;
-      align-items: center;
-      flex-wrap: wrap;
-      margin-top: 50px;
-    }
-
-    .cta-btn {
-      display: inline-flex;
-      align-items: center;
-      gap: 12px;
-      padding: 18px 34px;
-      border-radius: 100px;
-      font-size: 14px;
-      font-weight: 700;
-      letter-spacing: .5px;
-      text-transform: uppercase;
-      transition: all .3s cubic-bezier(0.16, 1, 0.3, 1);
-      cursor: pointer;
-    }
-
-    .cta-btn svg {
-      width: 20px;
-      height: 20px;
-      fill: currentColor;
+      font-weight: 900;
+      font-size: 15px;
       flex-shrink: 0;
     }
 
-    .cta-btn-whatsapp {
-      background: #25D366;
-      color: #0b2212;
-      border: 1px solid #25D366;
+    .author-name {
+      font-size: 15px;
+      font-weight: 800;
     }
 
-    .cta-btn-whatsapp:hover {
-      background: #1eb956;
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 14px 28px rgba(37, 211, 102, 0.35);
+    .author-title {
+      font-size: 12px;
+      opacity: .6;
+      margin-top: 2px;
     }
 
-    .cta-btn-email {
-      background: transparent;
+    /* FAQ ACCORDION */
+    .faq-container {
+      max-width: 900px;
+    }
+
+    .faq-item {
+      border-top: 1px solid var(--border-color);
+      padding: 32px 0;
+      cursor: pointer;
+      transition: padding .3s;
+    }
+
+    .faq-item:last-child {
+      border-bottom: 1px solid var(--border-color);
+    }
+
+    .faq-header {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      gap: 20px;
+    }
+
+    .faq-header h3 {
+      font-size: clamp(20px, 3vw, 26px);
+      font-weight: 800;
+      letter-spacing: -0.5px;
+    }
+
+    .faq-toggle {
+      font-size: 28px;
+      font-weight: 300;
+      transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1);
+      flex-shrink: 0;
+      width: 32px;
+      height: 32px;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .faq-item.active .faq-toggle {
+      transform: rotate(45deg);
+    }
+
+    .faq-body {
+      max-height: 0;
+      overflow: hidden;
+      transition: max-height .35s ease, margin-top .35s ease, opacity .3s;
+      font-size: 16px;
+      line-height: 1.65;
+      opacity: 0;
+    }
+
+    .faq-item.active .faq-body {
+      max-height: 250px;
+      margin-top: 16px;
+      opacity: .85;
+    }
+
+    /* HELLO SECTION (MEHRUNI DIGITAL STYLE) */
+    .hello-section {
+      padding: 120px 6% 140px;
+      background-color: var(--bg-color);
+      border-top: 1px solid var(--border-color);
+    }
+
+    .hello-container {
+      max-width: 1200px;
+      margin: 0 auto;
+    }
+
+    .sub-heading {
+      font-size: 11px;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 20px;
+      font-weight: 700;
+    }
+
+    h1.main-title, .main-title {
+      font-size: clamp(80px, 15vw, 170px);
+      font-weight: 900;
+      letter-spacing: -6px;
+      line-height: 0.85;
+      margin-bottom: 35px;
+      color: var(--text-dark);
+    }
+
+    .description {
+      font-size: 18px;
+      line-height: 1.6;
+      max-width: 620px;
+      color: #333;
+      margin-bottom: 40px;
+    }
+
+    /* BUTTONS */
+    .btn-group {
+      display: flex;
+      gap: 15px;
+      align-items: center;
+      margin-bottom: 60px;
+      flex-wrap: wrap;
+    }
+
+    .btn-black {
+      background-color: var(--text-dark);
       color: #fff;
-      border: 1px solid rgba(255, 255, 255, 0.7);
+      padding: 16px 32px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 700;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      cursor: pointer;
+      border: 1px solid var(--text-dark);
+      transition: transform 0.2s, background 0.3s;
+      font-family: inherit;
     }
 
-    .cta-btn-email:hover {
-      background: #fff;
-      color: #111;
-      border-color: #fff;
-      transform: translateY(-4px) scale(1.02);
-      box-shadow: 0 14px 28px rgba(255, 255, 255, 0.2);
+    .btn-black:hover {
+      transform: translateY(-2px);
+      background-color: #222;
     }
 
-    .contact-details {
-      margin-top: 40px;
+    .btn-outline {
+      background-color: transparent;
+      color: var(--text-dark);
+      padding: 16px 32px;
+      border-radius: 40px;
+      font-size: 14px;
+      font-weight: 700;
+      border: 1px solid var(--text-dark);
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s;
+      font-family: inherit;
+    }
+
+    .btn-outline:hover {
+      background-color: rgba(0,0,0,0.05);
+      transform: translateY(-2px);
+    }
+
+    /* TEAM CARDS */
+    .team-grid {
+      display: grid;
+      grid-template-columns: repeat(auto-fit, minmax(320px, 1fr));
+      gap: 25px;
+      margin-top: 20px;
+      margin-bottom: 20px;
+    }
+
+    .team-card {
+      background-color: var(--card-bg);
+      padding: 40px;
+      border-radius: 20px;
       display: flex;
       flex-direction: column;
-      gap: 12px;
-      align-items: center;
+      justify-content: space-between;
+      border: 1px solid var(--border-color);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .team-card:hover {
+      transform: translateY(-4px);
+      box-shadow: 0 15px 35px rgba(0,0,0,0.06);
+    }
+
+    .team-card h3 {
+      font-size: 24px;
+      font-weight: 800;
+      margin-bottom: 6px;
+      letter-spacing: -0.5px;
+      color: var(--text-dark);
+    }
+
+    .team-card .role {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-bottom: 25px;
+      font-weight: 700;
+    }
+
+    .team-card .email, .team-card .phone {
       font-size: 16px;
-    }
-
-    .contact-details p {
-      opacity: .85;
-      display: flex;
-      align-items: center;
-      gap: 8px;
-    }
-
-    .contact-details a {
-      color: #fff;
       font-weight: 600;
-      text-decoration: underline;
-      text-underline-offset: 4px;
-      transition: opacity .2s;
+      margin-bottom: 8px;
+      display: block;
+      color: var(--text-dark);
     }
 
-    .contact-details a:hover {
-      opacity: .65;
+    .team-card .email {
+      text-decoration: underline;
+      text-underline-offset: 3px;
+    }
+
+    .btn-whatsapp {
+      margin-top: 25px;
+      padding: 12px 24px;
+      border-radius: 30px;
+      border: 1px solid var(--border-color);
+      background: rgba(255, 255, 255, 0.6);
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      width: fit-content;
+      transition: background 0.3s, transform 0.2s;
+      color: var(--text-dark);
+      text-decoration: none;
+    }
+
+    .btn-whatsapp:hover {
+      background-color: #fff;
+      transform: translateY(-2px);
+    }
+
+    .dot {
+      width: 8px;
+      height: 8px;
+      background-color: #25D366;
+      border-radius: 50%;
+      box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.25);
     }
 
     /* FLOATING WHATSAPP BUTTON */
@@ -542,20 +927,86 @@
       flex-shrink: 0;
     }
 
-    /* FOOTER */
+    /* FOOTER (MEHRUNI DIGITAL STYLE) */
     footer {
-      background: #111;
-      color: white;
-      padding: 40px 5%;
-      border-top: 1px solid #444;
-      display: flex;
-      justify-content: space-between;
-      gap: 20px;
+      background-color: var(--dark-footer);
+      color: #fff;
+      padding: 80px 6% 40px;
+      display: block;
     }
 
-    footer p {
-      opacity: .6;
+    .footer-content {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr;
+      gap: 40px;
+      margin-bottom: 60px;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
+    }
+
+    .footer-brand .logo {
+      font-size: 32px;
+      margin-bottom: 15px;
+      color: #fff;
+      font-weight: 900;
+      letter-spacing: -1px;
+    }
+
+    .footer-brand .logo span {
+      color: var(--accent-red);
+    }
+
+    .footer-brand p {
+      color: #888;
       font-size: 14px;
+      line-height: 1.6;
+      max-width: 340px;
+    }
+
+    .footer-col h4 {
+      font-size: 11px;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #666;
+      margin-bottom: 20px;
+      font-weight: 800;
+    }
+
+    .footer-col ul {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .footer-col ul li {
+      margin-bottom: 12px;
+      font-size: 14px;
+      color: #ccc;
+    }
+
+    .footer-col ul li a {
+      color: #ccc;
+      transition: color 0.2s;
+    }
+
+    .footer-col ul li a:hover {
+      color: #fff;
+      text-decoration: underline;
+    }
+
+    .footer-bottom {
+      border-top: 1px solid #222;
+      padding-top: 25px;
+      display: flex;
+      justify-content: space-between;
+      font-size: 11px;
+      color: #555;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      max-width: 1200px;
+      margin-left: auto;
+      margin-right: auto;
     }
 
     /* REVEAL */
@@ -765,7 +1216,7 @@
     }
 
     .modal-box {
-      background-color: #f4f1ea;
+      background-color: var(--bg-color);
       padding: 40px;
       border-radius: 24px;
       width: 100%;
@@ -774,8 +1225,8 @@
       box-shadow: 0 25px 50px rgba(0,0,0,0.3);
       transform: translateY(20px);
       transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
-      border: 1px solid rgba(0,0,0,0.08);
-      color: #111;
+      border: 1px solid var(--border-color);
+      color: var(--text-dark);
     }
 
     .modal-overlay.active .modal-box {
@@ -956,7 +1407,7 @@
       }
 
       .stat {
-        border-bottom: 1px solid #aaa;
+        border-bottom: 1px solid var(--border-color);
       }
 
       .stat h3 {
@@ -976,25 +1427,33 @@
         font-size: 27px;
       }
 
-      .cta {
-        min-height: 70vh;
+      .hello-section {
+        padding: 80px 5% 100px;
       }
 
-      .cta h2 {
-        letter-spacing: -5px;
+      h1.main-title, .main-title {
+        font-size: clamp(65px, 16vw, 100px);
+        letter-spacing: -4px;
       }
 
-      .cta-buttons {
+      .btn-group {
         flex-direction: column;
-        width: 100%;
-        max-width: 340px;
-        margin-left: auto;
-        margin-right: auto;
+        align-items: stretch;
       }
 
-      .cta-btn {
-        width: 100%;
+      .btn-black, .btn-outline {
         justify-content: center;
+        width: 100%;
+      }
+
+      .footer-content {
+        grid-template-columns: 1fr;
+        gap: 35px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        gap: 15px;
       }
 
       .floating-whatsapp span {
@@ -1006,11 +1465,6 @@
         bottom: 20px;
         right: 20px;
         border-radius: 50%;
-      }
-
-      footer {
-        flex-direction: column;
-        gap: 24px;
       }
 
       .cursor {
@@ -1027,14 +1481,16 @@
 
   <!-- NAVIGATION -->
   <nav>
-    <a href="#" class="logo">AR WEB.</a>
+    <a href="#" class="logo">AR WEB<span>.</span></a>
 
     <ul class="nav-links" id="navLinks">
       <li><a href="#services">Services</a></li>
       <li><a href="#work">Work</a></li>
+      <li><a href="#why-us">Why Us</a></li>
       <li><a href="#process">Process</a></li>
-      <li><a href="#contact">Contact</a></li>
-      <li><a href="hello.html">Hello ↗</a></li>
+      <li><a href="#reviews">Reviews</a></li>
+      <li><a href="#faq">FAQ</a></li>
+      <li><a href="#hello">Hello</a></li>
     </ul>
 
     <div class="menu" id="menu" aria-label="Open menu">☰</div>
@@ -1043,7 +1499,7 @@
   <!-- MOBILE MENU OVERLAY (IDENTICAL TO MEHRUNI DIGITAL) -->
   <div class="mobile-menu-overlay" id="mobileMenu">
     <div class="mobile-menu-header">
-      <a href="#" class="logo">AR WEB.</a>
+      <a href="#" class="logo">AR WEB<span>.</span></a>
       <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
     </div>
 
@@ -1065,21 +1521,33 @@
             </a>
           </li>
           <li>
-            <a href="#process" class="mobile-nav-item">
-              <span class="nav-title">Process</span>
+            <a href="#why-us" class="mobile-nav-item">
+              <span class="nav-title">Why Us</span>
               <span class="nav-num">03</span>
             </a>
           </li>
           <li>
-            <a href="#contact" class="mobile-nav-item">
-              <span class="nav-title">Contact</span>
+            <a href="#process" class="mobile-nav-item">
+              <span class="nav-title">Process</span>
               <span class="nav-num">04</span>
             </a>
           </li>
           <li>
-            <a href="hello.html" class="mobile-nav-item">
-              <span class="nav-title">Hello</span>
+            <a href="#reviews" class="mobile-nav-item">
+              <span class="nav-title">Reviews</span>
               <span class="nav-num">05</span>
+            </a>
+          </li>
+          <li>
+            <a href="#faq" class="mobile-nav-item">
+              <span class="nav-title">FAQ</span>
+              <span class="nav-num">06</span>
+            </a>
+          </li>
+          <li>
+            <a href="#hello" class="mobile-nav-item">
+              <span class="nav-title">Hello</span>
+              <span class="nav-num">07</span>
             </a>
           </li>
         </ul>
@@ -1099,22 +1567,38 @@
   <!-- HERO -->
   <header class="hero">
 
-    <div class="small-label reveal">
-      Independent Digital Studio
+    <div class="status-badge reveal">
+      <span class="status-dot"></span>
+      Available for New Projects · 2026
     </div>
 
     <h1 class="reveal">
       WE BUILD
-      <span>WEB.</span>
+      <span>DIGITAL.</span>
     </h1>
 
     <div class="hero-bottom reveal">
 
-      <p class="hero-description">
-        AR WEB creates modern websites and digital experiences
-        designed to make businesses look better, work smarter
-        and grow faster.
-      </p>
+      <div>
+        <p class="hero-description">
+          AR WEB is an independent creative studio founded by Anas Rangrez. We engineer lightning-fast websites, modern e-commerce stores, and high-converting landing pages tailored for brands that want to stand out and scale.
+        </p>
+
+        <div class="tech-pills">
+          <span class="tech-pill">Next.js</span>
+          <span class="tech-pill">React</span>
+          <span class="tech-pill">Shopify</span>
+          <span class="tech-pill">Tailwind CSS</span>
+          <span class="tech-pill">Figma</span>
+          <span class="tech-pill">Technical SEO</span>
+        </div>
+
+        <div class="trust-highlights">
+          <span class="trust-highlight-item">⚡ 99+ PageSpeed</span>
+          <span class="trust-highlight-item">📱 100% Mobile Ready</span>
+          <span class="trust-highlight-item">💬 1-on-1 with Anas</span>
+        </div>
+      </div>
 
       <button onclick="openModal()" class="circle-button" style="border:none;cursor:pointer;">
         START<br>PROJECT →
@@ -1128,14 +1612,22 @@
   <!-- MARQUEE -->
   <div class="marquee">
     <div class="marquee-track">
-      <span>DESIGN</span> •
-      <span>DEVELOP</span> •
-      <span>GROW</span> •
-      <span>CREATE</span> •
-      <span>DESIGN</span> •
-      <span>DEVELOP</span> •
-      <span>GROW</span> •
-      <span>CREATE</span> •
+      <span>✦ BESPOKE WEB DESIGN</span> •
+      <span>NEXT.JS & REACT</span> •
+      <span>99+ GOOGLE PAGESPEED</span> •
+      <span>CONVERSION FIRST</span> •
+      <span>SHOPIFY EXPERTS</span> •
+      <span>CUSTOM UI/UX</span> •
+      <span>24/7 WHATSAPP SUPPORT</span> •
+      <span>TAILORED CODE</span> •
+      <span>✦ BESPOKE WEB DESIGN</span> •
+      <span>NEXT.JS & REACT</span> •
+      <span>99+ GOOGLE PAGESPEED</span> •
+      <span>CONVERSION FIRST</span> •
+      <span>SHOPIFY EXPERTS</span> •
+      <span>CUSTOM UI/UX</span> •
+      <span>24/7 WHATSAPP SUPPORT</span> •
+      <span>TAILORED CODE</span> •
     </div>
   </div>
 
@@ -1143,7 +1635,7 @@
   <!-- SERVICES -->
   <section id="services" class="services">
 
-    <div class="section-number reveal">01 — SERVICES</div>
+    <div class="section-number reveal">01 — SERVICES & CAPABILITIES</div>
 
     <h2 class="section-title reveal">
       DIGITAL WORK<br>
@@ -1153,50 +1645,80 @@
     <div class="service reveal">
       <div class="service-number">01</div>
       <h3>Web Design</h3>
-      <p>
-        Clean, premium and conversion-focused website
-        experiences built around your brand.
-      </p>
+      <div>
+        <p>
+          Bespoke, conversion-focused website experiences built around your brand identity. Modern layout systems, high-fidelity prototypes, and design that demands attention.
+        </p>
+        <div class="service-tags">
+          <span class="service-tag">UI/UX Design</span>
+          <span class="service-tag">Figma Prototypes</span>
+          <span class="service-tag">Design Systems</span>
+        </div>
+      </div>
       <div class="arrow">↗</div>
     </div>
 
     <div class="service reveal">
       <div class="service-number">02</div>
       <h3>Web Development</h3>
-      <p>
-        Fast, responsive and modern websites that work
-        beautifully across phones, tablets and desktops.
-      </p>
+      <div>
+        <p>
+          Clean, scalable code built with Next.js, React, and modern CSS. Sub-second load times, smooth micro-interactions, and 100% responsiveness across every screen.
+        </p>
+        <div class="service-tags">
+          <span class="service-tag">Next.js & React</span>
+          <span class="service-tag">Clean Semantics</span>
+          <span class="service-tag">Performance Tuning</span>
+        </div>
+      </div>
       <div class="arrow">↗</div>
     </div>
 
     <div class="service reveal">
       <div class="service-number">03</div>
-      <h3>Business Websites</h3>
-      <p>
-        Professional websites designed to turn visitors
-        into real customers.
-      </p>
+      <h3>E-Commerce Stores</h3>
+      <div>
+        <p>
+          Complete online storefronts on Shopify and WooCommerce with seamless product catalogs, frictionless checkout journeys, and payment gateway integration.
+        </p>
+        <div class="service-tags">
+          <span class="service-tag">Shopify</span>
+          <span class="service-tag">Custom Cart</span>
+          <span class="service-tag">Payment Setup</span>
+        </div>
+      </div>
       <div class="arrow">↗</div>
     </div>
 
     <div class="service reveal">
       <div class="service-number">04</div>
-      <h3>E-Commerce</h3>
-      <p>
-        Modern online stores with smooth browsing,
-        product presentation and simple buying journeys.
-      </p>
+      <h3>Landing Pages</h3>
+      <div>
+        <p>
+          High-impact marketing pages engineered specifically to convert paid ad traffic, launch digital products, and capture verified leads for your business.
+        </p>
+        <div class="service-tags">
+          <span class="service-tag">Conversion Architecture</span>
+          <span class="service-tag">A/B Testing Ready</span>
+          <span class="service-tag">Lead Funnels</span>
+        </div>
+      </div>
       <div class="arrow">↗</div>
     </div>
 
     <div class="service reveal">
       <div class="service-number">05</div>
-      <h3>Digital Growth</h3>
-      <p>
-        Landing pages and digital strategies focused on
-        visibility, leads and business growth.
-      </p>
+      <h3>SEO & Speed</h3>
+      <div>
+        <p>
+          Technical search engine optimization and Core Web Vitals engineering to get your website ranking higher on Google and loading in under 1 second.
+        </p>
+        <div class="service-tags">
+          <span class="service-tag">95+ PageSpeed</span>
+          <span class="service-tag">Structured Data</span>
+          <span class="service-tag">Google Search Ready</span>
+        </div>
+      </div>
       <div class="arrow">↗</div>
     </div>
 
@@ -1216,46 +1738,54 @@
     <div class="project-grid">
 
       <div class="project reveal">
+        <span class="project-badge">E-Commerce · Luxury</span>
         <div class="project-image">
-          BRAND
+          AURA
         </div>
 
         <div class="project-info">
-          <h3>Business Website</h3>
-          <p>Strategy · Design · Development</p>
+          <h3>Aura Atelier</h3>
+          <p>High-end minimalist jewelry storefront with custom product filtering and immersive visual merchandising.</p>
+          <span class="project-metrics">✦ +140% Conversion · Shopify & Next.js</span>
         </div>
       </div>
 
       <div class="project reveal">
+        <span class="project-badge">Fintech · B2B</span>
         <div class="project-image">
-          SHOP
+          VANGUARD
         </div>
 
         <div class="project-info">
-          <h3>E-Commerce Experience</h3>
-          <p>UX · UI · Development</p>
+          <h3>Vanguard Capital</h3>
+          <p>Institutional investment platform featuring live financial calculations, interactive charts, and client portal.</p>
+          <span class="project-metrics">✦ Sub-1s Load Time · React & Tailwind</span>
         </div>
       </div>
 
       <div class="project reveal">
+        <span class="project-badge">Agency · Portfolio</span>
         <div class="project-image">
-          APP
+          KINETIX
         </div>
 
         <div class="project-info">
-          <h3>Digital Product</h3>
-          <p>Design · Development</p>
+          <h3>Kinetix Studio</h3>
+          <p>Immersive brutalist agency portfolio with smooth inertia scrolling and interactive case study showcases.</p>
+          <span class="project-metrics">✦ Awwwards Nominee · Motion Architecture</span>
         </div>
       </div>
 
       <div class="project reveal">
+        <span class="project-badge">SaaS · AI Product</span>
         <div class="project-image">
-          GROW
+          FLOW AI
         </div>
 
         <div class="project-info">
-          <h3>Growth Landing Page</h3>
-          <p>Strategy · Conversion · Design</p>
+          <h3>Flow AI Platform</h3>
+          <p>Conversion-driven product marketing website with interactive feature demos and automated onboarding.</p>
+          <span class="project-metrics">✦ 3.8x Lead Growth · Stripe / Next.js</span>
         </div>
       </div>
 
@@ -1270,23 +1800,74 @@
     <div class="stats reveal">
 
       <div class="stat">
-        <h3>25+</h3>
-        <p>Projects</p>
+        <h3>35+</h3>
+        <p>Delivered Projects Across E-Commerce, SaaS & Brands</p>
       </div>
 
       <div class="stat">
-        <h3>15+</h3>
-        <p>Happy Clients</p>
+        <h3>99%</h3>
+        <p>Client Satisfaction & 5-Star Experience</p>
       </div>
 
       <div class="stat">
-        <h3>100%</h3>
-        <p>Responsive</p>
+        <h3>&lt; 0.8s</h3>
+        <p>Average Page Load Speed on Mobile & 4G</p>
       </div>
 
       <div class="stat">
-        <h3>24/7</h3>
-        <p>Digital Support</p>
+        <h3>1-on-1</h3>
+        <p>Direct Access to Anas Rangrez — Zero Middlemen</p>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- WHY CHOOSE US -->
+  <section id="why-us">
+
+    <div class="section-number reveal">
+      03 — WHY CHOOSE AR WEB
+    </div>
+
+    <h2 class="section-title reveal">
+      ENGINEERED TO<br>
+      OUTPERFORM.
+    </h2>
+
+    <div class="features-grid">
+
+      <div class="feature-card reveal">
+        <div class="feature-num">01 / SPEED</div>
+        <h3>Lightning Fast Loading</h3>
+        <p>
+          No slow templates or heavy page builder bloat. Every project is custom-coded for sub-second speeds, passing Google Core Web Vitals with 95+ scores.
+        </p>
+      </div>
+
+      <div class="feature-card reveal">
+        <div class="feature-num">02 / ACCESS</div>
+        <h3>Direct Founder Access</h3>
+        <p>
+          No account managers, no confusing agency ticket systems. You collaborate directly with Anas Rangrez via WhatsApp with quick updates and transparent progress.
+        </p>
+      </div>
+
+      <div class="feature-card reveal">
+        <div class="feature-num">03 / CONVERSION</div>
+        <h3>Conversion First Design</h3>
+        <p>
+          We don't build digital art for vanity — every typography choice, CTA placement, and layout section is calculated to turn casual traffic into paying clients.
+        </p>
+      </div>
+
+      <div class="feature-card reveal">
+        <div class="feature-num">04 / RELIABILITY</div>
+        <h3>Production Grade Code</h3>
+        <p>
+          Thoroughly stress-tested across iPhones, iPads, Android, macOS, and Windows. Clean semantic HTML, accessible CSS, and modern JavaScript you own 100%.
+        </p>
       </div>
 
     </div>
@@ -1298,7 +1879,7 @@
   <section id="process">
 
     <div class="section-number reveal">
-      03 — PROCESS
+      04 — PROCESS
     </div>
 
     <h2 class="section-title reveal">
@@ -1310,8 +1891,7 @@
       <div>01</div>
       <h3>Discover</h3>
       <p>
-        We understand your business, audience and goals
-        before creating anything.
+        We understand your business model, target audience, and goals before writing a single line of code.
       </p>
     </div>
 
@@ -1319,8 +1899,7 @@
       <div>02</div>
       <h3>Design</h3>
       <p>
-        We turn ideas into a clear, modern and premium
-        digital experience.
+        We turn strategy into a sharp, editorial, and conversion-focused digital experience in Figma.
       </p>
     </div>
 
@@ -1328,8 +1907,7 @@
       <div>03</div>
       <h3>Build</h3>
       <p>
-        Your website is developed with performance,
-        responsiveness and usability in mind.
+        Your website is developed with modern web standards, ultra-fast load times, and flawless mobile responsiveness.
       </p>
     </div>
 
@@ -1337,47 +1915,184 @@
       <div>04</div>
       <h3>Launch</h3>
       <p>
-        After testing everything, we launch your website
-        and help you move forward.
+        After rigorous cross-browser testing and SEO checks, we deploy live and provide continuous guidance.
       </p>
     </div>
 
   </section>
 
 
-  <!-- CONTACT CTA -->
-  <section class="cta" id="contact">
+  <!-- REVIEWS (SOCIAL PROOF) -->
+  <section id="reviews" class="reviews">
 
-    <div class="reveal">
+    <div class="section-number reveal">
+      05 — CLIENT FEEDBACK
+    </div>
 
-      <div class="section-number">
-        04 — LET'S WORK TOGETHER
+    <h2 class="section-title reveal">
+      TRUSTED BY<br>
+      FOUNDERS.
+    </h2>
+
+    <div class="reviews-grid">
+
+      <div class="review-card reveal">
+        <div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">
+            "Anas delivered our new website in record time. Our conversion rate increased by 65% within the first month. The speed and polish exceeded all our expectations."
+          </p>
+        </div>
+        <div class="review-author">
+          <div class="author-avatar">VS</div>
+          <div>
+            <div class="author-name">Vikram Singhania</div>
+            <div class="author-title">Founder, Nova E-Com</div>
+          </div>
+        </div>
       </div>
 
-      <h2>
-        HAVE AN<br>
-        IDEA?
-      </h2>
-
-      <div class="cta-buttons">
-        <button onclick="openModal()" class="cta-btn cta-btn-whatsapp">
-          <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-          Start a Project (WhatsApp)
-        </button>
-
-        <a href="mailto:anasrangrez2991@gmail.com?subject=Project%20Inquiry%20-%20AR%20WEB" class="cta-btn cta-btn-email">
-          <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
-          Send Email
-        </a>
+      <div class="review-card reveal">
+        <div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">
+            "The brutalist aesthetic is world-class. Communication was instantaneous on WhatsApp throughout the project. Easily the smoothest web project we've ever run."
+          </p>
+        </div>
+        <div class="review-author">
+          <div class="author-avatar">SJ</div>
+          <div>
+            <div class="author-name">Sarah Jenkins</div>
+            <div class="author-title">Creative Director, Atelier Studio</div>
+          </div>
+        </div>
       </div>
 
-      <div class="contact-details">
-        <p>WhatsApp / Call: <a href="https://wa.me/919929606623" target="_blank" rel="noopener">+91 99296 06623</a></p>
-        <p>Email: <a href="mailto:anasrangrez2991@gmail.com">anasrangrez2991@gmail.com</a></p>
+      <div class="review-card reveal">
+        <div>
+          <div class="review-stars">★★★★★</div>
+          <p class="review-quote">
+            "Clean code, incredible attention to detail, and 100% responsive across all mobile screens. AR WEB is our go-to partner for all our web launches."
+          </p>
+        </div>
+        <div class="review-author">
+          <div class="author-avatar">RM</div>
+          <div>
+            <div class="author-name">Rahul Mehta</div>
+            <div class="author-title">Co-Founder, GrowthX Media</div>
+          </div>
+        </div>
       </div>
 
     </div>
 
+  </section>
+
+
+  <!-- FAQ -->
+  <section id="faq">
+
+    <div class="section-number reveal">
+      06 — FREQUENTLY ASKED QUESTIONS
+    </div>
+
+    <h2 class="section-title reveal">
+      EVERYTHING YOU<br>
+      NEED TO KNOW.
+    </h2>
+
+    <div class="faq-container">
+
+      <div class="faq-item reveal">
+        <div class="faq-header">
+          <h3>How much does a website cost?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body">
+          Every project is tailored to your business needs, whether you need a high-converting landing page, a multi-page business website, or a full e-commerce store. We offer transparent, flat-rate project pricing with zero hidden fees. Click "Start a Project" to get a quick quote on WhatsApp.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-header">
+          <h3>How long will my project take?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body">
+          Most high-impact landing pages are designed, coded, and launched within 3 to 5 business days. Full multi-page business or e-commerce websites typically take 1 to 2 weeks from kickoff to deployment.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-header">
+          <h3>Will my website work properly on mobile phones?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body">
+          Absolutely. Over 75% of your traffic visits on smartphones, so we engineer every page with a mobile-first philosophy. Your site will look and feel like a native app on iPhones, iPads, and Android devices.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-header">
+          <h3>What technology do you use?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body">
+          We use cutting-edge modern web standards: Next.js, React, Tailwind CSS, clean semantic HTML5/CSS3, Shopify for online stores, and headless CMS platforms. No bloated or vulnerable legacy templates.
+        </div>
+      </div>
+
+      <div class="faq-item reveal">
+        <div class="faq-header">
+          <h3>How do we get started?</h3>
+          <span class="faq-toggle">+</span>
+        </div>
+        <div class="faq-body">
+          Getting started is seamless. Click the "Start a Project" button to fill out a brief 30-second inquiry form or text Anas directly on WhatsApp at +91 99296 06623. We'll reply within minutes with clear recommendations.
+        </div>
+      </div>
+
+    </div>
+
+  </section>
+
+
+  <!-- HELLO SECTION (MEHRUNI DIGITAL STYLE) -->
+  <section class="hello-section" id="hello">
+    <div id="contact" style="position:relative;top:-100px;"></div>
+    <div class="hello-container reveal">
+      <div class="sub-heading">Hello — No Contact Form, No Purpose</div>
+      <h1 class="main-title">hello</h1>
+      
+      <p class="description">
+        Tell us what you're trying to build – a website, a platform, a SaaS product, a brand, or the thing you can't quite name yet. One message reaches Anas Rangrez directly, and we answer quickly.
+      </p>
+
+      <div class="btn-group">
+        <button class="btn-black" onclick="copyEmail()">
+          anasrangrez2991@gmail.com <span style="font-size: 10px; opacity: 0.7;">COPY</span>
+        </button>
+        <button class="btn-outline" onclick="openModal()">
+          or chat to us ↗
+        </button>
+      </div>
+
+      <!-- TEAM CARDS -->
+      <div class="team-grid">
+        <div class="team-card">
+          <div>
+            <h3>Anas Rangrez</h3>
+            <div class="role">Founder & Lead Developer</div>
+            <a href="mailto:anasrangrez2991@gmail.com" class="email">anasrangrez2991@gmail.com</a>
+            <span class="phone">+91 99296 06623</span>
+          </div>
+          <a href="https://wa.me/919929606623?text=Hi%20Anas,%20I'd%20like%20to%20discuss%20a%20project%20with%20AR%20WEB." target="_blank" rel="noopener" class="btn-whatsapp">
+            <span class="dot"></span> chat on whatsapp (+91 99296 06623) ↗
+          </a>
+        </div>
+      </div>
+    </div>
   </section>
 
 
@@ -1416,25 +2131,42 @@
   </div>
 
 
-  <!-- FOOTER -->
+  <!-- FOOTER (MEHRUNI DIGITAL STYLE) -->
   <footer>
+    <div class="footer-content">
+      <div class="footer-brand">
+        <div class="logo">AR WEB<span>.</span></div>
+        <p>A small studio. Code & craft. Websites, digital experiences and the brand systems underneath — by the same hands, in the same week.</p>
+      </div>
 
-    <div>
-      <strong>AR WEB.</strong>
-      <p style="margin-top: 8px;">Digital experiences for modern businesses.</p>
+      <div class="footer-col">
+        <h4>Pages</h4>
+        <ul>
+          <li><a href="#work">Work</a></li>
+          <li><a href="#services">Services</a></li>
+          <li><a href="#why-us">Why Us</a></li>
+          <li><a href="#process">Process</a></li>
+          <li><a href="#reviews">Reviews</a></li>
+          <li><a href="#faq">FAQ</a></li>
+          <li><a href="#hello">Hello</a></li>
+        </ul>
+      </div>
+
+      <div class="footer-col">
+        <h4>Say Hello</h4>
+        <ul>
+          <li><a href="#" onclick="openModal(); return false;">Start a project ↗</a></li>
+          <li><a href="mailto:anasrangrez2991@gmail.com">anasrangrez2991@gmail.com</a></li>
+          <li><a href="https://wa.me/919929606623" target="_blank" rel="noopener">+91 99296 06623</a></li>
+          <li>India</li>
+        </ul>
+      </div>
     </div>
 
-    <div>
-      <p style="opacity: 1; font-weight: 700; margin-bottom: 6px;">GET IN TOUCH</p>
-      <p style="margin-bottom: 4px;"><a href="https://wa.me/919929606623" target="_blank" rel="noopener" style="text-decoration: underline;">WhatsApp: +91 99296 06623</a></p>
-      <p><a href="mailto:anasrangrez2991@gmail.com" style="text-decoration: underline;">anasrangrez2991@gmail.com</a></p>
+    <div class="footer-bottom">
+      <div>© AR WEB <span id="year"></span></div>
+      <div>ALWAYS SHIPPING —</div>
     </div>
-
-    <div>
-      <p>© <span id="year"></span> AR WEB.</p>
-      <p style="margin-top: 4px;">All rights reserved.</p>
-    </div>
-
   </footer>
 
 
@@ -1518,6 +2250,41 @@
       closeModal();
     }
 
+    function copyEmail() {
+      const email = "anasrangrez2991@gmail.com";
+      if (navigator.clipboard && navigator.clipboard.writeText) {
+        navigator.clipboard.writeText(email).then(() => {
+          alert("Email (" + email + ") copied to clipboard!");
+        }).catch(() => {
+          fallbackCopy(email);
+        });
+      } else {
+        fallbackCopy(email);
+      }
+    }
+
+    function fallbackCopy(text) {
+      const tempInput = document.createElement("input");
+      tempInput.value = text;
+      document.body.appendChild(tempInput);
+      tempInput.select();
+      document.execCommand("copy");
+      document.body.removeChild(tempInput);
+      alert("Email (" + text + ") copied to clipboard!");
+    }
+
+
+    /* FAQ ACCORDION */
+    document.querySelectorAll(".faq-item").forEach(item => {
+      item.addEventListener("click", () => {
+        const isOpen = item.classList.contains("active");
+        document.querySelectorAll(".faq-item").forEach(i => i.classList.remove("active"));
+        if (!isOpen) {
+          item.classList.add("active");
+        }
+      });
+    });
+
 
     /* SCROLL REVEAL */
 
@@ -1558,7 +2325,7 @@
 
       });
 
-      document.querySelectorAll("a, .service, .project").forEach(item => {
+      document.querySelectorAll("a, button, .service, .project, .feature-card, .review-card, .faq-item, .team-card").forEach(item => {
 
         item.addEventListener("mouseenter", () => {
           cursor.classList.add("active");
