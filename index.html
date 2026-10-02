@@ -7,6 +7,11 @@
   <title>AR WEB — Digital Experiences That Grow</title>
   <meta name="description" content="AR WEB creates premium websites, digital experiences and growth solutions for modern businesses.">
 
+  <!-- GOOGLE FONTS -->
+  <link rel="preconnect" href="https://fonts.googleapis.com">
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+  <link href="https://fonts.googleapis.com/css2?family=Plus+Jakarta+Sans:wght@400;500;600;700;800;900&display=swap" rel="stylesheet">
+
   <style>
     * {
       margin: 0;
@@ -19,7 +24,7 @@
     }
 
     body {
-      font-family: Arial, Helvetica, sans-serif;
+      font-family: 'Plus Jakarta Sans', Arial, Helvetica, sans-serif;
       background: #f4f1ea;
       color: #111;
       overflow-x: hidden;
@@ -565,6 +570,310 @@
       transform: translateY(0);
     }
 
+    /* FULLSCREEN MOBILE MENU OVERLAY (SOLID, NO DIFFERENCE BLEND) */
+    .mobile-menu-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      height: 100dvh;
+      background: #f4f1ea;
+      color: #111;
+      z-index: 99999;
+      display: flex;
+      flex-direction: column;
+      opacity: 0;
+      visibility: hidden;
+      transform: translateY(-8px);
+      transition: opacity .3s ease, transform .3s cubic-bezier(0.16, 1, 0.3, 1), visibility .3s;
+      mix-blend-mode: normal !important;
+      isolation: isolate;
+      overflow-y: auto;
+    }
+
+    .mobile-menu-overlay.open {
+      opacity: 1;
+      visibility: visible;
+      transform: translateY(0);
+    }
+
+    .mobile-menu-header {
+      padding: 22px 6%;
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      border-bottom: 1px solid rgba(0, 0, 0, 0.06);
+    }
+
+    .mobile-menu-header .logo {
+      font-size: 26px;
+      font-weight: 900;
+      letter-spacing: -1px;
+      color: #111;
+    }
+
+    .mobile-menu-close {
+      background: none;
+      border: none;
+      font-size: 30px;
+      font-weight: 700;
+      color: #111;
+      cursor: pointer;
+      padding: 6px 10px;
+      line-height: 1;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+
+    .mobile-menu-body {
+      padding: 24px 6% 36px;
+      display: flex;
+      flex-direction: column;
+      justify-content: space-between;
+      flex: 1;
+      min-height: calc(100dvh - 85px);
+    }
+
+    .menu-label {
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 2.5px;
+      text-transform: uppercase;
+      color: #888;
+      margin-bottom: 12px;
+    }
+
+    .mobile-nav-list {
+      list-style: none;
+      padding: 0;
+      margin: 0;
+    }
+
+    .mobile-nav-item {
+      display: flex;
+      justify-content: space-between;
+      align-items: baseline;
+      padding: 18px 0;
+      border-bottom: 1px solid #dcd7cc;
+      text-decoration: none;
+      color: #111;
+      transition: transform .2s ease, opacity .2s ease;
+    }
+
+    .mobile-nav-item:active {
+      opacity: .6;
+      transform: translateX(6px);
+    }
+
+    .mobile-nav-item .nav-title {
+      font-size: clamp(34px, 9vw, 46px);
+      font-weight: 900;
+      letter-spacing: -1.5px;
+      line-height: 1.1;
+    }
+
+    .mobile-nav-item .nav-num {
+      font-size: 13px;
+      font-weight: 600;
+      opacity: .45;
+      font-family: monospace;
+    }
+
+    .mobile-menu-footer {
+      margin-top: 36px;
+      display: flex;
+      flex-direction: column;
+    }
+
+    .say-hello-tag {
+      color: #d94852;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 2px;
+      text-transform: uppercase;
+      margin-bottom: 8px;
+    }
+
+    .start-project-link {
+      font-size: 22px;
+      font-weight: 900;
+      color: #111;
+      letter-spacing: -0.5px;
+      margin-bottom: 8px;
+      display: inline-block;
+      text-decoration: none;
+      transition: transform .2s ease;
+    }
+
+    .start-project-link:active {
+      transform: translateX(4px);
+    }
+
+    .menu-email {
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      color: #111;
+      opacity: .75;
+      margin-bottom: 6px;
+      text-decoration: none;
+    }
+
+    .menu-phone {
+      font-size: 13px;
+      font-weight: 700;
+      color: #111;
+      opacity: .65;
+      margin-bottom: 4px;
+      text-decoration: none;
+    }
+
+    .menu-copyright {
+      font-size: 10px;
+      font-weight: 600;
+      letter-spacing: 1.5px;
+      text-transform: uppercase;
+      opacity: .4;
+      margin-top: 22px;
+    }
+
+    /* MODAL POPUP */
+    .modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100%;
+      background: rgba(0, 0, 0, 0.65);
+      backdrop-filter: blur(5px);
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      opacity: 0;
+      pointer-events: none;
+      transition: opacity 0.3s ease;
+      z-index: 100000;
+      padding: 20px;
+    }
+
+    .modal-overlay.active {
+      opacity: 1;
+      pointer-events: auto;
+    }
+
+    .modal-box {
+      background-color: #f4f1ea;
+      padding: 40px;
+      border-radius: 24px;
+      width: 100%;
+      max-width: 500px;
+      position: relative;
+      box-shadow: 0 25px 50px rgba(0,0,0,0.3);
+      transform: translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+      border: 1px solid rgba(0,0,0,0.08);
+      color: #111;
+    }
+
+    .modal-overlay.active .modal-box {
+      transform: translateY(0);
+    }
+
+    .close-btn {
+      position: absolute;
+      top: 20px;
+      right: 25px;
+      font-size: 28px;
+      cursor: pointer;
+      font-weight: 300;
+      color: #111;
+      line-height: 1;
+      padding: 5px;
+      background: none;
+      border: none;
+    }
+
+    .close-btn:hover {
+      opacity: 0.6;
+    }
+
+    .modal-box h2 {
+      font-size: 28px;
+      font-weight: 900;
+      margin-bottom: 8px;
+      letter-spacing: -1px;
+      color: #111;
+    }
+
+    .modal-box p {
+      font-size: 14px;
+      color: #666;
+      margin-bottom: 25px;
+      line-height: 1.5;
+    }
+
+    .form-group {
+      margin-bottom: 18px;
+      text-align: left;
+    }
+
+    .form-group label {
+      display: block;
+      font-size: 11px;
+      font-weight: 800;
+      text-transform: uppercase;
+      letter-spacing: 1.5px;
+      margin-bottom: 8px;
+      color: #333;
+    }
+
+    .form-group input, .form-group textarea {
+      width: 100%;
+      padding: 13px 16px;
+      border-radius: 12px;
+      border: 1px solid #ccc;
+      background: rgba(255,255,255,0.85);
+      font-size: 15px;
+      outline: none;
+      font-family: inherit;
+      color: #111;
+      transition: border-color .2s, box-shadow .2s;
+    }
+
+    .form-group input:focus, .form-group textarea:focus {
+      border-color: #111;
+      box-shadow: 0 0 0 3px rgba(0,0,0,0.06);
+    }
+
+    .submit-btn {
+      width: 100%;
+      padding: 16px;
+      background: #25D366;
+      color: #0b2212;
+      border: none;
+      border-radius: 30px;
+      font-size: 14px;
+      font-weight: 800;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      cursor: pointer;
+      transition: background 0.3s, transform 0.2s, box-shadow 0.2s;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      margin-top: 10px;
+    }
+
+    .submit-btn:hover {
+      background: #1eb956;
+      transform: translateY(-2px);
+      box-shadow: 0 10px 20px rgba(37, 211, 102, 0.35);
+    }
+
     /* MOBILE */
     @media(max-width: 800px) {
 
@@ -573,26 +882,14 @@
       }
 
       .nav-links {
-        position: fixed;
-        top: 0;
-        right: -100%;
-        width: 75%;
-        height: 100vh;
-        background: #111;
-        color: white;
-        flex-direction: column;
-        justify-content: center;
-        padding: 40px;
-        font-size: 25px;
-        transition: .4s;
-      }
-
-      .nav-links.open {
-        right: 0;
+        display: none !important;
       }
 
       .menu {
         display: block;
+        font-size: 28px;
+        cursor: pointer;
+        line-height: 1;
       }
 
       .hero {
@@ -737,10 +1034,66 @@
       <li><a href="#work">Work</a></li>
       <li><a href="#process">Process</a></li>
       <li><a href="#contact">Contact</a></li>
+      <li><a href="hello.html">Hello ↗</a></li>
     </ul>
 
-    <div class="menu" id="menu">☰</div>
+    <div class="menu" id="menu" aria-label="Open menu">☰</div>
   </nav>
+
+  <!-- MOBILE MENU OVERLAY (IDENTICAL TO MEHRUNI DIGITAL) -->
+  <div class="mobile-menu-overlay" id="mobileMenu">
+    <div class="mobile-menu-header">
+      <a href="#" class="logo">AR WEB.</a>
+      <button class="mobile-menu-close" id="mobileMenuClose" aria-label="Close menu">✕</button>
+    </div>
+
+    <div class="mobile-menu-body">
+      <div>
+        <div class="menu-label">NAVIGATION</div>
+
+        <ul class="mobile-nav-list">
+          <li>
+            <a href="#services" class="mobile-nav-item">
+              <span class="nav-title">Services</span>
+              <span class="nav-num">01</span>
+            </a>
+          </li>
+          <li>
+            <a href="#work" class="mobile-nav-item">
+              <span class="nav-title">Work</span>
+              <span class="nav-num">02</span>
+            </a>
+          </li>
+          <li>
+            <a href="#process" class="mobile-nav-item">
+              <span class="nav-title">Process</span>
+              <span class="nav-num">03</span>
+            </a>
+          </li>
+          <li>
+            <a href="#contact" class="mobile-nav-item">
+              <span class="nav-title">Contact</span>
+              <span class="nav-num">04</span>
+            </a>
+          </li>
+          <li>
+            <a href="hello.html" class="mobile-nav-item">
+              <span class="nav-title">Hello</span>
+              <span class="nav-num">05</span>
+            </a>
+          </li>
+        </ul>
+      </div>
+
+      <div class="mobile-menu-footer">
+        <div class="say-hello-tag">SAY HELLO</div>
+        <a href="#" onclick="closeMobileMenu(); openModal(); return false;" class="start-project-link">start a project →</a>
+        <a href="mailto:anasrangrez2991@gmail.com" class="menu-email">ANASRANGREZ2991@GMAIL.COM</a>
+        <a href="https://wa.me/919929606623" target="_blank" rel="noopener" class="menu-phone">+91 99296 06623</a>
+        <div class="menu-copyright">© AR WEB ALWAYS AT WORK</div>
+      </div>
+    </div>
+  </div>
 
 
   <!-- HERO -->
@@ -763,9 +1116,9 @@
         and grow faster.
       </p>
 
-      <a href="#contact" class="circle-button">
+      <button onclick="openModal()" class="circle-button" style="border:none;cursor:pointer;">
         START<br>PROJECT →
-      </a>
+      </button>
 
     </div>
 
@@ -1007,10 +1360,10 @@
       </h2>
 
       <div class="cta-buttons">
-        <a href="https://wa.me/919929606623?text=Hi%20AR%20WEB,%20I'd%20like%20to%20discuss%20a%20project." target="_blank" rel="noopener" class="cta-btn cta-btn-whatsapp">
+        <button onclick="openModal()" class="cta-btn cta-btn-whatsapp">
           <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-          Chat on WhatsApp
-        </a>
+          Start a Project (WhatsApp)
+        </button>
 
         <a href="mailto:anasrangrez2991@gmail.com?subject=Project%20Inquiry%20-%20AR%20WEB" class="cta-btn cta-btn-email">
           <svg viewBox="0 0 24 24"><path d="M20 4H4c-1.1 0-1.99.9-1.99 2L2 18c0 1.1.9 2 2 2h16c1.1 0 2-.9 2-2V6c0-1.1-.9-2-2-2zm0 4l-8 5-8-5V6l8 5 8-5v2z"/></svg>
@@ -1033,6 +1386,34 @@
     <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
     <span>Chat on WhatsApp</span>
   </a>
+
+  <!-- POPUP MODAL (WHATSAPP INQUIRY) -->
+  <div class="modal-overlay" id="contactModal">
+    <div class="modal-box">
+      <button class="close-btn" onclick="closeModal()" aria-label="Close modal">&times;</button>
+      <h2>Start a Project</h2>
+      <p>Fill out the form below to chat directly with us on WhatsApp.</p>
+      
+      <form id="projectForm" onsubmit="sendToWhatsapp(event)">
+        <div class="form-group">
+          <label for="modalName">Your Name</label>
+          <input type="text" id="modalName" placeholder="Enter your name" required>
+        </div>
+        
+        <div class="form-group">
+          <label for="modalProject">Project Type</label>
+          <input type="text" id="modalProject" placeholder="Website, E-Commerce, Branding..." required>
+        </div>
+
+        <div class="form-group">
+          <label for="modalMessage">Message / Details</label>
+          <textarea id="modalMessage" rows="4" placeholder="Tell us about your project..."></textarea>
+        </div>
+
+        <button type="submit" class="submit-btn">Send Message on WhatsApp ↗</button>
+      </form>
+    </div>
+  </div>
 
 
   <!-- FOOTER -->
@@ -1059,27 +1440,83 @@
 
   <script>
 
-    /* MOBILE MENU */
+    /* MOBILE MENU (FULLSCREEN DRAWER LIKE MEHRUNIDIGITAL) */
+    const menuBtn = document.getElementById("menu");
+    const mobileMenu = document.getElementById("mobileMenu");
+    const mobileMenuClose = document.getElementById("mobileMenuClose");
 
-    const menu = document.getElementById("menu");
-    const navLinks = document.getElementById("navLinks");
+    function openMobileMenu() {
+      if (mobileMenu) {
+        mobileMenu.classList.add("open");
+        document.body.style.overflow = "hidden";
+      }
+    }
 
-    menu.addEventListener("click", () => {
-      navLinks.classList.toggle("open");
+    function closeMobileMenu() {
+      if (mobileMenu) {
+        mobileMenu.classList.remove("open");
+        document.body.style.overflow = "";
+      }
+    }
 
-      if (navLinks.classList.contains("open")) {
-        menu.innerHTML = "✕";
-      } else {
-        menu.innerHTML = "☰";
+    if (menuBtn) {
+      menuBtn.addEventListener("click", openMobileMenu);
+    }
+
+    if (mobileMenuClose) {
+      mobileMenuClose.addEventListener("click", closeMobileMenu);
+    }
+
+    document.querySelectorAll(".mobile-nav-item, .start-project-link, .menu-email, .menu-phone").forEach(link => {
+      link.addEventListener("click", () => {
+        closeMobileMenu();
+      });
+    });
+
+
+    /* MODAL CONTROL */
+    const contactModal = document.getElementById("contactModal");
+
+    function openModal() {
+      if (contactModal) {
+        contactModal.classList.add("active");
+        document.body.style.overflow = "hidden";
+      }
+    }
+
+    function closeModal() {
+      if (contactModal) {
+        contactModal.classList.remove("active");
+        const mobMenu = document.getElementById("mobileMenu");
+        if (!mobMenu || !mobMenu.classList.contains("open")) {
+          document.body.style.overflow = "";
+        }
+      }
+    }
+
+    window.addEventListener("click", event => {
+      if (event.target === contactModal) {
+        closeModal();
       }
     });
 
-    document.querySelectorAll(".nav-links a").forEach(link => {
-      link.addEventListener("click", () => {
-        navLinks.classList.remove("open");
-        menu.innerHTML = "☰";
-      });
+    document.addEventListener("keydown", event => {
+      if (event.key === "Escape") {
+        closeModal();
+      }
     });
+
+    function sendToWhatsapp(event) {
+      event.preventDefault();
+      const name = document.getElementById("modalName").value;
+      const project = document.getElementById("modalProject").value;
+      const message = document.getElementById("modalMessage").value;
+
+      const text = `Hello AR WEB!%0A%0A*Name:* ${encodeURIComponent(name)}%0A*Project:* ${encodeURIComponent(project)}%0A*Message:* ${encodeURIComponent(message)}`;
+      
+      window.open(`https://wa.me/919929606623?text=${text}`, '_blank');
+      closeModal();
+    }
 
 
     /* SCROLL REVEAL */
