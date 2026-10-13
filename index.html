@@ -12,52 +12,27 @@
   <link href="https://fonts.googleapis.com/css2?family=Inter:wght@400;500;600;700&family=JetBrains+Mono:wght@400;500;600&family=Manrope:wght@400;500;600;700;800&display=swap" rel="stylesheet">
 
   <style>
-    /* CSS Variables for Dynamic Theme Switching */
+    /* CSS Variables: Clean Editorial Light Theme */
     :root {
-      /* Dark Theme Defaults */
-      --bg-main: #0b0f19;
-      --card-bg: rgba(255, 255, 255, 0.04);
-      --card-border: rgba(255, 255, 255, 0.1);
-      --text-main: #ffffff;
-      --text-muted: #9aa0a6;
-      --pink-accent: #d63384;
-      --active-blue: #1a56db;
-      --input-bg: rgba(255, 255, 255, 0.05);
-      --orb-1-color: #d63384;
-      --orb-2-color: #0e4d34;
-      --grid-opacity: 0.05;
-
-      /* Mapping for existing components */
-      --bg-bone: var(--bg-main);
-      --text-ink: var(--text-main);
-      --text-dim: #cbd5e1;
-      --accent-pink: var(--pink-accent);
-      --accent-blue: #0ea5e9;
-      --tag-bg: rgba(255, 255, 255, 0.08);
-      --dark-bg: #070a12;
-      --dark-text: #F4F4FA;
-    }
-
-    [data-theme="light"] {
-      /* Light Editorial Theme Override */
       --bg-main: #fcfbf4;
-      --card-bg: rgba(255, 255, 255, 0.88);
-      --card-border: rgba(14, 77, 52, 0.15);
-      --text-main: #0d1117;
+      --card-bg: #ffffff;
+      --card-border: #e8d8b5;
+      --text-main: #0a0e17;
       --text-muted: #555555;
-      --pink-accent: #d63384;
+      --pink-accent: #bd1568;
       --active-blue: #1a56db;
       --input-bg: #f5f3e9;
-      --orb-1-color: #f7d6e6;
-      --orb-2-color: #cce3de;
       --grid-opacity: 0.03;
 
-      /* Mapping for existing components */
+      /* Semantic tokens */
       --bg-bone: #fcfbf4;
-      --text-ink: #0d1117;
+      --text-ink: #0a0e17;
       --text-dim: #4d5369;
+      --accent-pink: #bd1568;
+      --accent-blue: #0ea5e9;
       --tag-bg: #ede0be;
       --dark-bg: #0a0e17;
+      --dark-text: #ffffff;
     }
 
     * {
@@ -104,9 +79,12 @@
       width: 100%;
     }
 
-    main, footer {
+    main, footer, header, section {
       position: relative;
       z-index: 1;
+      width: 100%;
+      max-width: 100vw;
+      box-sizing: border-box;
     }
 
     /* CURSOR */
@@ -229,27 +207,40 @@
     }
 
     .mobile-menu-btn {
-      display: none;
-      width: 42px;
-      height: 42px;
+      display: inline-flex;
+      width: 44px;
+      height: 44px;
       border-radius: 50%;
-      background: none;
-      border: none;
+      background: #ffffff;
+      border: 1px solid var(--card-border);
       cursor: pointer;
       color: var(--text-ink);
-      font-size: 22px;
+      font-size: 20px;
       align-items: center;
       justify-content: center;
+      transition: all 0.25s ease;
+      line-height: 1;
+      padding: 0;
     }
 
-    /* FULLSCREEN MOBILE DRAWER */
+    .mobile-menu-btn:hover {
+      background: #0a0e17;
+      color: #ffffff;
+      border-color: #0a0e17;
+      transform: translateY(-1px);
+      box-shadow: 0 4px 14px rgba(10, 14, 23, 0.15);
+    }
+
+    /* FULLSCREEN MOBILE DRAWER (FROSTED GLASS BLUR BACKDROP) */
     .mobile-drawer {
       position: fixed;
       top: 0;
       left: 0;
       width: 100%;
       height: 100vh;
-      background: var(--bg-bone);
+      background: rgba(252, 251, 244, 0.85);
+      backdrop-filter: blur(24px);
+      -webkit-backdrop-filter: blur(24px);
       z-index: 9999;
       display: flex;
       flex-direction: column;
@@ -258,7 +249,9 @@
       opacity: 0;
       visibility: hidden;
       transform: translateY(-10px);
-      transition: opacity .3s, transform .3s, visibility .3s;
+      transition: opacity .3s cubic-bezier(0.16, 1, 0.3, 1), transform .3s cubic-bezier(0.16, 1, 0.3, 1), visibility .3s;
+      overflow-y: auto;
+      box-sizing: border-box;
     }
 
     .mobile-drawer.open {
@@ -1701,12 +1694,109 @@
 
     /* RESPONSIVE */
     @media (max-width: 900px) {
+      .header-bar {
+        padding: 10px 14px;
+        box-sizing: border-box;
+      }
+
+      .nav-desktop-only {
+        display: none !important;
+      }
+
+      .nav-pill-group {
+        gap: 6px;
+        flex-wrap: nowrap;
+      }
+
+      .nav-pill.nav-pill-cta {
+        padding: 8px 12px;
+        font-size: 0.78rem;
+      }
+
+      .nav-pill.nav-pill-cta .pill-subtext {
+        display: none;
+      }
+
+      .select-pill {
+        padding: 6px 10px;
+        font-size: 0.78rem;
+      }
+
+      .mobile-menu-btn {
+        display: flex !important;
+        width: 38px;
+        height: 38px;
+        align-items: center;
+        justify-content: center;
+        border-radius: 50%;
+        background: var(--input-bg);
+        border: 1px solid var(--card-border);
+        color: var(--text-main);
+        font-size: 16px;
+        cursor: pointer;
+        padding: 0;
+      }
+
       .nav-links {
         display: none !important;
       }
 
-      .mobile-menu-btn {
-        display: flex;
+      .hero-section {
+        padding: 24px 16px 40px 16px !important;
+        width: 100%;
+        max-width: 100vw;
+        box-sizing: border-box;
+      }
+
+      .hero-container {
+        width: 100%;
+        max-width: 100%;
+        padding: 0 4px;
+        box-sizing: border-box;
+        gap: 16px;
+      }
+
+      .hero-container h1.hero-main-title {
+        font-size: clamp(1.85rem, 7.5vw, 2.75rem) !important;
+        letter-spacing: -0.03em !important;
+        line-height: 1.15 !important;
+        word-break: break-word !important;
+        overflow-wrap: break-word !important;
+        max-width: 100% !important;
+        margin-bottom: 14px !important;
+        padding: 0 4px;
+      }
+
+      .hero-container .sub-title {
+        font-size: 0.98rem !important;
+        line-height: 1.55 !important;
+        margin: 0 auto 20px auto !important;
+        padding: 0 8px;
+      }
+
+      /* Mobile Hero Buttons: Clean responsive column stack */
+      .hero-buttons {
+        flex-direction: column !important;
+        width: 100% !important;
+        max-width: 320px !important;
+        margin: 10px auto 0 auto !important;
+        gap: 10px !important;
+      }
+
+      .btn-dark-pill,
+      .btn-white-pill {
+        width: 100% !important;
+        box-sizing: border-box !important;
+        text-align: center !important;
+        justify-content: center !important;
+        padding: 14px 20px !important;
+        min-height: 48px !important;
+        font-size: 14.5px !important;
+      }
+
+      .hero-glow {
+        width: 100vw;
+        max-width: 100vw;
       }
 
       .statement-grid {
@@ -1742,6 +1832,14 @@
     }
 
     @media (max-width: 640px) {
+      .hero-container h1.hero-main-title {
+        font-size: clamp(1.65rem, 8vw, 2.25rem) !important;
+      }
+
+      .brand-logo {
+        font-size: 1.35rem;
+      }
+
       .floating-social-dock {
         bottom: 20px;
         right: 20px;
@@ -1763,36 +1861,7 @@
       }
     }
 
-    /* ========================================================
-       LIVE ANIMATED BACKGROUND & DARK THEME OVERRIDES
-       ======================================================== */
-    /* Live Animated Background Grid & Orbs */
-    .live-bg {
-      position: fixed;
-      top: 0; left: 0; width: 100vw; height: 100vh;
-      z-index: -2;
-      background: radial-gradient(circle, rgba(255,255,255,var(--grid-opacity)) 1px, transparent 1px);
-      background-size: 32px 32px;
-      pointer-events: none;
-    }
 
-    .orb {
-      position: fixed;
-      border-radius: 50%;
-      filter: blur(100px);
-      opacity: 0.35;
-      z-index: -1;
-      pointer-events: none;
-      animation: floatOrb 12s ease-in-out infinite alternate;
-    }
-
-    .orb-1 { width: 400px; height: 400px; background: var(--orb-1-color); top: 5%; left: 10%; }
-    .orb-2 { width: 450px; height: 450px; background: var(--orb-2-color); bottom: 5%; right: 10%; animation-delay: -6s; }
-
-    @keyframes floatOrb {
-      0% { transform: translate(0, 0) scale(1); }
-      100% { transform: translate(50px, 40px) scale(1.15); }
-    }
 
     /* Standalone Navigation Pills & Header Bar */
     .header-bar {
@@ -1807,13 +1876,9 @@
       z-index: 1000;
       backdrop-filter: blur(20px);
       -webkit-backdrop-filter: blur(20px);
-      background: rgba(11, 15, 25, 0.78);
+      background: rgba(252, 251, 244, 0.88);
       border-bottom: 1px solid var(--card-border);
       transition: background 0.3s ease;
-    }
-
-    [data-theme="light"] .header-bar {
-      background: rgba(252, 251, 244, 0.88);
     }
 
     .brand-logo {
@@ -1830,8 +1895,7 @@
     .nav-pill-group {
       display: flex;
       align-items: center;
-      gap: 10px;
-      flex-wrap: wrap;
+      gap: 12px;
     }
 
     /* Individual Standalone Nav Pills */
@@ -1854,25 +1918,25 @@
     }
 
     .nav-pill:hover {
-      border-color: rgba(255, 255, 255, 0.3);
+      border-color: rgba(10, 14, 23, 0.3);
       transform: translateY(-1px);
     }
 
-    /* Active Nav Pill: Sleek Deep Dark Fill When Clicked */
-    .nav-pill.active,
-    .nav-pill:active {
+    .nav-pill.nav-pill-cta {
       background: #0a0e17 !important;
-      border-color: rgba(255, 255, 255, 0.3) !important;
       color: #ffffff !important;
-      box-shadow: 0 4px 18px rgba(0, 0, 0, 0.45) !important;
+      border: 1px solid #0a0e17 !important;
+      padding: 9px 20px;
     }
 
-    [data-theme="light"] .nav-pill.active,
-    [data-theme="light"] .nav-pill:active {
-      background: #0a0e17 !important;
-      border-color: #0a0e17 !important;
-      color: #ffffff !important;
-      box-shadow: 0 4px 14px rgba(10, 14, 23, 0.25) !important;
+    .nav-pill.nav-pill-cta:hover {
+      background: #1e2638 !important;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 20px rgba(10, 14, 23, 0.2);
+    }
+
+    .nav-pill.nav-pill-cta span {
+      color: #ffffff;
     }
 
     .pill-text-group {
@@ -1884,33 +1948,10 @@
 
     .pill-subtext {
       font-size: 0.65rem;
-      opacity: 0.8;
+      opacity: 0.75;
       font-weight: 400;
       margin-top: 2px;
-    }
-
-    /* Select Dropdowns */
-    .select-pill {
-      background: var(--card-bg);
-      border: 1px solid var(--card-border);
-      color: var(--text-main);
-      padding: 8px 14px;
-      border-radius: 30px;
-      font-size: 0.82rem;
-      font-weight: 600;
-      outline: none;
-      cursor: pointer;
-      backdrop-filter: blur(15px);
-      -webkit-backdrop-filter: blur(15px);
-    }
-
-    .select-pill option {
-      background: #0b0f19;
-      color: #ffffff;
-    }
-    [data-theme="light"] .select-pill option {
-      background: #ffffff;
-      color: #0d1117;
+      color: rgba(255, 255, 255, 0.7);
     }
 
     /* Hero Section Upgrades */
@@ -2004,300 +2045,35 @@
       text-align: right;
     }
 
-    /* THEME TOGGLE BUTTON */
-    .theme-toggle-btn {
-      background: rgba(255, 255, 255, 0.85);
-      border: 1px solid var(--card-border);
-      padding: 7px 14px;
-      border-radius: 9999px;
-      cursor: pointer;
-      font-size: 12px;
-      font-weight: 700;
-      display: inline-flex;
-      align-items: center;
-      gap: 6px;
-      color: var(--text-ink);
-      transition: all 0.25s ease;
-      font-family: inherit;
-    }
 
-    .theme-toggle-btn:hover {
-      transform: translateY(-1px);
-      box-shadow: 0 4px 14px rgba(0, 0, 0, 0.08);
-      background: #ffffff;
-    }
-
-    /* DARK THEME STYLING OVERRIDES */
-    body.dark-theme {
-      --bg-bone: #0b0f19;
-      --text-ink: #f8fafc;
-      --text-muted: #94a3b8;
-      --text-dim: #cbd5e1;
-      --card-border: rgba(255, 255, 255, 0.1);
-      --card-bg: rgba(255, 255, 255, 0.04);
-      --tag-bg: rgba(255, 255, 255, 0.08);
-      background-color: #0b0f19;
-      color: #f8fafc;
-    }
-
-    body.dark-theme .theme-toggle-btn {
-      background: rgba(255, 255, 255, 0.1);
-      border-color: rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-    }
-
-    body.dark-theme .theme-toggle-btn:hover {
-      background: rgba(255, 255, 255, 0.18);
-      box-shadow: 0 4px 15px rgba(214, 51, 132, 0.35);
-    }
-
-    body.dark-theme .nav-container {
-      background-color: rgba(11, 15, 25, 0.82);
-      border-color: rgba(255, 255, 255, 0.12);
-      box-shadow: 0 6px 25px rgba(0, 0, 0, 0.6);
-    }
-
-    body.dark-theme .nav-logo {
-      color: #ffffff;
-    }
-
-    body.dark-theme .nav-links a {
-      color: #cbd5e1;
-    }
-
-    body.dark-theme .nav-links a:hover {
-      color: var(--accent-pink);
-    }
-
-    body.dark-theme .mobile-menu-btn {
-      color: #ffffff;
-    }
-
-    body.dark-theme .mobile-drawer {
-      background-color: rgba(11, 15, 25, 0.98);
-      color: #ffffff;
-    }
-
-    body.dark-theme .drawer-links a {
-      color: #f1f5f9;
-      border-bottom-color: rgba(255, 255, 255, 0.08);
-    }
-
-    body.dark-theme .flash-badge {
-      color: #cbd5e1;
-    }
-
-    body.dark-theme .hero-sub {
-      color: #cbd5e1;
-    }
-
-    body.dark-theme .hero-description {
-      color: #94a3b8;
-    }
-
-    body.dark-theme .hero-footnotes {
-      color: #64748b;
-    }
-
-    body.dark-theme .btn-white-pill {
-      background: rgba(255, 255, 255, 0.08);
-      color: #ffffff;
-      border-color: rgba(255, 255, 255, 0.18);
-    }
-
-    body.dark-theme .btn-white-pill:hover {
-      background: rgba(255, 255, 255, 0.16);
-      border-color: rgba(255, 255, 255, 0.3);
-    }
-
-    body.dark-theme .btn-dark-pill {
-      background: #ffffff;
-      color: #0b0f19;
-      border-color: #ffffff;
-    }
-
-    body.dark-theme .btn-dark-pill:hover {
-      background: #f1f5f9;
-      transform: translateY(-2px);
-    }
-
-    body.dark-theme .marquee-wrapper {
-      background: rgba(11, 15, 25, 0.7);
-      border-color: rgba(255, 255, 255, 0.08);
-      color: #cbd5e1;
-    }
-
-    body.dark-theme .editorial-section {
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    body.dark-theme .editorial-lead {
-      color: #f1f5f9;
-    }
-
-    body.dark-theme .quote-badge {
-      background: rgba(255, 255, 255, 0.06);
-      border-color: rgba(255, 255, 255, 0.15);
-      color: #cbd5e1;
-    }
-
-    body.dark-theme .search-preview,
-    body.dark-theme .search-preview-top {
-      background: rgba(255, 255, 255, 0.04);
-      border-color: rgba(255, 255, 255, 0.1);
-      color: #cbd5e1;
-    }
-
-    body.dark-theme .bento-card,
-    body.dark-theme .inquiry-card,
-    body.dark-theme .founder-card,
-    body.dark-theme .phase-card,
-    body.dark-theme .work-card,
-    body.dark-theme .roadmap-card {
-      background: rgba(255, 255, 255, 0.04) !important;
-      backdrop-filter: blur(20px);
-      -webkit-backdrop-filter: blur(20px);
-      border: 1px solid rgba(255, 255, 255, 0.1) !important;
-      color: #f8fafc;
-      box-shadow: 0 20px 45px rgba(0, 0, 0, 0.45);
-    }
-
-    body.dark-theme .bento-card p,
-    body.dark-theme .inquiry-card .description,
-    body.dark-theme .roadmap-card p,
-    body.dark-theme .phase-desc,
-    body.dark-theme .hello-desc {
-      color: #cbd5e1;
-    }
-
-    body.dark-theme .pill-btn {
-      background: rgba(255, 255, 255, 0.06) !important;
-      border-color: rgba(255, 255, 255, 0.15) !important;
-      color: #f1f5f9 !important;
-    }
-
-    body.dark-theme .pill-btn:hover {
-      border-color: var(--accent-pink) !important;
-    }
-
-    body.dark-theme .pill-btn.active {
-      background: rgba(189, 21, 104, 0.22) !important;
-      border-color: var(--accent-pink) !important;
-      color: #ffffff !important;
-      box-shadow: 0 0 0 1px var(--accent-pink);
-    }
-
-    body.dark-theme .form-control,
-    body.dark-theme .select-box {
-      background: rgba(255, 255, 255, 0.06) !important;
-      border-color: rgba(255, 255, 255, 0.15) !important;
-      color: #ffffff !important;
-    }
-
-    body.dark-theme .select-box option {
-      background: #0b0f19;
-      color: #ffffff;
-    }
-
-    body.dark-theme .form-control:focus,
-    body.dark-theme .select-box:focus {
-      border-color: #ffffff !important;
-      background: rgba(255, 255, 255, 0.1) !important;
-    }
-
-    body.dark-theme .modal-box {
-      background: #0f1422;
-      border-color: rgba(255, 255, 255, 0.15);
-      color: #ffffff;
-    }
-
-    body.dark-theme .modal-box h2 {
-      color: #ffffff;
-    }
-
-    body.dark-theme .hello-section {
-      border-color: rgba(255, 255, 255, 0.08);
-    }
-
-    body.dark-theme .btn-hello-copy {
-      background: rgba(255, 255, 255, 0.08);
-      border-color: rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-    }
-
-    body.dark-theme .btn-hello-copy:hover {
-      background: rgba(255, 255, 255, 0.15);
-    }
-
-    body.dark-theme .btn-hello-outline {
-      border-color: rgba(255, 255, 255, 0.2);
-      color: #ffffff;
-    }
-
-    body.dark-theme .cursor {
-      border-color: #ffffff;
-    }
-
-    body.dark-theme .cursor.active {
-      background: rgba(214, 51, 132, 0.25);
-      border-color: var(--accent-pink);
-    }
   </style>
 </head>
-<body data-theme="dark">
-
-  <!-- LIVE ANIMATED BACKGROUND GRID & ORBS LAYER -->
-  <div class="live-bg"></div>
-  <div class="orb orb-1"></div>
-  <div class="orb orb-2"></div>
+<body class="bg-bone text-ink">
 
   <!-- CURSOR -->
   <div class="cursor"></div>
 
-  <!-- STANDALONE TOP NAVIGATION PILLS & HEADER BAR -->
+  <!-- TOP NAVIGATION BAR: ARWEB, BOOK A CALL, AND 3-LINE MENU -->
   <header class="header-bar" id="headerBar">
     <a href="#top" class="brand-logo">
       arweb<span>_</span>
     </a>
 
     <div class="nav-pill-group">
-      <!-- Section Quick Jump Pills (Dark on Click & Theme Adaptive) -->
-      <a href="#work" class="nav-pill" onclick="handleNavClick(this, 'work')">Work</a>
-      <a href="#why" class="nav-pill" onclick="handleNavClick(this, 'why')">Why us</a>
-      <a href="#do" class="nav-pill" onclick="handleNavClick(this, 'services')">Services</a>
-      <a href="#inquiry" class="nav-pill" onclick="handleNavClick(this, 'inquiry')">Inquiry</a>
-      <a href="#hello" class="nav-pill" onclick="handleNavClick(this, 'hello')">Hello</a>
-
-      <!-- Language & Currency Selectors -->
-      <select class="select-pill" id="langSelect" onchange="updateLanguage()">
-        <option value="en">🌐 EN</option>
-        <option value="ar">🌐 العربية</option>
-        <option value="es">🌐 ES</option>
-      </select>
-
-      <select class="select-pill" id="currencySelect" onchange="updateCurrency()">
-        <option value="USD">$ USD</option>
-        <option value="EUR">€ EUR</option>
-        <option value="GBP">£ GBP</option>
-        <option value="AED">د.إ AED</option>
-        <option value="KWD">د.ك KWD</option>
-        <option value="INR">₹ INR</option>
-      </select>
-
-      <!-- Book a Call Pill (Standalone with Subtext) -->
-      <a href="https://wa.me/919929606623" target="_blank" rel="noopener" class="nav-pill" onclick="handleNavClick(this, 'inquiry')" aria-label="Book a call on WhatsApp">
+      <!-- Book a Call Pill -->
+      <a href="https://wa.me/919929606623" target="_blank" rel="noopener" class="nav-pill nav-pill-cta" aria-label="Book a call on WhatsApp">
         <div class="pill-text-group">
           <span>Book a call</span>
           <span class="pill-subtext">20 min. Pick a slot.</span>
         </div>
       </a>
 
-      <!-- Mobile Menu Toggle Button -->
-      <button class="mobile-menu-btn" onclick="openDrawer()" aria-label="Open mobile menu" style="padding: 8px 12px; border-radius: 20px; font-size: 16px;">☰</button>
+      <!-- 3-Line Hamburger Menu Button -->
+      <button class="mobile-menu-btn" onclick="openDrawer()" aria-label="Open menu">☰</button>
     </div>
   </header>
 
-  <!-- FULLSCREEN MOBILE DRAWER -->
+  <!-- FULLSCREEN MOBILE DRAWER (FROSTED GLASS BLUR BACKDROP) -->
   <div class="mobile-drawer" id="mobileDrawer">
     <div class="drawer-header">
       <div class="nav-logo">arweb<span>_</span></div>
@@ -2305,17 +2081,17 @@
     </div>
 
     <ul class="drawer-links">
-      <li><a href="#flash" onclick="closeDrawer(); handleNavClick(null, 'flash')"><span>Flash £499</span><span class="num">01</span></a></li>
-      <li><a href="#work" onclick="closeDrawer(); handleNavClick(null, 'work')"><span>Work</span><span class="num">02</span></a></li>
-      <li><a href="#why" onclick="closeDrawer(); handleNavClick(null, 'why')"><span>Why us</span><span class="num">03</span></a></li>
-      <li><a href="#do" onclick="closeDrawer(); handleNavClick(null, 'services')"><span>Services</span><span class="num">04</span></a></li>
-      <li><a href="#inquiry" onclick="closeDrawer(); handleNavClick(null, 'inquiry')"><span>Inquiry</span><span class="num">05</span></a></li>
-      <li><a href="#hello" onclick="closeDrawer(); handleNavClick(null, 'hello')"><span>Hello</span><span class="num">06</span></a></li>
+      <li><a href="#flash" onclick="closeDrawer()"><span>Flash £499</span><span class="num">01</span></a></li>
+      <li><a href="#work" onclick="closeDrawer()"><span>Work</span><span class="num">02</span></a></li>
+      <li><a href="#why" onclick="closeDrawer()"><span>Why us</span><span class="num">03</span></a></li>
+      <li><a href="#do" onclick="closeDrawer()"><span>Services</span><span class="num">04</span></a></li>
+      <li><a href="#inquiry" onclick="closeDrawer()"><span>Inquiry</span><span class="num">05</span></a></li>
+      <li><a href="#hello" onclick="closeDrawer()"><span>Hello</span><span class="num">06</span></a></li>
     </ul>
 
     <div class="drawer-footer">
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent-pink);text-transform:uppercase;font-weight:700;">DIRECT CONTACT</div>
-      <a href="mailto:arweb9929@gmail.com" style="font-weight:700;font-size:15px;display:block;margin-bottom:12px;">ARWEB9929@GMAIL.COM</a>
+      <a href="mailto:arweb9929@gmail.com" style="font-weight:700;font-size:15px;display:block;margin-bottom:12px;color:var(--text-ink);">ARWEB9929@GMAIL.COM</a>
       <div class="founder-social-btns" style="margin-top:0;">
         <a href="https://wa.me/919929606623" target="_blank" rel="noopener" class="social-btn social-btn-wa" aria-label="WhatsApp">
           <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
@@ -2793,24 +2569,6 @@
     <section class="inquiry-section" id="inquiry">
       <div class="inquiry-card" id="cardContainer">
         
-        <!-- Language & Currency Switcher Bar -->
-        <div class="controls-bar">
-          <select class="select-box" id="langSelectCard" onchange="syncLanguage(this.value)">
-            <option value="en">🌐 EN (English)</option>
-            <option value="ar">🌐 العربية (Arabic)</option>
-            <option value="es">🌐 ES (Spanish)</option>
-          </select>
-
-          <select class="select-box" id="currencySelectCard" onchange="syncCurrency(this.value)">
-            <option value="USD">$ USD</option>
-            <option value="EUR">€ EUR</option>
-            <option value="GBP">£ GBP</option>
-            <option value="AED">د.إ AED</option>
-            <option value="KWD">د.ك KWD</option>
-            <option value="INR">₹ INR</option>
-          </select>
-        </div>
-
         <div class="sub-header" id="subHeader">PROJECT INQUIRY</div>
         <h2 id="inquiryHeading">Tell us about the build</h2>
         <p class="description" id="subDesc">Fill in what you know; we will shape the rest together on a call.</p>
@@ -2849,10 +2607,13 @@
             <input type="text" id="clientCompany" class="form-control" placeholder="e.g. Acme Health Ltd">
           </div>
 
-          <!-- Dynamic Multi-Currency Budget Range -->
+          <!-- Estimated Investment Range -->
           <span class="section-title" id="budgetTitle">ESTIMATED INVESTMENT RANGE</span>
           <div class="pills-group" id="budgetGroup">
-            <!-- Dynamically Populated by JS -->
+            <button type="button" class="pill-btn active" onclick="selectBudget(this)">&lt; £5k</button>
+            <button type="button" class="pill-btn" onclick="selectBudget(this)">£5k - £10k</button>
+            <button type="button" class="pill-btn" onclick="selectBudget(this)">£10k - £25k</button>
+            <button type="button" class="pill-btn" onclick="selectBudget(this)">£25k+</button>
           </div>
 
           <!-- Project Brief -->
@@ -3098,7 +2859,10 @@
     });
 
     document.addEventListener("keydown", e => {
-      if (e.key === "Escape") closeModal();
+      if (e.key === "Escape") {
+        closeModal();
+        closeDrawer();
+      }
     });
 
     /* ACCORDION PHASES */
@@ -3117,82 +2881,9 @@
       }
     }
 
-    /* LANGUAGE TRANSLATIONS OBJECT */
-    const i18n = {
-      en: {
-        heroTitle: "High-Ticket Websites & AI Systems",
-        heroSub: "Custom engineering for modern salons, clinics, real estate, and high-growth commercial clients worldwide.",
-        subHeader: "PROJECT INQUIRY",
-        inquiryHeading: "Tell us about the build",
-        subDesc: "Fill in what you know; we will shape the rest together on a call.",
-        serviceTitle: "WHAT ARE WE MAKING?",
-        s1: "Software Development",
-        s2: "SEO & Organic Growth",
-        s3: "AI Business Automation",
-        s4: "Full Digital Transformation",
-        lblName: "YOUR NAME",
-        lblEmail: "EMAIL ADDRESS",
-        lblPhone: "PHONE NUMBER (OPTIONAL)",
-        lblCompany: "COMPANY / ORGANIZATION (OPTIONAL)",
-        budgetTitle: "ESTIMATED INVESTMENT RANGE",
-        lblBrief: "PROJECT BRIEF & OBJECTIVES",
-        btnText: "send project brief",
-        footerNote: "REPLIES WITHIN 1 WORKING DAY • NO SPAM GUARANTEED"
-      },
-      ar: {
-        heroTitle: "مواقع إلكترونية وأنظمة ذكاء اصطناعي فاخرة",
-        heroSub: "تطوير خاص لصالونات التجميل، العيادات، والشركات العقارية في دول الخليج والعالم.",
-        subHeader: "استفسار عن المشروع",
-        inquiryHeading: "أخبرنا عن تفاصيل مشروعك",
-        subDesc: "املأ البيانات التي تعرفها؛ وسنقوم بتنسيق باقي التفاصيل معاً في مكالمة.",
-        serviceTitle: "ماذا تريد أن نبني؟",
-        s1: "تطوير البرمجيات",
-        s2: "تحسين محركات البحث SEO",
-        s3: "أتمتة الأعمال بالذكاء الاصطناعي",
-        s4: "تحول رقمي كامل",
-        lblName: "الاسم الكامل",
-        lblEmail: "البريد الإلكتروني",
-        lblPhone: "رقم الهاتف (اختياري)",
-        lblCompany: "اسم الشركة / المؤسسة (اختياري)",
-        budgetTitle: "الميزانية التقديرية للمشروع",
-        lblBrief: "تفاصيل وأهداف المشروع",
-        btnText: "إرسال تفاصيل المشروع",
-        footerNote: "نرد خلال يوم عمل واحد • لا نرسل رسائل مزعجة"
-      },
-      es: {
-        heroTitle: "Sitios Web y Sistemas de IA de Alto Nivel",
-        heroSub: "Desarrollo a medida para salones, clínicas y empresas inmobiliarias en todo el mundo.",
-        subHeader: "CONSULTA DE PROYECTO",
-        inquiryHeading: "Cuéntanos sobre tu proyecto",
-        subDesc: "Rellena lo que sepas; definiremos el resto juntos en una llamada.",
-        serviceTitle: "¿QUÉ VAMOS A CREAR?",
-        s1: "Desarrollo de Software",
-        s2: "SEO y Crecimiento Orgánico",
-        s3: "Automatización con IA",
-        s4: "Transformación Digital Integral",
-        lblName: "TU NOMBRE",
-        lblEmail: "CORREO ELECTRÓNICO",
-        lblPhone: "TELÉFONO (OPCIONAL)",
-        lblCompany: "EMPRESA / ORGANIZACIÓN (OPCIONAL)",
-        budgetTitle: "RANGO DE INVERSIÓN ESTIMADO",
-        lblBrief: "RESUMEN DEL PROYECTO Y OBJETIVOS",
-        btnText: "enviar resumen del proyecto",
-        footerNote: "RESPUESTAS EN 1 DÍA LABORABLE • SIN SPAM GARANTIZADO"
-      }
-    };
-
-    /* MULTI-CURRENCY BUDGET PRESETS */
-    const currencyBudgets = {
-      USD: ["< $2.5k", "$2.5k - $10k", "$10k - $25k", "$25k - $50k", "$50k+"],
-      EUR: ["< €2k", "€2k - €8k", "€8k - €20k", "€20k - €45k", "€45k+"],
-      GBP: ["< £1.5k", "£1.5k - £7k", "£7k - £18k", "£18k - £40k", "£40k+"],
-      AED: ["< 9k AED", "9k - 35k AED", "35k - 90k AED", "90k - 180k AED", "180k+ AED"],
-      KWD: ["< 750 KWD", "750 - 3k KWD", "3k - 7.5k KWD", "7.5k - 15k KWD", "15k+ KWD"],
-      INR: ["< ₹1.5 Lakh", "₹1.5L - ₹5 Lakh", "₹5L - ₹15 Lakh", "₹15L - ₹30 Lakh", "₹30 Lakh+"]
-    };
-
+    /* INQUIRY FORM PILLS & SUBMISSION */
     let selectedService = "Software Development";
-    let selectedBudget = "< $2.5k";
+    let selectedBudget = "< £5k";
 
     function selectService(btn) {
       document.querySelectorAll('#serviceGroup .pill-btn').forEach(b => b.classList.remove('active'));
@@ -3204,93 +2895,6 @@
       document.querySelectorAll('#budgetGroup .pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
       selectedBudget = btn.innerText;
-    }
-
-    function updateCurrency() {
-      const select = document.getElementById("currencySelect");
-      const curr = select ? select.value : "USD";
-      syncCurrency(curr);
-    }
-
-    function syncCurrency(curr) {
-      const select = document.getElementById("currencySelect");
-      const selectCard = document.getElementById("currencySelectCard");
-      if (select && select.value !== curr) select.value = curr;
-      if (selectCard && selectCard.value !== curr) selectCard.value = curr;
-
-      const budgetGroup = document.getElementById("budgetGroup");
-      if (!budgetGroup || !currencyBudgets[curr]) return;
-      budgetGroup.innerHTML = "";
-
-      currencyBudgets[curr].forEach((item, index) => {
-        const btn = document.createElement("button");
-        btn.type = "button";
-        btn.className = "pill-btn" + (index === 0 ? " active" : "");
-        btn.innerText = item;
-        btn.onclick = function() { selectBudget(this); };
-        budgetGroup.appendChild(btn);
-      });
-      selectedBudget = currencyBudgets[curr][0];
-    }
-
-    function updateLanguage() {
-      const langSelect = document.getElementById("langSelect");
-      const lang = langSelect ? langSelect.value : "en";
-      syncLanguage(lang);
-    }
-
-    function syncLanguage(lang) {
-      const langSelect = document.getElementById("langSelect");
-      const langCard = document.getElementById("langSelectCard");
-      if (langSelect && langSelect.value !== lang) langSelect.value = lang;
-      if (langCard && langCard.value !== lang) langCard.value = lang;
-
-      const body = document.body;
-      const container = document.getElementById("cardContainer");
-
-      // Toggle Arabic RTL Layout
-      if (lang === "ar") {
-        body.classList.add("rtl");
-        if (container) container.classList.add("rtl");
-      } else {
-        body.classList.remove("rtl");
-        if (container) container.classList.remove("rtl");
-      }
-
-      // Update Hero Text Content
-      const mainTitle = document.getElementById("mainTitle");
-      if (mainTitle && i18n[lang].heroTitle) {
-        mainTitle.innerHTML = i18n[lang].heroTitle + '<span>_</span>';
-      }
-      const subTitle = document.getElementById("subTitle");
-      if (subTitle && i18n[lang].heroSub) {
-        subTitle.innerText = i18n[lang].heroSub;
-      }
-
-      // Update Inquiry Card Text
-      if (document.getElementById("subHeader")) document.getElementById("subHeader").innerText = i18n[lang].subHeader;
-      if (document.getElementById("inquiryHeading")) document.getElementById("inquiryHeading").innerText = i18n[lang].inquiryHeading;
-      if (document.getElementById("subDesc")) document.getElementById("subDesc").innerText = i18n[lang].subDesc;
-      if (document.getElementById("serviceTitle")) document.getElementById("serviceTitle").innerText = i18n[lang].serviceTitle;
-      
-      // Update Service Buttons
-      document.querySelectorAll("#serviceGroup .pill-btn").forEach(btn => {
-        const key = btn.getAttribute("data-key");
-        if (key && i18n[lang][key]) {
-          const wasActive = btn.classList.contains("active");
-          btn.innerText = i18n[lang][key];
-          if (wasActive) selectedService = i18n[lang][key];
-        }
-      });
-
-      if (document.getElementById("lblLabelName")) document.getElementById("lblLabelName").innerHTML = i18n[lang].lblName + ' <span class="req">*</span>';
-      if (document.getElementById("lblLabelEmail")) document.getElementById("lblLabelEmail").innerHTML = i18n[lang].lblEmail + ' <span class="req">*</span>';
-      if (document.getElementById("lblLabelPhone")) document.getElementById("lblLabelPhone").innerText = i18n[lang].lblPhone;
-      if (document.getElementById("lblLabelCompany")) document.getElementById("lblLabelCompany").innerText = i18n[lang].lblCompany;
-      if (document.getElementById("budgetTitle")) document.getElementById("budgetTitle").innerText = i18n[lang].budgetTitle;
-      if (document.getElementById("lblLabelBrief")) document.getElementById("lblLabelBrief").innerHTML = i18n[lang].lblBrief + ' <span class="req">*</span>';
-      if (document.getElementById("btnText")) document.getElementById("btnText").innerText = i18n[lang].btnText;
-      if (document.getElementById("footerNote")) document.getElementById("footerNote").innerText = i18n[lang].footerNote;
     }
 
     function sendToWhatsApp(event) {
@@ -3317,9 +2921,6 @@
       const whatsappUrl = `https://wa.me/919929606623?text=${message}`;
       window.open(whatsappUrl, '_blank');
     }
-
-    // Initialize Currency Presets on load
-    updateCurrency();
 
     /* MODAL INQUIRY PILLS & SUBMISSION */
     let selectedModalService = "Software Development";
@@ -3383,78 +2984,11 @@
       alert("Email (" + text + ") copied to clipboard!");
     }
 
-    /* ACTIVE PILL & DYNAMIC SECTION THEME CONTROLLER */
-    function setActivePill(element) {
-      if (!element) return;
-      document.querySelectorAll('.nav-pill').forEach(pill => pill.classList.remove('active'));
-      element.classList.add('active');
-    }
-
-    function applyTheme(themeName) {
-      const body = document.body;
-      body.setAttribute('data-theme', themeName);
-      if (themeName === 'dark') {
-        body.classList.add('dark-theme');
-      } else {
-        body.classList.remove('dark-theme');
-      }
-      try {
-        localStorage.setItem('arweb_theme', themeName);
-      } catch(e) {}
-    }
-
-    function handleNavClick(element, section) {
-      if (element) setActivePill(element);
-
-      // Services (#do) and Inquiry (#inquiry) trigger DARK THEME
-      if (section === 'services' || section === 'inquiry') {
-        applyTheme('dark');
-      } else if (section === 'work' || section === 'why' || section === 'flash') {
-        applyTheme('light');
-      }
-    }
-
-    // Legacy fallback
-    function toggleTheme() {
-      const current = document.body.getAttribute('data-theme') || 'light';
-      applyTheme(current === 'dark' ? 'light' : 'dark');
-    }
-
-    /* AUTOMATIC SCROLL-BASED THEME & NAV PILL DETECTION */
-    // Services (#do) and Inquiry (#inquiry) automatically turn DARK THEME on scroll
-    if ('IntersectionObserver' in window) {
-      const sectionObserver = new IntersectionObserver((entries) => {
-        entries.forEach(entry => {
-          if (entry.isIntersecting) {
-            const id = entry.target.id;
-            if (id === 'do' || id === 'inquiry') {
-              applyTheme('dark');
-              const pill = document.querySelector(`.nav-pill[href="#${id}"]`);
-              if (pill) setActivePill(pill);
-            } else if (id === 'why' || id === 'work' || id === 'flash') {
-              applyTheme('light');
-              const pill = document.querySelector(`.nav-pill[href="#${id}"]`);
-              if (pill) setActivePill(pill);
-            }
-          }
-        });
-      }, {
-        threshold: 0.25,
-        rootMargin: "-60px 0px -40% 0px"
+    /* MOBILE DRAWER BACKDROP CLICK */
+    if (mobileDrawer) {
+      mobileDrawer.addEventListener("click", e => {
+        if (e.target === mobileDrawer) closeDrawer();
       });
-
-      ['do', 'inquiry', 'why', 'work', 'flash'].forEach(id => {
-        const el = document.getElementById(id);
-        if (el) sectionObserver.observe(el);
-      });
-    }
-
-    // Initial boot: start with light theme, Services and Inquiry trigger Dark
-    try {
-      const savedTheme = localStorage.getItem("arweb_theme") || "light";
-      applyTheme(savedTheme);
-    } catch(e) {
-      applyTheme("light");
     }
 
     /* CUSTOM CURSOR */
