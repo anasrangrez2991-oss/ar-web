@@ -1045,10 +1045,55 @@
       background: var(--card-bg);
       border: 1px solid var(--card-border);
       border-radius: 26px;
-      padding: 42px 34px;
-      max-width: 580px;
+      padding: 38px 30px;
+      max-width: 620px;
       width: 100%;
       box-shadow: 0 10px 30px rgba(0,0,0,0.03);
+    }
+
+    /* Top Selectors Bar */
+    .controls-bar {
+      display: flex;
+      justify-content: space-between;
+      gap: 10px;
+      margin-bottom: 22px;
+    }
+
+    .select-box {
+      background: #f9f7f0;
+      border: 1px solid var(--card-border);
+      padding: 7px 14px;
+      border-radius: 20px;
+      font-size: 0.85rem;
+      font-weight: 600;
+      outline: none;
+      cursor: pointer;
+      font-family: inherit;
+      color: var(--text-ink);
+      transition: border-color 0.2s ease, background 0.2s ease;
+    }
+
+    .select-box:focus {
+      border-color: var(--text-ink);
+      background: #ffffff;
+    }
+
+    /* RTL Support for Arabic */
+    .inquiry-card.rtl {
+      direction: rtl;
+      text-align: right;
+    }
+
+    .inquiry-card.rtl .form-group {
+      text-align: right;
+    }
+
+    .inquiry-card.rtl .controls-bar {
+      direction: ltr;
+    }
+
+    .inquiry-card.rtl .submit-btn span.arrow {
+      transform: rotate(180deg);
     }
 
     .inquiry-card .sub-header {
@@ -1312,48 +1357,105 @@
       font-weight: 700;
     }
 
-    .founder-card .email, .founder-card .phone {
+    .founder-card .email {
       font-size: 16px;
       font-weight: 600;
       margin-bottom: 8px;
       display: block;
       color: var(--text-ink);
-    }
-
-    .founder-card .email {
       text-decoration: underline;
       text-underline-offset: 3px;
     }
 
-    .btn-founder-wa {
-      margin-top: 25px;
-      padding: 12px 24px;
-      border-radius: 30px;
-      border: 1px solid var(--card-border);
-      background: rgba(248, 240, 213, 0.6);
-      font-size: 13px;
-      font-weight: 700;
-      cursor: pointer;
+    /* SOCIAL LOGO BUTTONS */
+    .founder-social-btns {
+      display: flex;
+      gap: 12px;
+      margin-top: 24px;
+      flex-wrap: wrap;
+    }
+
+    .social-btn {
       display: inline-flex;
       align-items: center;
       gap: 10px;
-      width: fit-content;
-      transition: background 0.3s, transform 0.2s;
-      color: var(--text-ink);
+      padding: 12px 20px;
+      border-radius: 30px;
+      font-size: 13px;
+      font-weight: 700;
       text-decoration: none;
+      transition: transform 0.2s ease, box-shadow 0.2s ease;
+      cursor: pointer;
     }
 
-    .btn-founder-wa:hover {
-      background-color: #ffffff;
+    .social-btn:hover {
       transform: translateY(-2px);
     }
 
-    .dot-wa {
-      width: 8px;
-      height: 8px;
-      background-color: #25D366;
+    .social-btn-wa {
+      background: #25D366;
+      color: #0b2212;
+      box-shadow: 0 4px 15px rgba(37, 211, 102, 0.25);
+    }
+
+    .social-btn-wa:hover {
+      box-shadow: 0 6px 20px rgba(37, 211, 102, 0.4);
+    }
+
+    .social-btn-insta {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: #ffffff;
+      box-shadow: 0 4px 15px rgba(220, 39, 67, 0.25);
+    }
+
+    .social-btn-insta:hover {
+      box-shadow: 0 6px 20px rgba(220, 39, 67, 0.4);
+    }
+
+    .social-btn svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
+    }
+
+    /* FOOTER SOCIAL LINKS */
+    .footer-social-links {
+      display: flex;
+      gap: 10px;
+      align-items: center;
+      margin-top: 6px;
+    }
+
+    .footer-social-link {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      width: 36px;
+      height: 36px;
       border-radius: 50%;
-      box-shadow: 0 0 0 2px rgba(37, 211, 102, 0.25);
+      background: rgba(255, 255, 255, 0.1);
+      color: var(--dark-text);
+      transition: background 0.2s, transform 0.2s, color 0.2s;
+    }
+
+    .footer-social-link:hover {
+      transform: translateY(-2px);
+    }
+
+    .footer-social-link.wa:hover {
+      background: #25D366;
+      color: #0b2212;
+    }
+
+    .footer-social-link.insta:hover {
+      background: #e1306c;
+      color: #ffffff;
+    }
+
+    .footer-social-link svg {
+      width: 18px;
+      height: 18px;
+      fill: currentColor;
     }
 
     /* FOOTER */
@@ -1444,34 +1546,55 @@
       gap: 16px;
     }
 
-    /* FLOATING WHATSAPP BUTTON */
-    .floating-wa {
+    /* FLOATING SOCIAL DOCK */
+    .floating-social-dock {
       position: fixed;
       bottom: 28px;
       right: 28px;
       z-index: 999;
-      background: #25D366;
-      color: #0b2212;
       display: flex;
       align-items: center;
-      gap: 10px;
-      padding: 14px 22px;
-      border-radius: 50px;
-      box-shadow: 0 10px 30px rgba(0, 0, 0, 0.35);
-      font-size: 14px;
-      font-weight: 700;
+      gap: 12px;
+    }
+
+    .floating-social-btn {
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      width: 52px;
+      height: 52px;
+      border-radius: 50%;
       text-decoration: none;
-      transition: transform .3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow .3s;
+      box-shadow: 0 10px 28px rgba(0, 0, 0, 0.25);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s;
+      cursor: pointer;
     }
 
-    .floating-wa:hover {
-      transform: translateY(-3px) scale(1.05);
-      box-shadow: 0 15px 35px rgba(37, 211, 102, 0.45);
+    .floating-social-btn:hover {
+      transform: translateY(-4px) scale(1.08);
     }
 
-    .floating-wa svg {
-      width: 22px;
-      height: 22px;
+    .floating-social-btn.wa {
+      background: #25D366;
+      color: #0b2212;
+    }
+
+    .floating-social-btn.wa:hover {
+      box-shadow: 0 14px 30px rgba(37, 211, 102, 0.45);
+    }
+
+    .floating-social-btn.insta {
+      background: linear-gradient(45deg, #f09433 0%, #e6683c 25%, #dc2743 50%, #cc2366 75%, #bc1888 100%);
+      color: #ffffff;
+    }
+
+    .floating-social-btn.insta:hover {
+      box-shadow: 0 14px 30px rgba(220, 39, 67, 0.45);
+    }
+
+    .floating-social-btn svg {
+      width: 26px;
+      height: 26px;
       fill: currentColor;
     }
 
@@ -1575,15 +1698,20 @@
     }
 
     @media (max-width: 640px) {
-      .floating-wa span {
-        display: none;
-      }
-
-      .floating-wa {
-        padding: 16px;
+      .floating-social-dock {
         bottom: 20px;
         right: 20px;
-        border-radius: 50%;
+        gap: 10px;
+      }
+
+      .floating-social-btn {
+        width: 44px;
+        height: 44px;
+      }
+
+      .floating-social-btn svg {
+        width: 22px;
+        height: 22px;
       }
 
       .cursor {
@@ -1641,9 +1769,18 @@
 
     <div class="drawer-footer">
       <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent-pink);text-transform:uppercase;font-weight:700;">DIRECT CONTACT</div>
-      <a href="mailto:arweb9929@gmail.com" style="font-weight:700;font-size:15px;">ARWEB9929@GMAIL.COM</a>
-      <a href="https://wa.me/919929606623" target="_blank" rel="noopener" style="font-weight:700;font-size:15px;">+91 99296 06623</a>
-      <div style="font-size:11px;opacity:0.5;margin-top:10px;">© 2026 AR WEB · ALL RIGHTS RESERVED</div>
+      <a href="mailto:arweb9929@gmail.com" style="font-weight:700;font-size:15px;display:block;margin-bottom:12px;">ARWEB9929@GMAIL.COM</a>
+      <div class="founder-social-btns" style="margin-top:0;">
+        <a href="https://wa.me/919929606623" target="_blank" rel="noopener" class="social-btn social-btn-wa" aria-label="WhatsApp">
+          <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+          <span>WhatsApp</span>
+        </a>
+        <a href="https://instagram.com/7m.anx0?exln=MTVlNjQwY3oxZXZmcA%3D%3D" target="_blank" rel="noopener" class="social-btn social-btn-insta" aria-label="Instagram">
+          <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+          <span>Instagram</span>
+        </a>
+      </div>
+      <div style="font-size:11px;opacity:0.5;margin-top:14px;">© 2026 AR WEB · ALL RIGHTS RESERVED</div>
     </div>
   </div>
 
@@ -2098,67 +2235,83 @@
 
     <!-- PROJECT INQUIRY (TELL US ABOUT THE BUILD) -->
     <section class="inquiry-section" id="inquiry">
-      <div class="inquiry-card">
-        <div class="sub-header">PROJECT INQUIRY</div>
-        <h2>Tell us about the build</h2>
-        <p class="description">Fill in what you know; we will shape the rest together on a call.</p>
+      <div class="inquiry-card" id="cardContainer">
+        
+        <!-- Language & Currency Switcher Bar -->
+        <div class="controls-bar">
+          <select class="select-box" id="langSelect" onchange="updateLanguage()">
+            <option value="en">🌐 English</option>
+            <option value="ar">🌐 العربية (Arabic)</option>
+            <option value="es">🌐 Español (Spanish)</option>
+          </select>
 
-        <!-- Category Selection -->
-        <span class="section-title">WHAT ARE WE MAKING?</span>
-        <div class="pills-group" id="pageServiceGroup">
-          <button type="button" class="pill-btn active" onclick="selectPageService(this)">Software Development</button>
-          <button type="button" class="pill-btn" onclick="selectPageService(this)">SEO & Organic Growth</button>
-          <button type="button" class="pill-btn" onclick="selectPageService(this)">AI Business Automation</button>
-          <button type="button" class="pill-btn" onclick="selectPageService(this)">Full Digital Transformation</button>
+          <select class="select-box" id="currencySelect" onchange="updateCurrency()">
+            <option value="USD">USD ($)</option>
+            <option value="EUR">EUR (€)</option>
+            <option value="GBP">GBP (£)</option>
+            <option value="AED">AED (د.إ)</option>
+            <option value="KWD">KWD (د.ك)</option>
+            <option value="INR">INR (₹)</option>
+          </select>
         </div>
 
-        <form id="pageInquiryForm" onsubmit="sendPageToWhatsApp(event)">
+        <div class="sub-header" id="subHeader">PROJECT INQUIRY</div>
+        <h2 id="mainTitle">Tell us about the build</h2>
+        <p class="description" id="subDesc">Fill in what you know; we will shape the rest together on a call.</p>
+
+        <!-- Category Selection -->
+        <span class="section-title" id="serviceTitle">WHAT ARE WE MAKING?</span>
+        <div class="pills-group" id="serviceGroup">
+          <button type="button" class="pill-btn active" onclick="selectService(this)" data-key="s1">Software Development</button>
+          <button type="button" class="pill-btn" onclick="selectService(this)" data-key="s2">SEO & Organic Growth</button>
+          <button type="button" class="pill-btn" onclick="selectService(this)" data-key="s3">AI Business Automation</button>
+          <button type="button" class="pill-btn" onclick="selectService(this)" data-key="s4">Full Digital Transformation</button>
+        </div>
+
+        <form id="inquiryForm" onsubmit="sendToWhatsApp(event)">
           <!-- Name -->
           <div class="form-group">
-            <label for="pageClientName">YOUR NAME <span class="req">*</span></label>
-            <input type="text" id="pageClientName" class="form-control" placeholder="e.g. Alex Davies" required>
+            <label id="lblLabelName">YOUR NAME <span class="req">*</span></label>
+            <input type="text" id="clientName" class="form-control" placeholder="e.g. Alex Davies" required>
           </div>
 
           <!-- Email -->
           <div class="form-group">
-            <label for="pageClientEmail">EMAIL ADDRESS <span class="req">*</span></label>
-            <input type="email" id="pageClientEmail" class="form-control" placeholder="alex@company.com" required>
+            <label id="lblLabelEmail">EMAIL ADDRESS <span class="req">*</span></label>
+            <input type="email" id="clientEmail" class="form-control" placeholder="alex@company.com" required>
           </div>
 
           <!-- Phone -->
           <div class="form-group">
-            <label for="pageClientPhone">PHONE NUMBER (OPTIONAL)</label>
-            <input type="tel" id="pageClientPhone" class="form-control" placeholder="+91 99296 06623">
+            <label id="lblLabelPhone">PHONE NUMBER (OPTIONAL)</label>
+            <input type="tel" id="clientPhone" class="form-control" placeholder="+91 XXXXX XXXXX">
           </div>
 
           <!-- Company -->
           <div class="form-group">
-            <label for="pageClientCompany">COMPANY / ORGANIZATION (OPTIONAL)</label>
-            <input type="text" id="pageClientCompany" class="form-control" placeholder="e.g. Acme Health Ltd">
+            <label id="lblLabelCompany">COMPANY / ORGANIZATION (OPTIONAL)</label>
+            <input type="text" id="clientCompany" class="form-control" placeholder="e.g. Acme Health Ltd">
           </div>
 
-          <!-- Budget Range -->
-          <span class="section-title">ESTIMATED INVESTMENT RANGE</span>
-          <div class="pills-group" id="pageBudgetGroup">
-            <button type="button" class="pill-btn active" onclick="selectPageBudget(this)">&lt; £5k</button>
-            <button type="button" class="pill-btn" onclick="selectPageBudget(this)">£5k - £10k</button>
-            <button type="button" class="pill-btn" onclick="selectPageBudget(this)">£10k - £25k</button>
-            <button type="button" class="pill-btn" onclick="selectPageBudget(this)">£25k+</button>
+          <!-- Dynamic Multi-Currency Budget Range -->
+          <span class="section-title" id="budgetTitle">ESTIMATED INVESTMENT RANGE</span>
+          <div class="pills-group" id="budgetGroup">
+            <!-- Dynamically Populated by JS -->
           </div>
 
           <!-- Project Brief -->
           <div class="form-group">
-            <label for="pageProjectBrief">PROJECT BRIEF & OBJECTIVES <span class="req">*</span></label>
-            <textarea id="pageProjectBrief" class="form-control" placeholder="Tell us about what you need built, any deadlines, existing systems, or links to references..." required></textarea>
+            <label id="lblLabelBrief">PROJECT BRIEF & OBJECTIVES <span class="req">*</span></label>
+            <textarea id="projectBrief" class="form-control" placeholder="Tell us about what you need built, any deadlines, existing systems, or links to references..." required></textarea>
           </div>
 
           <!-- Submit Button -->
-          <button type="submit" class="submit-btn">
-            send project brief <span>→</span>
+          <button type="submit" class="submit-btn" id="btnSubmit">
+            <span id="btnText">send project brief</span> <span class="arrow">→</span>
           </button>
         </form>
 
-        <div class="inquiry-footer-note">
+        <div class="inquiry-footer-note" id="footerNote">
           REPLIES WITHIN 1 WORKING DAY • NO SPAM GUARANTEED
         </div>
       </div>
@@ -2190,11 +2343,17 @@
             <h3>Anas Rangrez</h3>
             <div class="role">Founder & Lead Engineer</div>
             <a href="mailto:arweb9929@gmail.com" class="email">arweb9929@gmail.com</a>
-            <span class="phone">+91 99296 06623</span>
           </div>
-          <a href="https://wa.me/919929606623?text=Hi%20Anas,%20I'd%20like%20to%20discuss%20a%20project%20with%20AR%20Web." target="_blank" rel="noopener" class="btn-founder-wa">
-            <span class="dot-wa"></span> chat on whatsapp (+91 99296 06623) ↗
-          </a>
+          <div class="founder-social-btns">
+            <a href="https://wa.me/919929606623" target="_blank" rel="noopener" class="social-btn social-btn-wa" aria-label="Chat on WhatsApp">
+              <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+              <span>WhatsApp</span>
+            </a>
+            <a href="https://instagram.com/7m.anx0?exln=MTVlNjQwY3oxZXZmcA%3D%3D" target="_blank" rel="noopener" class="social-btn social-btn-insta" aria-label="Visit Instagram">
+              <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              <span>Instagram</span>
+            </a>
+          </div>
         </div>
       </div>
     </section>
@@ -2218,6 +2377,17 @@
           <div>
             <div class="lbl">Email</div>
             <a href="mailto:arweb9929@gmail.com" class="val">arweb9929@gmail.com</a>
+          </div>
+          <div>
+            <div class="lbl">Social</div>
+            <div class="footer-social-links">
+              <a href="https://wa.me/919929606623" target="_blank" rel="noopener" class="footer-social-link wa" aria-label="Chat on WhatsApp">
+                <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+              </a>
+              <a href="https://instagram.com/7m.anx0?exln=MTVlNjQwY3oxZXZmcA%3D%3D" target="_blank" rel="noopener" class="footer-social-link insta" aria-label="Visit Instagram">
+                <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+              </a>
+            </div>
           </div>
         </div>
 
@@ -2244,11 +2414,15 @@
   </footer>
 
 
-  <!-- FLOATING WHATSAPP BUTTON -->
-  <a href="https://wa.me/919929606623?text=Hi%20AR%20Web,%20I'd%20like%20to%20discuss%20a%20project." class="floating-wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-    <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-    <span>Chat on WhatsApp</span>
-  </a>
+  <!-- FLOATING SOCIAL DOCK (WHATSAPP & INSTAGRAM) -->
+  <div class="floating-social-dock">
+    <a href="https://instagram.com/7m.anx0?exln=MTVlNjQwY3oxZXZmcA%3D%3D" class="floating-social-btn insta" target="_blank" rel="noopener" aria-label="Visit Instagram">
+      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+    </a>
+    <a href="https://wa.me/919929606623" class="floating-social-btn wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+      <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+    </a>
+  </div>
 
   <!-- POPUP MODAL (PROJECT INQUIRY) -->
   <div class="modal-overlay" id="contactModal">
@@ -2289,7 +2463,7 @@
 
         <div class="form-group">
           <label for="modalPhone">PHONE NUMBER (OPTIONAL)</label>
-          <input type="tel" id="modalPhone" class="form-control" placeholder="+91 99296 06623">
+          <input type="tel" id="modalPhone" class="form-control" placeholder="+91 XXXXX XXXXX">
         </div>
 
         <div class="form-group">
@@ -2387,42 +2561,174 @@
       }
     }
 
-    /* ON-PAGE INQUIRY PILLS & SUBMISSION */
-    let selectedPageService = "Software Development";
-    let selectedPageBudget = "< £5k";
+    /* LANGUAGE TRANSLATIONS OBJECT */
+    const i18n = {
+      en: {
+        subHeader: "PROJECT INQUIRY",
+        mainTitle: "Tell us about the build",
+        subDesc: "Fill in what you know; we will shape the rest together on a call.",
+        serviceTitle: "WHAT ARE WE MAKING?",
+        s1: "Software Development",
+        s2: "SEO & Organic Growth",
+        s3: "AI Business Automation",
+        s4: "Full Digital Transformation",
+        lblName: "YOUR NAME",
+        lblEmail: "EMAIL ADDRESS",
+        lblPhone: "PHONE NUMBER (OPTIONAL)",
+        lblCompany: "COMPANY / ORGANIZATION (OPTIONAL)",
+        budgetTitle: "ESTIMATED INVESTMENT RANGE",
+        lblBrief: "PROJECT BRIEF & OBJECTIVES",
+        btnText: "send project brief",
+        footerNote: "REPLIES WITHIN 1 WORKING DAY • NO SPAM GUARANTEED"
+      },
+      ar: {
+        subHeader: "استفسار عن المشروع",
+        mainTitle: "أخبرنا عن تفاصيل مشروعك",
+        subDesc: "املأ البيانات التي تعرفها؛ وسنقوم بتنسيق باقي التفاصيل معاً في مكالمة.",
+        serviceTitle: "ماذا تريد أن نبني؟",
+        s1: "تطوير البرمجيات",
+        s2: "تحسين محركات البحث SEO",
+        s3: "أتمتة الأعمال بالذكاء الاصطناعي",
+        s4: "تحول رقمي كامل",
+        lblName: "الاسم",
+        lblEmail: "البريد الإلكتروني",
+        lblPhone: "رقم الهاتف (اختياري)",
+        lblCompany: "اسم الشركة / المؤسسة (اختياري)",
+        budgetTitle: "الميزانية التقديرية للمشروع",
+        lblBrief: "تفاصيل وأهداف المشروع",
+        btnText: "إرسال تفاصيل المشروع",
+        footerNote: "نرد خلال يوم عمل واحد • لا نرسل رسائل مزعجة"
+      },
+      es: {
+        subHeader: "CONSULTA DE PROYECTO",
+        mainTitle: "Cuéntanos sobre tu proyecto",
+        subDesc: "Rellena lo que sepas; definiremos el resto juntos en una llamada.",
+        serviceTitle: "¿QUÉ VAMOS A CREAR?",
+        s1: "Desarrollo de Software",
+        s2: "SEO y Crecimiento Orgánico",
+        s3: "Automatización con IA",
+        s4: "Transformación Digital Integral",
+        lblName: "TU NOMBRE",
+        lblEmail: "CORREO ELECTRÓNICO",
+        lblPhone: "TELÉFONO (OPCIONAL)",
+        lblCompany: "EMPRESA / ORGANIZACIÓN (OPCIONAL)",
+        budgetTitle: "RANGO DE INVERSIÓN ESTIMADO",
+        lblBrief: "RESUMEN DEL PROYECTO Y OBJETIVOS",
+        btnText: "enviar resumen del proyecto",
+        footerNote: "RESPUESTAS EN 1 DÍA LABORABLE • SIN SPAM GARANTIZADO"
+      }
+    };
 
-    function selectPageService(btn) {
-      document.querySelectorAll('#pageServiceGroup .pill-btn').forEach(b => b.classList.remove('active'));
+    /* MULTI-CURRENCY BUDGET PRESETS */
+    const currencyBudgets = {
+      USD: ["< $2.5k", "$2.5k - $10k", "$10k - $25k", "$25k - $50k", "$50k+"],
+      EUR: ["< €2k", "€2k - €8k", "€8k - €20k", "€20k - €45k", "€45k+"],
+      GBP: ["< £1.5k", "£1.5k - £7k", "£7k - £18k", "£18k - £40k", "£40k+"],
+      AED: ["< 9k AED", "9k - 35k AED", "35k - 90k AED", "90k - 180k AED", "180k+ AED"],
+      KWD: ["< 750 KWD", "750 - 3k KWD", "3k - 7.5k KWD", "7.5k - 15k KWD", "15k+ KWD"],
+      INR: ["< ₹1.5 Lakh", "₹1.5L - ₹5 Lakh", "₹5L - ₹15 Lakh", "₹15L - ₹30 Lakh", "₹30 Lakh+"]
+    };
+
+    let selectedService = "Software Development";
+    let selectedBudget = "< $2.5k";
+
+    function selectService(btn) {
+      document.querySelectorAll('#serviceGroup .pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      selectedPageService = btn.innerText;
+      selectedService = btn.innerText;
     }
 
-    function selectPageBudget(btn) {
-      document.querySelectorAll('#pageBudgetGroup .pill-btn').forEach(b => b.classList.remove('active'));
+    function selectBudget(btn) {
+      document.querySelectorAll('#budgetGroup .pill-btn').forEach(b => b.classList.remove('active'));
       btn.classList.add('active');
-      selectedPageBudget = btn.innerText;
+      selectedBudget = btn.innerText;
     }
 
-    function sendPageToWhatsApp(event) {
+    function updateCurrency() {
+      const select = document.getElementById("currencySelect");
+      if (!select) return;
+      const curr = select.value;
+      const budgetGroup = document.getElementById("budgetGroup");
+      if (!budgetGroup || !currencyBudgets[curr]) return;
+      budgetGroup.innerHTML = "";
+
+      currencyBudgets[curr].forEach((item, index) => {
+        const btn = document.createElement("button");
+        btn.type = "button";
+        btn.className = "pill-btn" + (index === 0 ? " active" : "");
+        btn.innerText = item;
+        btn.onclick = function() { selectBudget(this); };
+        budgetGroup.appendChild(btn);
+      });
+      selectedBudget = currencyBudgets[curr][0];
+    }
+
+    function updateLanguage() {
+      const langSelect = document.getElementById("langSelect");
+      if (!langSelect) return;
+      const lang = langSelect.value;
+      const container = document.getElementById("cardContainer");
+
+      // Toggle Arabic RTL Layout
+      if (lang === "ar") {
+        if (container) container.classList.add("rtl");
+      } else {
+        if (container) container.classList.remove("rtl");
+      }
+
+      // Update Text Content
+      if (document.getElementById("subHeader")) document.getElementById("subHeader").innerText = i18n[lang].subHeader;
+      if (document.getElementById("mainTitle")) document.getElementById("mainTitle").innerText = i18n[lang].mainTitle;
+      if (document.getElementById("subDesc")) document.getElementById("subDesc").innerText = i18n[lang].subDesc;
+      if (document.getElementById("serviceTitle")) document.getElementById("serviceTitle").innerText = i18n[lang].serviceTitle;
+      
+      // Update Service Buttons
+      document.querySelectorAll("#serviceGroup .pill-btn").forEach(btn => {
+        const key = btn.getAttribute("data-key");
+        if (key && i18n[lang][key]) {
+          const wasActive = btn.classList.contains("active");
+          btn.innerText = i18n[lang][key];
+          if (wasActive) selectedService = i18n[lang][key];
+        }
+      });
+
+      if (document.getElementById("lblLabelName")) document.getElementById("lblLabelName").innerHTML = i18n[lang].lblName + ' <span class="req">*</span>';
+      if (document.getElementById("lblLabelEmail")) document.getElementById("lblLabelEmail").innerHTML = i18n[lang].lblEmail + ' <span class="req">*</span>';
+      if (document.getElementById("lblLabelPhone")) document.getElementById("lblLabelPhone").innerText = i18n[lang].lblPhone;
+      if (document.getElementById("lblLabelCompany")) document.getElementById("lblLabelCompany").innerText = i18n[lang].lblCompany;
+      if (document.getElementById("budgetTitle")) document.getElementById("budgetTitle").innerText = i18n[lang].budgetTitle;
+      if (document.getElementById("lblLabelBrief")) document.getElementById("lblLabelBrief").innerHTML = i18n[lang].lblBrief + ' <span class="req">*</span>';
+      if (document.getElementById("btnText")) document.getElementById("btnText").innerText = i18n[lang].btnText;
+      if (document.getElementById("footerNote")) document.getElementById("footerNote").innerText = i18n[lang].footerNote;
+    }
+
+    function sendToWhatsApp(event) {
       event.preventDefault();
-      const name = document.getElementById("pageClientName").value;
-      const email = document.getElementById("pageClientEmail").value;
-      const phone = document.getElementById("pageClientPhone").value || "Not provided";
-      const company = document.getElementById("pageClientCompany").value || "Not provided";
-      const brief = document.getElementById("pageProjectBrief").value;
 
+      const name = document.getElementById('clientName').value;
+      const email = document.getElementById('clientEmail').value;
+      const phone = document.getElementById('clientPhone').value || "Not provided";
+      const company = document.getElementById('clientCompany').value || "Not provided";
+      const brief = document.getElementById('projectBrief').value;
+
+      // WhatsApp Message Formatting for AR Web (+919929606623)
       const message = `*Hi AR Web,*%0A%0A` +
         `I want to submit a new Project Inquiry:%0A` +
-        `• *Service Required:* ${encodeURIComponent(selectedPageService)}%0A` +
+        `• *Service Required:* ${encodeURIComponent(selectedService)}%0A` +
         `• *Name:* ${encodeURIComponent(name)}%0A` +
         `• *Email:* ${encodeURIComponent(email)}%0A` +
         `• *Phone:* ${encodeURIComponent(phone)}%0A` +
         `• *Company:* ${encodeURIComponent(company)}%0A` +
-        `• *Budget Range:* ${encodeURIComponent(selectedPageBudget)}%0A%0A` +
+        `• *Budget Range:* ${encodeURIComponent(selectedBudget)}%0A%0A` +
         `*Project Brief & Objectives:*%0A${encodeURIComponent(brief)}`;
 
-      window.open(`https://wa.me/919929606623?text=${message}`, '_blank');
+      // Redirect to WhatsApp Number (+919929606623)
+      const whatsappUrl = `https://wa.me/919929606623?text=${message}`;
+      window.open(whatsappUrl, '_blank');
     }
+
+    // Initialize Currency Presets on load
+    updateCurrency();
 
     /* MODAL INQUIRY PILLS & SUBMISSION */
     let selectedModalService = "Software Development";
