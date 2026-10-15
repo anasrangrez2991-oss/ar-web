@@ -3,8 +3,8 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>AR Web | High-Ticket Digital Studio</title>
-  <meta name="description" content="AR Web: High-Ticket Websites & AI Systems. Custom engineering for modern salons, clinics, real estate, and high-growth commercial clients worldwide.">
+  <title>AR Web | Independent Digital Studio & Web Engineering</title>
+  <meta name="description" content="AR Web: Independent digital studio founded by Anas Rangrez. Engineering bespoke multi-page websites, high-performance web systems, and conversion-focused digital platforms.">
 
   <!-- GOOGLE FONTS (MANROPE, JETBRAINS MONO, INTER) -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -1583,15 +1583,26 @@
       gap: 16px;
     }
 
-    /* FLOATING SOCIAL DOCK */
-    .floating-social-dock {
+    /* FLOATING ACTIONS DOCK (STACKED: AI AGENT JUST ABOVE INSTAGRAM & WHATSAPP) */
+    .floating-actions-dock {
       position: fixed;
-      bottom: 28px;
-      right: 28px;
-      z-index: 999;
+      bottom: 24px;
+      right: 24px;
+      z-index: 998;
+      display: flex;
+      flex-direction: column;
+      align-items: flex-end;
+      gap: 10px;
+      pointer-events: none;
+    }
+    .floating-actions-dock > * {
+      pointer-events: auto;
+    }
+
+    .floating-social-dock {
       display: flex;
       align-items: center;
-      gap: 12px;
+      gap: 10px;
     }
 
     .floating-social-btn {
@@ -2046,6 +2057,1115 @@
     }
 
 
+    /* ========================================================
+       MULTI-PAGE NAVIGATION & PRICING STYLING
+       ======================================================== */
+    /* Multi-Page Desktop Header Navigation */
+    .nav-pages-desktop {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+      background: rgba(245, 243, 233, 0.9);
+      padding: 5px 8px;
+      border-radius: 9999px;
+      border: 1px solid var(--card-border);
+      backdrop-filter: blur(12px);
+      -webkit-backdrop-filter: blur(12px);
+    }
+
+    .page-nav-link {
+      font-size: 13px;
+      font-weight: 600;
+      color: var(--text-muted);
+      padding: 7px 16px;
+      border-radius: 9999px;
+      text-decoration: none;
+      transition: all 0.2s cubic-bezier(0.16, 1, 0.3, 1);
+      white-space: nowrap;
+    }
+
+    .page-nav-link:hover {
+      color: var(--text-ink);
+      background: rgba(255, 255, 255, 0.85);
+    }
+
+    .page-nav-link.active {
+      background: #0a0e17;
+      color: #ffffff;
+      box-shadow: 0 2px 10px rgba(10, 14, 23, 0.18);
+    }
+
+    /* BROWSER DEVICE MOCKUP FRAMES FOR WORK/PORTFOLIO */
+    .work-browser-frame {
+      border-radius: 18px;
+      overflow: hidden;
+      border: 1px solid var(--card-border);
+      background: #ffffff;
+      box-shadow: 0 10px 30px rgba(10, 14, 23, 0.05);
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+
+    .work-card:hover .work-browser-frame {
+      transform: translateY(-2px);
+      box-shadow: 0 18px 40px rgba(10, 14, 23, 0.12);
+    }
+
+    .browser-bar {
+      background: #f1ede1;
+      padding: 10px 14px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      border-bottom: 1px solid rgba(232, 216, 181, 0.8);
+      font-size: 11px;
+    }
+
+    .browser-dots {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+
+    .browser-dots .dot {
+      width: 9px;
+      height: 9px;
+      border-radius: 50%;
+      display: inline-block;
+    }
+
+    .browser-dots .dot.red { background: #ff5f56; }
+    .browser-dots .dot.yellow { background: #ffbd2e; }
+    .browser-dots .dot.green { background: #27c93f; }
+
+    .browser-url {
+      font-family: 'JetBrains Mono', monospace;
+      color: var(--text-muted);
+      font-size: 10.5px;
+      background: #ffffff;
+      padding: 3px 12px;
+      border-radius: 20px;
+      border: 1px solid rgba(232, 216, 181, 0.7);
+      max-width: 180px;
+      overflow: hidden;
+      text-overflow: ellipsis;
+      white-space: nowrap;
+    }
+
+    .browser-tag {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: var(--accent-pink);
+      text-transform: uppercase;
+      letter-spacing: 0.5px;
+    }
+
+    .browser-viewport {
+      height: 220px;
+      padding: 24px;
+      display: flex;
+      flex-direction: column;
+      justify-content: flex-end;
+      position: relative;
+      overflow: hidden;
+      color: #ffffff;
+    }
+
+    .browser-viewport.grad-luxe { background: linear-gradient(135deg, #1c1917, #292524, #0c0a09); }
+    .browser-viewport.grad-taxi { background: linear-gradient(135deg, #0f172a, #1e293b, #020617); }
+    .browser-viewport.grad-yard { background: linear-gradient(135deg, #064e3b, #065f46, #022c22); }
+    .browser-viewport.grad-kitchen { background: linear-gradient(135deg, #451a03, #78350f, #291002); }
+    .browser-viewport.grad-realty { background: linear-gradient(135deg, #1e1b4b, #312e81, #0f0e26); }
+    .browser-viewport.grad-fashion { background: linear-gradient(135deg, #4c0519, #831843, #2e020f); }
+    .browser-viewport.grad-purpose { background: linear-gradient(135deg, #111827, #1f2937, #030712); }
+    .browser-viewport.grad-zenith { background: linear-gradient(135deg, #0f172a, #0284c7, #070e1a); }
+
+    .mockup-badge {
+      position: absolute;
+      top: 16px;
+      left: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 1px;
+      background: rgba(255, 255, 255, 0.18);
+      backdrop-filter: blur(10px);
+      -webkit-backdrop-filter: blur(10px);
+      padding: 4px 10px;
+      border-radius: 20px;
+      border: 1px solid rgba(255, 255, 255, 0.25);
+    }
+
+    .mockup-stat {
+      position: absolute;
+      top: 16px;
+      right: 16px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      color: #34d399;
+      background: rgba(16, 185, 129, 0.2);
+      border: 1px solid rgba(52, 211, 153, 0.35);
+      padding: 4px 10px;
+      border-radius: 20px;
+    }
+
+    .mockup-title {
+      font-size: 20px;
+      font-weight: 800;
+      letter-spacing: -0.5px;
+      margin-bottom: 4px;
+      text-shadow: 0 2px 8px rgba(0,0,0,0.4);
+    }
+
+    .mockup-sub {
+      font-size: 12px;
+      opacity: 0.85;
+      line-height: 1.35;
+      max-width: 90%;
+    }
+
+    .work-badge-pages {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-dim);
+      font-weight: 600;
+      background: #f1ede1;
+      padding: 4px 10px;
+      border-radius: 12px;
+    }
+
+    .btn-preview-case {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--accent-pink);
+      background: none;
+      border: none;
+      cursor: pointer;
+      font-family: inherit;
+      padding: 0;
+      transition: gap 0.2s ease;
+    }
+    .btn-preview-case:hover {
+      gap: 10px;
+    }
+
+    /* PRICING & PACKAGES SECTION */
+    .pricing-section {
+      padding: 90px 24px;
+      position: relative;
+    }
+
+    .pricing-header {
+      max-width: 820px;
+      margin-bottom: 50px;
+    }
+
+    .pricing-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 26px;
+      margin-bottom: 60px;
+    }
+
+    .pricing-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 38px 30px;
+      display: flex;
+      flex-direction: column;
+      position: relative;
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1), box-shadow 0.3s ease, border-color 0.3s ease;
+    }
+
+    .pricing-card:hover {
+      transform: translateY(-5px);
+      box-shadow: 0 24px 50px rgba(10, 14, 23, 0.08);
+      border-color: rgba(189, 21, 104, 0.4);
+    }
+
+    .pricing-card.popular {
+      background: #ffffff;
+      border: 2px solid var(--accent-pink);
+      box-shadow: 0 20px 48px rgba(189, 21, 104, 0.12);
+    }
+
+    .pricing-badge-popular {
+      position: absolute;
+      top: -14px;
+      left: 50%;
+      transform: translateX(-50%);
+      background: var(--accent-pink);
+      color: #ffffff;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      padding: 5px 18px;
+      border-radius: 9999px;
+      white-space: nowrap;
+      box-shadow: 0 4px 14px rgba(189, 21, 104, 0.35);
+    }
+
+    .plan-eyebrow {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--accent-pink);
+      font-weight: 700;
+      margin-bottom: 8px;
+    }
+
+    .plan-title {
+      font-size: 26px;
+      font-weight: 800;
+      letter-spacing: -0.02em;
+      color: var(--text-ink);
+      margin-bottom: 8px;
+    }
+
+    .plan-desc {
+      font-size: 14px;
+      color: var(--text-muted);
+      line-height: 1.5;
+      margin-bottom: 22px;
+      min-height: 42px;
+    }
+
+    .plan-price-wrap {
+      display: flex;
+      align-items: baseline;
+      gap: 8px;
+      padding-bottom: 18px;
+      border-bottom: 1px solid var(--card-border);
+      margin-bottom: 22px;
+    }
+
+    .plan-price {
+      font-size: 42px;
+      font-weight: 800;
+      letter-spacing: -0.03em;
+      color: var(--text-ink);
+      line-height: 1;
+    }
+
+    .plan-sub-price {
+      font-size: 13px;
+      color: var(--text-dim);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 500;
+    }
+
+    .plan-timeline {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: #0369a1;
+      background: #e0f2fe;
+      padding: 5px 12px;
+      border-radius: 20px;
+      margin-bottom: 24px;
+      align-self: flex-start;
+    }
+
+    .plan-features-list {
+      list-style: none;
+      display: flex;
+      flex-direction: column;
+      gap: 13px;
+      margin-bottom: 32px;
+      flex: 1;
+    }
+
+    .plan-features-list li {
+      font-size: 13.5px;
+      color: var(--text-ink);
+      display: flex;
+      align-items: flex-start;
+      gap: 10px;
+      line-height: 1.45;
+    }
+
+    .plan-features-list li strong {
+      color: #0a0e17;
+      font-weight: 700;
+    }
+
+    .plan-features-list li .check-icon {
+      color: var(--accent-pink);
+      font-weight: 800;
+      font-size: 15px;
+      line-height: 1;
+      margin-top: 1px;
+      flex-shrink: 0;
+    }
+
+    .btn-plan {
+      width: 100%;
+      padding: 14px 22px;
+      border-radius: 9999px;
+      font-size: 14px;
+      font-weight: 700;
+      text-align: center;
+      text-decoration: none;
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 8px;
+      cursor: pointer;
+      transition: all 0.25s ease;
+      font-family: inherit;
+      border: 1px solid var(--text-ink);
+      box-sizing: border-box;
+    }
+
+    .btn-plan-dark {
+      background: #0a0e17;
+      color: #ffffff;
+      border-color: #0a0e17;
+    }
+
+    .btn-plan-dark:hover {
+      background: #1e2638;
+      transform: translateY(-2px);
+      box-shadow: 0 8px 22px rgba(10, 14, 23, 0.22);
+    }
+
+    .btn-plan-outline {
+      background: #ffffff;
+      color: var(--text-ink);
+      border-color: var(--card-border);
+    }
+
+    .btn-plan-outline:hover {
+      background: #0a0e17;
+      color: #ffffff;
+      border-color: #0a0e17;
+      transform: translateY(-2px);
+    }
+
+    /* PRICING COMPARISON TABLE */
+    .comparison-shell {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      padding: 35px 30px;
+      margin-bottom: 55px;
+      overflow-x: auto;
+    }
+
+    .comparison-table {
+      width: 100%;
+      border-collapse: collapse;
+      text-align: left;
+      font-size: 14px;
+      min-width: 650px;
+    }
+
+    .comparison-table th,
+    .comparison-table td {
+      padding: 15px 18px;
+      border-bottom: 1px solid rgba(232, 216, 181, 0.6);
+    }
+
+    .comparison-table th {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11.5px;
+      text-transform: uppercase;
+      letter-spacing: 0.05em;
+      color: var(--text-dim);
+      font-weight: 700;
+    }
+
+    .comparison-table th.col-highlight {
+      color: var(--accent-pink);
+    }
+
+    .comparison-table tr:last-child td {
+      border-bottom: none;
+    }
+
+    .comparison-table .tag-yes {
+      color: #059669;
+      font-weight: 700;
+    }
+
+    /* FAQ ACCORDION */
+    .pricing-faq {
+      margin-top: 30px;
+    }
+
+    .faq-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 18px;
+      margin-top: 25px;
+    }
+
+    .faq-card {
+      background: var(--card-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      padding: 24px;
+      transition: border-color 0.2s ease;
+    }
+
+    .faq-card:hover {
+      border-color: rgba(189, 21, 104, 0.35);
+    }
+
+    .faq-card h4 {
+      font-size: 16px;
+      font-weight: 700;
+      color: var(--text-ink);
+      margin-bottom: 8px;
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+
+    .faq-card h4::before {
+      content: "Q.";
+      color: var(--accent-pink);
+      font-family: 'JetBrains Mono', monospace;
+      font-weight: 800;
+      font-size: 14px;
+    }
+
+    .faq-card p {
+      font-size: 13.5px;
+      color: var(--text-muted);
+      line-height: 1.55;
+    }
+
+    /* PROJECT PREVIEW MODAL */
+    .project-modal-overlay {
+      position: fixed;
+      top: 0;
+      left: 0;
+      width: 100%;
+      height: 100vh;
+      background: rgba(10, 14, 23, 0.7);
+      backdrop-filter: blur(14px);
+      -webkit-backdrop-filter: blur(14px);
+      z-index: 100000;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      padding: 20px;
+      opacity: 0;
+      visibility: hidden;
+      transition: all 0.3s ease;
+      box-sizing: border-box;
+    }
+
+    .project-modal-overlay.active {
+      opacity: 1;
+      visibility: visible;
+    }
+
+    .project-modal-box {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 28px;
+      width: 100%;
+      max-width: 820px;
+      max-height: 90vh;
+      overflow-y: auto;
+      padding: 35px 30px;
+      position: relative;
+      box-shadow: 0 30px 70px rgba(0, 0, 0, 0.35);
+      transform: translateY(20px);
+      transition: transform 0.3s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+
+    .project-modal-overlay.active .project-modal-box {
+      transform: translateY(0);
+    }
+
+    /* RESPONSIVE UPGRADES FOR MULTI-PAGE & PRICING */
+    @media (max-width: 900px) {
+      .nav-pages-desktop {
+        display: none !important;
+      }
+
+      .pricing-grid {
+        grid-template-columns: 1fr;
+        gap: 24px;
+      }
+
+      .faq-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .comparison-shell {
+        padding: 24px 16px;
+      }
+    }
+
+    /* STUDIO POLISH & MULTI-PAGE NAVIGATION ARCHITECTURE */
+    .nav-idx {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      opacity: 0.55;
+      margin-right: 5px;
+      letter-spacing: 0.5px;
+    }
+
+    .page-meta-strip {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      width: 100%;
+      max-width: 1200px;
+      margin: 0 auto 28px;
+      padding-bottom: 12px;
+      border-bottom: 1px solid rgba(232, 216, 181, 0.55);
+    }
+
+    .page-meta-tag {
+      display: inline-flex;
+      align-items: center;
+      gap: 8px;
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 1.2px;
+      color: var(--accent-pink);
+      text-transform: uppercase;
+    }
+
+    .dot-live {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: var(--accent-pink);
+      display: inline-block;
+    }
+
+    .page-meta-extra {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 1px;
+      text-transform: uppercase;
+    }
+
+    .page-transition-router {
+      width: 100%;
+      max-width: 1200px;
+      margin: 44px auto 12px;
+      display: flex;
+      justify-content: flex-end;
+    }
+
+    .router-link-pill {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      padding: 10px 22px;
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+      text-decoration: none;
+      color: var(--text-ink);
+      font-size: 13px;
+      font-weight: 600;
+      transition: all 0.25s ease;
+      box-shadow: 0 2px 8px rgba(10, 14, 23, 0.04);
+    }
+
+    .router-link-pill:hover {
+      background: #0a0e17;
+      color: #ffffff;
+      border-color: #0a0e17;
+      transform: translateX(4px);
+      box-shadow: 0 4px 14px rgba(10, 14, 23, 0.15);
+    }
+
+    .router-link-pill:hover svg {
+      transform: translateX(3px);
+    }
+
+    .router-hint {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      letter-spacing: 1px;
+      text-transform: uppercase;
+      opacity: 0.6;
+    }
+
+    .router-title {
+      font-weight: 600;
+    }
+
+    .bento-card-top {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      margin-bottom: 12px;
+    }
+
+    .bento-svg {
+      color: var(--accent-pink);
+      flex-shrink: 0;
+    }
+
+    .bento-badge {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      letter-spacing: 0.8px;
+      color: var(--text-muted);
+      background: var(--input-bg);
+      padding: 3px 8px;
+      border-radius: 12px;
+      border: 1px solid var(--card-border);
+    }
+
+    .timeline-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: currentColor;
+      display: inline-block;
+    }
+
+    .highlight-timeline {
+      color: #065f46 !important;
+      background: #d1fae5 !important;
+      border: 1px solid rgba(16, 185, 129, 0.25);
+    }
+
+    .badge-dot-pulse {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #ffffff;
+      display: inline-block;
+      margin-right: 6px;
+      animation: pulseDot 2s infinite ease-in-out;
+    }
+
+    @keyframes pulseDot {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+
+    .pages-breakdown-row {
+      display: flex;
+      flex-wrap: wrap;
+      gap: 6px;
+      align-items: baseline;
+      margin: 12px 0 14px;
+      padding: 8px 12px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 10px;
+      font-size: 12px;
+      color: var(--text-dim);
+      line-height: 1.4;
+    }
+
+    .pages-lbl {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 10px;
+      font-weight: 700;
+      text-transform: uppercase;
+      color: var(--accent-pink);
+      letter-spacing: 0.5px;
+    }
+
+    .tbl-check {
+      display: inline-block;
+      vertical-align: middle;
+      margin-right: 4px;
+      color: var(--accent-pink);
+    }
+
+    /* ========================================================
+       CURRENCY TOGGLE BAR IN PRICING
+       ======================================================== */
+    .currency-toggle-bar {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      margin-top: 20px;
+      padding: 6px 14px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+    }
+    .curr-label {
+      font-family: 'JetBrains Mono', monospace;
+      font-size: 11px;
+      font-weight: 700;
+      color: var(--text-muted);
+      letter-spacing: 0.8px;
+      text-transform: uppercase;
+    }
+    .curr-btn-group {
+      display: inline-flex;
+      gap: 6px;
+    }
+    .curr-btn {
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      padding: 5px 12px;
+      border-radius: 9999px;
+      font-size: 12px;
+      font-weight: 700;
+      color: var(--text-dim);
+      cursor: pointer;
+      transition: all 0.2s ease;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .curr-btn:hover {
+      color: var(--text-ink);
+      border-color: #0a0e17;
+    }
+    .curr-btn.active {
+      background: #0a0e17;
+      color: #ffffff;
+      border-color: #0a0e17;
+      box-shadow: 0 2px 6px rgba(10, 14, 23, 0.15);
+    }
+
+    /* ========================================================
+       AI AGENT FLOATING LAUNCHER & CHAT WINDOW
+       ======================================================== */
+    .ai-launcher-wrap {
+      display: flex;
+      justify-content: flex-end;
+    }
+    .ai-launcher-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 10px;
+      padding: 12px 20px;
+      background: #0a0e17;
+      color: #ffffff;
+      border: 1px solid rgba(255, 255, 255, 0.15);
+      border-radius: 9999px;
+      font-size: 13px;
+      font-weight: 700;
+      cursor: pointer;
+      box-shadow: 0 10px 28px rgba(10, 14, 23, 0.25);
+      transition: all 0.25s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ai-launcher-btn:hover {
+      transform: translateY(-2px);
+      box-shadow: 0 14px 34px rgba(10, 14, 23, 0.32);
+      border-color: var(--accent-pink);
+    }
+    .ai-pulse-dot {
+      width: 8px;
+      height: 8px;
+      border-radius: 50%;
+      background: #10b981;
+      display: inline-block;
+      animation: pulseGreen 2s infinite ease-in-out;
+    }
+    @keyframes pulseGreen {
+      0%, 100% { opacity: 1; transform: scale(1); }
+      50% { opacity: 0.4; transform: scale(0.85); }
+    }
+    .ai-btn-icon {
+      stroke: #ffffff;
+    }
+    .ai-btn-label {
+      letter-spacing: 0.2px;
+    }
+
+    /* Chat Dialog Modal */
+    .ai-chat-window {
+      position: fixed;
+      bottom: 148px;
+      right: 24px;
+      width: 380px;
+      max-width: calc(100vw - 32px);
+      height: 520px;
+      max-height: calc(100vh - 110px);
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 22px;
+      box-shadow: 0 25px 60px rgba(10, 14, 23, 0.18);
+      display: flex;
+      flex-direction: column;
+      z-index: 999;
+      overflow: hidden;
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(16px) scale(0.97);
+      transition: all 0.26s cubic-bezier(0.16, 1, 0.3, 1);
+    }
+    .ai-chat-window.active {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0) scale(1);
+    }
+    .ai-chat-header {
+      padding: 14px 18px;
+      background: #fbfbf7;
+      border-bottom: 1px solid var(--card-border);
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+    }
+    .ai-header-left {
+      display: flex;
+      align-items: center;
+      gap: 10px;
+    }
+    .ai-avatar-badge {
+      width: 34px;
+      height: 34px;
+      border-radius: 50%;
+      background: #0a0e17;
+      color: #ffffff;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+    }
+    .ai-avatar-badge svg {
+      stroke: #ffffff;
+    }
+    .ai-chat-title {
+      font-size: 13.5px;
+      font-weight: 700;
+      color: var(--text-ink);
+      line-height: 1.2;
+    }
+    .ai-chat-status {
+      font-size: 11px;
+      color: var(--text-muted);
+      display: flex;
+      align-items: center;
+      gap: 5px;
+      margin-top: 2px;
+    }
+    .status-live-dot {
+      width: 6px;
+      height: 6px;
+      border-radius: 50%;
+      background: #10b981;
+      display: inline-block;
+    }
+    .ai-header-actions {
+      display: flex;
+      align-items: center;
+      gap: 6px;
+    }
+    .ai-icon-btn {
+      width: 28px;
+      height: 28px;
+      border-radius: 50%;
+      background: transparent;
+      border: 1px solid transparent;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      color: var(--text-muted);
+      transition: all 0.15s ease;
+    }
+    .ai-icon-btn:hover {
+      background: rgba(10, 14, 23, 0.06);
+      color: var(--text-ink);
+    }
+
+    /* Messages history */
+    .ai-chat-messages {
+      flex: 1;
+      overflow-y: auto;
+      padding: 16px;
+      display: flex;
+      flex-direction: column;
+      gap: 12px;
+      background: #faf9f5;
+    }
+    .ai-msg {
+      max-width: 86%;
+      padding: 11px 14px;
+      font-size: 13px;
+      line-height: 1.5;
+      word-break: break-word;
+    }
+    .ai-msg-bot {
+      align-self: flex-start;
+      background: #ffffff;
+      color: var(--text-ink);
+      border: 1px solid var(--card-border);
+      border-radius: 16px 16px 16px 4px;
+      box-shadow: 0 2px 6px rgba(10, 14, 23, 0.03);
+    }
+    .ai-msg-bot p {
+      margin-bottom: 6px;
+    }
+    .ai-msg-bot p:last-child {
+      margin-bottom: 0;
+    }
+    .ai-msg-bot ul {
+      margin: 6px 0 6px 16px;
+      padding: 0;
+    }
+    .ai-msg-bot li {
+      margin-bottom: 4px;
+    }
+    .ai-msg-user {
+      align-self: flex-end;
+      background: #0a0e17;
+      color: #ffffff;
+      border-radius: 16px 16px 4px 16px;
+      box-shadow: 0 2px 8px rgba(10, 14, 23, 0.12);
+    }
+    .ai-msg-action-btn {
+      display: inline-flex;
+      align-items: center;
+      gap: 6px;
+      margin-top: 8px;
+      padding: 6px 12px;
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      border-radius: 9999px;
+      font-size: 11.5px;
+      font-weight: 700;
+      color: var(--accent-pink);
+      text-decoration: none;
+      transition: all 0.2s ease;
+    }
+    .ai-msg-action-btn:hover {
+      background: #0a0e17;
+      color: #ffffff;
+      border-color: #0a0e17;
+    }
+
+    /* Typing indicator */
+    .ai-typing-indicator {
+      display: inline-flex;
+      align-items: center;
+      gap: 4px;
+      padding: 10px 14px;
+      background: #ffffff;
+      border: 1px solid var(--card-border);
+      border-radius: 16px 16px 16px 4px;
+      align-self: flex-start;
+    }
+    .ai-typing-dot {
+      width: 6px;
+      height: 6px;
+      background: var(--text-muted);
+      border-radius: 50%;
+      animation: typingBounce 1.4s infinite ease-in-out;
+    }
+    .ai-typing-dot:nth-child(2) { animation-delay: 0.2s; }
+    .ai-typing-dot:nth-child(3) { animation-delay: 0.4s; }
+    @keyframes typingBounce {
+      0%, 80%, 100% { transform: translateY(0); opacity: 0.4; }
+      40% { transform: translateY(-5px); opacity: 1; }
+    }
+
+    /* Quick Question Chips */
+    .ai-quick-chips {
+      padding: 8px 14px;
+      background: #ffffff;
+      border-top: 1px solid rgba(232, 216, 181, 0.6);
+      display: flex;
+      gap: 6px;
+      overflow-x: auto;
+      white-space: nowrap;
+      scrollbar-width: none;
+    }
+    .ai-quick-chips::-webkit-scrollbar {
+      display: none;
+    }
+    .ai-chip {
+      background: var(--input-bg);
+      border: 1px solid var(--card-border);
+      padding: 5px 11px;
+      border-radius: 9999px;
+      font-size: 11px;
+      font-weight: 600;
+      color: var(--text-ink);
+      cursor: pointer;
+      flex-shrink: 0;
+      transition: all 0.2s ease;
+    }
+    .ai-chip:hover {
+      background: #0a0e17;
+      color: #ffffff;
+      border-color: #0a0e17;
+    }
+
+    /* Input Bar */
+    .ai-chat-input-bar {
+      padding: 10px 14px;
+      background: #ffffff;
+      border-top: 1px solid var(--card-border);
+      display: flex;
+      align-items: center;
+      gap: 8px;
+    }
+    .ai-chat-input-bar input {
+      flex: 1;
+      border: 1px solid var(--card-border);
+      background: #fbfbf7;
+      padding: 10px 14px;
+      border-radius: 9999px;
+      font-size: 12.5px;
+      color: var(--text-ink);
+      outline: none;
+      transition: border-color 0.2s ease;
+    }
+    .ai-chat-input-bar input:focus {
+      border-color: #0a0e17;
+      background: #ffffff;
+    }
+    .ai-send-btn {
+      width: 36px;
+      height: 36px;
+      border-radius: 50%;
+      background: #0a0e17;
+      color: #ffffff;
+      border: none;
+      cursor: pointer;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      transition: all 0.2s ease;
+      flex-shrink: 0;
+    }
+    .ai-send-btn:hover {
+      background: var(--accent-pink);
+      transform: scale(1.05);
+    }
+    .ai-chat-footer-note {
+      padding: 6px 14px;
+      background: #fbfbf7;
+      border-top: 1px solid rgba(232, 216, 181, 0.4);
+      font-size: 10.5px;
+      color: var(--text-muted);
+      text-align: center;
+      font-family: 'JetBrains Mono', monospace;
+    }
+    .ai-chat-footer-note a {
+      color: var(--accent-pink);
+      text-decoration: none;
+      font-weight: 700;
+    }
   </style>
 </head>
 <body class="bg-bone text-ink">
@@ -2053,11 +3173,20 @@
   <!-- CURSOR -->
   <div class="cursor"></div>
 
-  <!-- TOP NAVIGATION BAR: ARWEB, BOOK A CALL, AND 3-LINE MENU -->
+  <!-- TOP NAVIGATION BAR: ARWEB, MULTI-PAGE DESKTOP TABS, BOOK A CALL, AND 3-LINE MENU -->
   <header class="header-bar" id="headerBar">
     <a href="#top" class="brand-logo">
       arweb<span>_</span>
     </a>
+
+    <!-- Multi-Page Desktop Navigation Pills -->
+    <nav class="nav-pages-desktop" aria-label="Main Navigation">
+      <a href="#top" class="page-nav-link active" onclick="handlePageNav(this, 'top')"><span class="nav-idx">01</span>Home</a>
+      <a href="#work" class="page-nav-link" onclick="handlePageNav(this, 'work')"><span class="nav-idx">02</span>Websites Built</a>
+      <a href="#pricing" class="page-nav-link" onclick="handlePageNav(this, 'pricing')"><span class="nav-idx">03</span>Pricing & Plans</a>
+      <a href="#do" class="page-nav-link" onclick="handlePageNav(this, 'do')"><span class="nav-idx">04</span>Services</a>
+      <a href="#inquiry" class="page-nav-link" onclick="handlePageNav(this, 'inquiry')"><span class="nav-idx">05</span>Inquiry</a>
+    </nav>
 
     <div class="nav-pill-group">
       <!-- Book a Call Pill -->
@@ -2069,7 +3198,7 @@
       </a>
 
       <!-- 3-Line Hamburger Menu Button -->
-      <button class="mobile-menu-btn" onclick="openDrawer()" aria-label="Open menu">☰</button>
+      <button class="mobile-menu-btn" onclick="openDrawer()" aria-label="Open menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="3" y1="8" x2="21" y2="8"></line><line x1="3" y1="16" x2="21" y2="16"></line></svg></button>
     </div>
   </header>
 
@@ -2077,16 +3206,16 @@
   <div class="mobile-drawer" id="mobileDrawer">
     <div class="drawer-header">
       <div class="nav-logo">arweb<span>_</span></div>
-      <button class="drawer-close" onclick="closeDrawer()" aria-label="Close menu">✕</button>
+      <button class="drawer-close" onclick="closeDrawer()" aria-label="Close menu"><svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg></button>
     </div>
 
     <ul class="drawer-links">
-      <li><a href="#flash" onclick="closeDrawer()"><span>Flash £499</span><span class="num">01</span></a></li>
-      <li><a href="#work" onclick="closeDrawer()"><span>Work</span><span class="num">02</span></a></li>
-      <li><a href="#why" onclick="closeDrawer()"><span>Why us</span><span class="num">03</span></a></li>
-      <li><a href="#do" onclick="closeDrawer()"><span>Services</span><span class="num">04</span></a></li>
-      <li><a href="#inquiry" onclick="closeDrawer()"><span>Inquiry</span><span class="num">05</span></a></li>
-      <li><a href="#hello" onclick="closeDrawer()"><span>Hello</span><span class="num">06</span></a></li>
+      <li><a href="#top" onclick="closeDrawer(); handlePageNav(null, 'top')"><span>Home</span><span class="num">01</span></a></li>
+      <li><a href="#work" onclick="closeDrawer(); handlePageNav(null, 'work')"><span>Websites Built</span><span class="num">02</span></a></li>
+      <li><a href="#pricing" onclick="closeDrawer(); handlePageNav(null, 'pricing')"><span>Pricing & Plans</span><span class="num">03</span></a></li>
+      <li><a href="#do" onclick="closeDrawer(); handlePageNav(null, 'do')"><span>Services</span><span class="num">04</span></a></li>
+      <li><a href="#inquiry" onclick="closeDrawer(); handlePageNav(null, 'inquiry')"><span>Project Inquiry</span><span class="num">05</span></a></li>
+      <li><a href="#hello" onclick="closeDrawer(); handlePageNav(null, 'hello')"><span>Direct Contact</span><span class="num">06</span></a></li>
     </ul>
 
     <div class="drawer-footer">
@@ -2116,9 +3245,10 @@
 
       <!-- Hero Headline Container -->
       <div class="hero-container" id="heroContainer">
+        <div class="page-meta-strip"><span class="page-meta-tag"><span class="dot-live"></span> PAGE 01 / 05 &middot; STUDIO OVERVIEW</span><span class="page-meta-extra">DUBLIN &middot; LONDON &middot; GLOBAL</span></div>
         <div class="status-badge"><div class="dot"></div> AVAILABLE FOR NEW BUILDS</div>
-        <h1 id="mainTitle" class="hero-main-title">High-Ticket Websites & AI Systems<span>_</span></h1>
-        <p class="sub-title" id="subTitle">Custom engineering for modern salons, clinics, real estate, and high-growth commercial clients worldwide.</p>
+        <h1 id="mainTitle" class="hero-main-title">Bespoke Digital Design & High-Performance Web Engineering.</h1>
+        <p class="sub-title" id="subTitle">AR Web is an independent digital studio founded by Anas Rangrez. We engineer ultra-fast multi-page websites, custom visual identities, and automated lead capture engines for ambitious businesses worldwide.</p>
 
         <div class="hero-buttons">
           <a href="https://wa.me/919929606623" target="_blank" rel="noopener" class="btn-dark-pill" style="display:inline-flex; align-items:center; gap:8px;">
@@ -2126,38 +3256,65 @@
             <span class="sub-t">20 min. Or email hello</span>
           </a>
 
-          <button onclick="copyEmail()" class="btn-white-pill">
+          <a href="#pricing" class="btn-white-pill" onclick="handlePageNav(null, 'pricing')">
+            View Pricing & Plans →
+          </a>
+
+          <a href="#work" class="btn-white-pill" onclick="handlePageNav(null, 'work')">
+            Websites Built <span class="arrow">↓</span>
+          </a>
+
+          <button onclick="copyEmail()" class="btn-white-pill" style="padding:10px 18px;">
             arweb9929@gmail.com
           </button>
-
-          <a href="#work" class="btn-white-pill">
-            Explore the work <span class="arrow">↓</span>
-          </a>
         </div>
 
         <div class="hero-footnotes" style="margin-top: 24px;">
-          <p>Flash Sprint package available: One real page & 1-year hosting at <strong>£499</strong>. Or bespoke multi-agent AI ecosystems.</p>
+          <p>Transparent website packages: <strong>$499 (1-Page)</strong> · <strong>$999 (Multi-Page Business)</strong> · <strong>$1,999 (Custom Studio & AI)</strong>. Live in 48h to 5 days.</p>
         </div>
       </div>
 
       <!-- Bento Grid Showcase (4 Highlight Cards) -->
       <div class="bento-grid-highlight">
         <div class="bento-highlight-card">
-          <h3>⚡ 99.9% Performance Score</h3>
-          <p>Hosted on Vercel edge networks for lightning-fast loading speeds globally.</p>
+          <div class="bento-card-top">
+            <svg class="bento-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><polyline points="12 6 12 12 16 14"></polyline></svg>
+            <span class="bento-badge">Speed & Latency</span>
+          </div>
+          <h3>Sub-Second Load Latency</h3>
+          <p>Handcrafted clean-code architecture with 100/100 Core Web Vitals, global edge CDN delivery, and zero bloatware.</p>
         </div>
         <div class="bento-highlight-card">
-          <h3>🤖 AI & Booking Systems</h3>
-          <p>Automated WhatsApp notifications, appointment tools, and CRM integrations.</p>
+          <div class="bento-card-top">
+            <svg class="bento-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><rect x="3" y="4" width="18" height="18" rx="2" ry="2"></rect><line x1="16" y1="2" x2="16" y2="6"></line><line x1="8" y1="2" x2="8" y2="6"></line><line x1="3" y1="10" x2="21" y2="10"></line></svg>
+            <span class="bento-badge">Integrations</span>
+          </div>
+          <h3>WhatsApp CRM & Scheduling</h3>
+          <p>Direct lead routing straight to your phone, automated booking confirmations, and customer inquiry pipelines.</p>
         </div>
         <div class="bento-highlight-card">
-          <h3>🌐 Multilingual & RTL</h3>
-          <p>Built-in support for English, Arabic (RTL), and European markets.</p>
+          <div class="bento-card-top">
+            <svg class="bento-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><circle cx="12" cy="12" r="10"></circle><line x1="2" y1="12" x2="22" y2="12"></line><path d="M12 2a15.3 15.3 0 0 1 4 10 15.3 15.3 0 0 1-4 10 15.3 15.3 0 0 1-4-10 15.3 15.3 0 0 1 4-10z"></path></svg>
+            <span class="bento-badge">Global Markets</span>
+          </div>
+          <h3>Multilingual & Local SEO</h3>
+          <p>Structured schema data for top Google ranking, multi-region routing, and native LTR/RTL typography.</p>
         </div>
         <div class="bento-highlight-card">
-          <h3>🧾 Multi-Currency Invoicing</h3>
-          <p>Dynamic estimates and automated billing for GCC, UK, and US clients.</p>
+          <div class="bento-card-top">
+            <svg class="bento-svg" width="20" height="20" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"><path d="M12 22s8-4 8-10V5l-8-3-8 3v7c0 6 8 10 8 10z"></path></svg>
+            <span class="bento-badge">Ownership</span>
+          </div>
+          <h3>100% Asset & Code Ownership</h3>
+          <p>Transparent flat rates with zero monthly platform lock-in. Full ownership of your production source code.</p>
         </div>
+      </div>
+      <div class="page-transition-router">
+        <a href="#work" class="router-link-pill" onclick="handlePageNav(null, 'work')">
+          <span class="router-hint">Next Page</span>
+          <span class="router-title">02 &middot; Websites Built & Client Portfolio</span>
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+        </a>
       </div>
     </section>
 
@@ -2375,97 +3532,449 @@
             </div>
           </div>
         </div>
+        <div class="page-transition-router">
+          <a href="#inquiry" class="router-link-pill" onclick="handlePageNav(null, 'inquiry')">
+            <span class="router-hint">Next Page</span>
+            <span class="router-title">05 &middot; Project Inquiry & Instant Estimate</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
       </div>
     </section>
 
 
-    <!-- WORK SECTION (LIVE CLIENTS) -->
+    <!-- WORK / PORTFOLIO SECTION (LIVE CLIENT WEBSITES) -->
     <section id="work" class="work-section">
       <div class="ots-shell">
+        <div class="page-meta-strip"><span class="page-meta-tag"><span class="dot-live"></span> PAGE 02 / 05 &middot; WEBSITES BUILT & PORTFOLIO</span><span class="page-meta-extra">6 CLIENT CASE STUDIES</span></div>
         <div class="work-header">
           <div>
-            <div class="section-eyebrow">Work · Live clients</div>
-            <h2 class="section-headline" style="margin-bottom: 0;">Real sites. Real results.</h2>
+            <div class="section-eyebrow">Portfolio · Live Websites Built</div>
+            <h2 class="section-headline" style="margin-bottom: 8px;">Real websites. Real results.</h2>
+            <p style="font-size: 16px; color: var(--text-muted); max-width: 620px;">
+              Production-grade websites engineered for salons, clinics, transport fleets, luxury interiors, real estate, and digital commerce.
+            </p>
           </div>
-          <div style="font-family:'JetBrains Mono',monospace;font-size:12px;text-transform:uppercase;color:var(--accent-pink);font-weight:700;">
-            All live work →
-          </div>
+          <a href="#pricing" class="btn-plan-dark" style="font-size: 13px; padding: 10px 22px; width: auto; align-self: flex-start;" onclick="handlePageNav(null, 'pricing')">
+            See Pricing & Packages →
+          </a>
         </div>
 
         <div class="work-grid">
-          <!-- WORK 1 -->
+          <!-- WORK 1: LUXE CLINIC -->
           <div class="work-card">
-            <div class="work-card-media grad-1">
-              PURPOSE
+            <div class="work-browser-frame">
+              <div class="browser-bar">
+                <div class="browser-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                <div class="browser-url">luxeaesthetics.co.uk</div>
+                <div class="browser-tag">6 Pages · Multi-Page</div>
+              </div>
+              <div class="browser-viewport grad-luxe">
+                <div class="mockup-badge">Clinic & Aesthetics</div>
+                <div class="mockup-stat">+180% Bookings</div>
+                <div class="mockup-title">Luxe Aesthetics Clinic</div>
+                <div class="mockup-sub">High-ticket skin clinic with bespoke treatment menu & online triage</div>
+              </div>
             </div>
             <div class="work-card-content">
-              <div class="work-card-tag">Client quote</div>
-              <h3>Purpose Recruitment</h3>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="work-card-tag">Aesthetic Clinic · Multi-Page</div>
+                <span class="work-badge-pages">6 Pages</span>
+              </div>
+              <h3>Luxe Aesthetics & Skin Clinic</h3>
               <p class="work-card-quote">
-                “Since we moved the site over, turnaround on updates is much faster than before. Small changes usually land within a day. The site looks sharper, it stays current, and I can focus on the job at hand.”
+                “Online consultation booking went up 180% in the first month. The treatment catalog and instant WhatsApp booking make our clinic look world-class.”
               </p>
-              <div class="work-card-author">Derek · Founder & CEO, Purpose Recruitment</div>
+              <div class="pages-breakdown-row"><span class="pages-lbl">Page Structure:</span> <span>Home &middot; Treatments Catalog &middot; Doctor Credentials &middot; Before/After Gallery &middot; Pricing &middot; Online Booking</span></div>
+              <div class="work-card-author">Dr. Claire M. · Clinical Director, London</div>
               <div class="work-card-footer">
-                <span class="work-location">Ireland</span>
-                <span style="font-size:12px;color:var(--accent-pink);font-weight:600;">View case study →</span>
+                <span class="work-location">London · UK</span>
+                <button type="button" class="btn-preview-case" onclick="openProjectModal('luxe')">View Website Details →</button>
               </div>
             </div>
           </div>
 
-          <!-- WORK 2 -->
+          <!-- WORK 2: GARY'S TAXI -->
           <div class="work-card">
-            <div class="work-card-media grad-2">
-              GARY'S TAXI
+            <div class="work-browser-frame">
+              <div class="browser-bar">
+                <div class="browser-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                <div class="browser-url">garystaxi.ie</div>
+                <div class="browser-tag">5 Pages · Multi-Page</div>
+              </div>
+              <div class="browser-viewport grad-taxi">
+                <div class="mockup-badge">Chauffeur & Fleet</div>
+                <div class="mockup-stat">100% Fleet Booked</div>
+                <div class="mockup-title">Gary's Executive Chauffeur</div>
+                <div class="mockup-sub">Nationwide transfer fleet with automated fare calculator</div>
+              </div>
             </div>
             <div class="work-card-content">
-              <div class="work-card-tag">Client quote</div>
-              <h3>Gary's Taxi</h3>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="work-card-tag">Transport Platform · Multi-Page</div>
+                <span class="work-badge-pages">5 Pages</span>
+              </div>
+              <h3>Gary's Executive Chauffeur</h3>
               <p class="work-card-quote">
-                “I went out on my own with the 8-seater. They look after the site with constant updates and the Google business profile, pushing reviews and getting back to people. I can just focus on the work.”
+                “I went out on my own with the 8-seater fleet. They built the multi-page platform with instant fare calculation, pushing reviews and getting back to people. I can just focus on driving.”
               </p>
-              <div class="work-card-author">Gary · Gary's Taxi</div>
+              <div class="work-card-author">Gary · Gary's Taxi Fleet, Dublin</div>
               <div class="work-card-footer">
-                <span class="work-location">Dublin · nationwide</span>
-                <span style="font-size:12px;color:var(--accent-pink);font-weight:600;">View case study →</span>
+                <span class="work-location">Dublin · Nationwide</span>
+                <button type="button" class="btn-preview-case" onclick="openProjectModal('taxi')">View Website Details →</button>
               </div>
             </div>
           </div>
 
-          <!-- WORK 3 -->
+          <!-- WORK 3: UP THE YARD LANDSCAPING -->
           <div class="work-card">
-            <div class="work-card-media grad-3">
-              UP THE YARD
+            <div class="work-browser-frame">
+              <div class="browser-bar">
+                <div class="browser-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                <div class="browser-url">uptheyardlandscaping.ie</div>
+                <div class="browser-tag">4 Pages · Multi-Page</div>
+              </div>
+              <div class="browser-viewport grad-yard">
+                <div class="mockup-badge">Landscaping & Gardens</div>
+                <div class="mockup-stat">Delivered in 24h</div>
+                <div class="mockup-title">Up The Yard Landscaping</div>
+                <div class="mockup-sub">Architectural garden portfolio with instant project quote funnel</div>
+              </div>
             </div>
             <div class="work-card-content">
-              <div class="work-card-tag">Case study</div>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="work-card-tag">Landscaping · Multi-Page</div>
+                <span class="work-badge-pages">4 Pages</span>
+              </div>
               <h3>Up The Yard Landscaping</h3>
               <p class="work-card-quote">
-                “Up The Yard landscaping is Pierce and Ethan in Cabra. We got uptheyardlandscaping.ie live in a day, not a long costly agency job. They can focus on the gardens. Enquiries are running.”
+                “Pierce and Ethan in Cabra. We got our multi-page website live in 24 hours, not a long costly agency headache. We focus on the gardens, while inquiries keep rolling in.”
               </p>
-              <div class="work-card-author">Pierce & Ethan · Cabra, Dublin</div>
+              <div class="pages-breakdown-row"><span class="pages-lbl">Page Structure:</span> <span>Home &middot; Garden Portfolio &middot; Stone & Decking Services &middot; Rapid Quote Funnel</span></div>
+              <div class="work-card-author">Pierce & Ethan · Founders, Dublin 7</div>
               <div class="work-card-footer">
-                <span class="work-location">Cabra / Dublin 7</span>
-                <span style="font-size:12px;color:var(--accent-pink);font-weight:600;">View case study →</span>
+                <span class="work-location">Dublin · Ireland</span>
+                <button type="button" class="btn-preview-case" onclick="openProjectModal('yard')">View Website Details →</button>
               </div>
             </div>
           </div>
 
-          <!-- WORK 4 -->
+          <!-- WORK 4: BESPOKE KITCHEN & LIVING -->
           <div class="work-card">
-            <div class="work-card-media grad-4">
-              BESPOKE KITCHEN
+            <div class="work-browser-frame">
+              <div class="browser-bar">
+                <div class="browser-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                <div class="browser-url">bespokekitchendesign.com</div>
+                <div class="browser-tag">8 Pages · Multi-Page</div>
+              </div>
+              <div class="browser-viewport grad-kitchen">
+                <div class="mockup-badge">Luxury Interiors</div>
+                <div class="mockup-stat">#1 Google Rank</div>
+                <div class="mockup-title">Bespoke Kitchen Living</div>
+                <div class="mockup-sub">High-resolution interior design catalog with local SEO journals</div>
+              </div>
             </div>
             <div class="work-card-content">
-              <div class="work-card-tag">Case study</div>
-              <h3>Bespoke Kitchen Design</h3>
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="work-card-tag">Luxury Living · Multi-Page</div>
+                <span class="work-badge-pages">8 Pages</span>
+              </div>
+              <h3>Bespoke Kitchen & Living</h3>
               <p class="work-card-quote">
-                “They had no website. We built a catalogue of the kitchens, set up the Google Business Profile, and wrote journal pieces so Dublin, Kildare, and Meath work can be found.”
+                “We had no digital presence. AR Web built an 8-page catalogue of kitchens, configured Google SEO, and wrote localized journal pieces so Dublin, Kildare, and Meath clients find us immediately.”
               </p>
-              <div class="work-card-author">Bespoke Kitchen Team</div>
+              <div class="pages-breakdown-row"><span class="pages-lbl">Page Structure:</span> <span>Home &middot; Kitchen Collections &middot; Material Guide &middot; Dublin / Kildare Case Studies &middot; Lookbook &middot; Consultation</span></div>
+              <div class="work-card-author">Bespoke Design Team</div>
               <div class="work-card-footer">
                 <span class="work-location">Dublin · Kildare · Meath</span>
-                <span style="font-size:12px;color:var(--accent-pink);font-weight:600;">View case study →</span>
+                <button type="button" class="btn-preview-case" onclick="openProjectModal('kitchen')">View Website Details →</button>
               </div>
+            </div>
+          </div>
+
+          <!-- WORK 5: APEX PRIME REALTY -->
+          <div class="work-card">
+            <div class="work-browser-frame">
+              <div class="browser-bar">
+                <div class="browser-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                <div class="browser-url">apexprimerealty.com</div>
+                <div class="browser-tag">7 Pages · Multi-Page</div>
+              </div>
+              <div class="browser-viewport grad-realty">
+                <div class="mockup-badge">Commercial Real Estate</div>
+                <div class="mockup-stat">£4.2M Pipeline</div>
+                <div class="mockup-title">Apex Prime Commercial Real Estate</div>
+                <div class="mockup-sub">Luxury property portfolio with interactive viewing scheduler</div>
+              </div>
+            </div>
+            <div class="work-card-content">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="work-card-tag">Real Estate · Multi-Page</div>
+                <span class="work-badge-pages">7 Pages</span>
+              </div>
+              <h3>Apex Prime Commercial Real Estate</h3>
+              <p class="work-card-quote">
+                “High-net-worth commercial investors expect perfection. The ultra-fast multi-page layout and virtual floorplans closed over £4.2M in property interest in our first quarter.”
+              </p>
+              <div class="pages-breakdown-row"><span class="pages-lbl">Page Structure:</span> <span>Home &middot; Commercial Listings &middot; Virtual Floorplans &middot; Investment Criteria &middot; Advisory Partners &middot; Inquiries</span></div>
+              <div class="work-card-author">Marcus Sterling · Managing Partner</div>
+              <div class="work-card-footer">
+                <span class="work-location">London · Dubai</span>
+                <button type="button" class="btn-preview-case" onclick="openProjectModal('realty')">View Website Details →</button>
+              </div>
+            </div>
+          </div>
+
+          <!-- WORK 6: AURA BOUTIQUE -->
+          <div class="work-card">
+            <div class="work-browser-frame">
+              <div class="browser-bar">
+                <div class="browser-dots"><span class="dot red"></span><span class="dot yellow"></span><span class="dot green"></span></div>
+                <div class="browser-url">auraboutique.store</div>
+                <div class="browser-tag">6 Pages · Multi-Page</div>
+              </div>
+              <div class="browser-viewport grad-fashion">
+                <div class="mockup-badge">E-Commerce & Fashion</div>
+                <div class="mockup-stat">3.4x Conversion Lift</div>
+                <div class="mockup-title">Aura Luxury Boutique</div>
+                <div class="mockup-sub">Editorial lifestyle store with instant WhatsApp checkout</div>
+              </div>
+            </div>
+            <div class="work-card-content">
+              <div style="display:flex; justify-content:space-between; align-items:center;">
+                <div class="work-card-tag">Fashion E-Commerce · Multi-Page</div>
+                <span class="work-badge-pages">6 Pages</span>
+              </div>
+              <h3>Aura Luxury Boutique</h3>
+              <p class="work-card-quote">
+                “Sub-second loading and direct WhatsApp checkout eliminated customer cart abandonment. Our mobile conversions jumped 3.4x within weeks.”
+              </p>
+              <div class="pages-breakdown-row"><span class="pages-lbl">Page Structure:</span> <span>Home &middot; Seasonal Lookbook &middot; Product Catalog &middot; Fit Guide &middot; WhatsApp Checkout &middot; Customer Care</span></div>
+              <div class="work-card-author">Elena Rostova · Brand Director</div>
+              <div class="work-card-footer">
+                <span class="work-location">Paris · London</span>
+                <button type="button" class="btn-preview-case" onclick="openProjectModal('fashion')">View Website Details →</button>
+              </div>
+            </div>
+          </div>
+        </div>
+        <div class="page-transition-router">
+          <a href="#pricing" class="router-link-pill" onclick="handlePageNav(null, 'pricing')">
+            <span class="router-hint">Next Page</span>
+            <span class="router-title">03 &middot; Pricing & Website Packages</span>
+            <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><path d="M5 12h14M12 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+    </section>
+
+
+    <!-- PRICING & WEBSITE CREATION PACKAGES SECTION -->
+    <section id="pricing" class="pricing-section">
+      <div class="ots-shell">
+        <div class="page-meta-strip"><span class="page-meta-tag"><span class="dot-live"></span> PAGE 03 / 05 &middot; PRICING & WEBSITE PACKAGES</span><span class="page-meta-extra">TRANSPARENT FLAT RATES</span></div>
+        <div class="pricing-header">
+          <div class="section-eyebrow">Pricing & Plans · Website Creation</div>
+          <h2 class="section-headline">Fixed prices. Clear deliverables. Zero surprises.</h2>
+          <p style="font-size: 18px; color: var(--text-muted); max-width: 680px; line-height: 1.6;">
+            Whether you need a high-converting 1-page launch sprint or a full multi-page commercial platform with automated AI, we deliver production-ready code with zero fluff.
+          </p>
+
+          <!-- Interactive Currency Switcher -->
+          <div class="currency-toggle-bar">
+            <span class="curr-label">Currency:</span>
+            <div class="curr-btn-group">
+              <button type="button" class="curr-btn active" id="btnCurrUSD" onclick="setCurrency('USD')">$ USD</button>
+              <button type="button" class="curr-btn" id="btnCurrGBP" onclick="setCurrency('GBP')">£ GBP</button>
+              <button type="button" class="curr-btn" id="btnCurrINR" onclick="setCurrency('INR')">₹ INR</button>
+            </div>
+          </div>
+        </div>
+
+        <!-- 3 Core Website Packages Grid -->
+        <div class="pricing-grid">
+          <!-- PLAN 1: ONE-PAGE SPRINT -->
+          <div class="pricing-card">
+            <div class="plan-eyebrow">Rapid Sprint</div>
+            <h3 class="plan-title">One-Page Build</h3>
+            <p class="plan-desc">A high-converting single page designed to establish instant authority, rank on Google, and capture WhatsApp leads.</p>
+            
+            <div class="plan-price-wrap">
+              <span class="plan-price" id="planPrice1">$499</span>
+              <span class="plan-sub-price" id="planSubPrice1">/ one-time · £399 · ₹19,999</span>
+            </div>
+
+            <div class="plan-timeline"><span class="timeline-dot"></span> 48-Hour Turnaround</div>
+
+            <ul class="plan-features-list">
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>1 Bespoke High-Conversion Page</strong> (Hero, Services, Social proof, Contact)</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>100% Mobile & Retina Responsive</strong> (Tested on iOS & Android)</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>1-Click WhatsApp Lead Capture</strong> & instant booking</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Free 1-Year Hosting & Domain Setup</strong> on Vercel Edge</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Sub-Second Load Speed</strong> (&lt;0.8s) for maximum conversion</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Google Business Profile Sync</strong> & review badge integration</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span>14 Days free post-launch support & polish</span></li>
+            </ul>
+
+            <a href="https://wa.me/919929606623?text=Hi%20AR%20Web%2C%20I%20want%20to%20order%20the%20%C2%A3399%20One-Page%20Website%20Package." target="_blank" rel="noopener" class="btn-plan btn-plan-outline">
+              Order One-Page Build ($499) →
+            </a>
+          </div>
+
+          <!-- PLAN 2: MULTI-PAGE BUSINESS (MOST POPULAR) -->
+          <div class="pricing-card popular">
+            <div class="pricing-badge-popular"><span class="badge-dot-pulse"></span> FLAGSHIP &middot; MULTI-PAGE PLATFORM</div>
+            <div class="plan-eyebrow">Complete Business Presence</div>
+            <h3 class="plan-title">Multi-Page Build</h3>
+            <p class="plan-desc">A comprehensive multi-page corporate website engineered for clinics, salons, real estate, and commercial service brands.</p>
+            
+            <div class="plan-price-wrap">
+              <span class="plan-price" id="planPrice2">$999</span>
+              <span class="plan-sub-price" id="planSubPrice2">/ one-time · £799 · ₹39,999</span>
+            </div>
+
+            <div class="plan-timeline highlight-timeline"><span class="timeline-dot"></span> 5 to 7 Business Days</div>
+
+            <ul class="plan-features-list">
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>4 to 7 Bespoke Multi-Pages</strong> (Home, About, Services/Menu, Portfolio, Pricing, Contact, Blog)</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Sticky Glassmorphic Nav & Mobile Drawer</strong> with sub-second page transitions</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Advanced Local SEO & Schema Markup</strong> for top Google rankings</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Custom Inquiry Form</strong> synced directly to your WhatsApp</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Appointment Booking & Calendar</strong> integration for client scheduling</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>CMS / Simple Admin Panel</strong> to update photos and text easily</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Google Analytics & Meta Pixel</strong> event tracking setup</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span>30 Days free maintenance & priority edits</span></li>
+            </ul>
+
+            <a href="https://wa.me/919929606623?text=Hi%20AR%20Web%2C%20I%20want%20to%20order%20the%20%C2%A3799%20Multi-Page%20Business%20Website%20Package." target="_blank" rel="noopener" class="btn-plan btn-plan-dark">
+              Choose Multi-Page Build ($999) →
+            </a>
+          </div>
+
+          <!-- PLAN 3: CUSTOM STUDIO & AI PLATFORM -->
+          <div class="pricing-card">
+            <div class="plan-eyebrow">Enterprise & Scale</div>
+            <h3 class="plan-title">AI Web Platform</h3>
+            <p class="plan-desc">Bespoke high-ticket engineering with custom multi-pages, automated AI workflows, client portals, and CRM sync.</p>
+            
+            <div class="plan-price-wrap">
+              <span class="plan-price" id="planPrice3">$1,999</span>
+              <span class="plan-sub-price" id="planSubPrice3">/ one-time · £1,699 · ₹84,999</span>
+            </div>
+
+            <div class="plan-timeline"><span class="timeline-dot"></span> 10 to 14 Business Days</div>
+
+            <ul class="plan-features-list">
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Unlimited Custom Multi-Pages</strong> & complex layout architecture</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Custom AI Receptionist / Agent</strong> trained on your business data</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>n8n Automated Workflow Pipelines</strong> (WhatsApp alerts, automated CRM, emails)</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Client Portal / Database</strong> or e-commerce booking checkout</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Multilingual & RTL Support</strong> (English, Arabic, Spanish, etc.)</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Dedicated Lead Engineer (Anas Rangrez)</strong> on private WhatsApp channel</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span><strong>Full Intellectual Property Ownership</strong> & production source code</span></li>
+              <li><span class="check-icon"><svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg></span> <span>60 Days VIP performance care & continuous tuning</span></li>
+            </ul>
+
+            <a href="https://wa.me/919929606623?text=Hi%20AR%20Web%2C%20I%20want%20to%20discuss%20a%20Custom%20Studio%20%26%20AI%20Web%20Platform%20build." target="_blank" rel="noopener" class="btn-plan btn-plan-outline">
+              Build Custom Platform ($1,999) →
+            </a>
+          </div>
+        </div>
+
+        <!-- PACKAGE FEATURE COMPARISON TABLE -->
+        <div class="comparison-shell">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent-pink);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;">
+            DETAILED SPECIFICATION
+          </div>
+          <h3 style="font-size:22px;font-weight:800;letter-spacing:-0.5px;margin-bottom:20px;">
+            Compare Website Packages Side-by-Side
+          </h3>
+          <table class="comparison-table">
+            <thead>
+              <tr>
+                <th>Deliverable Feature</th>
+                <th id="thPlan1">One-Page ($499 / £399)</th>
+                <th class="col-highlight" id="thPlan2">Multi-Page ($999 / £799) &middot; Flagship</th>
+                <th id="thPlan3">AI Enterprise ($1,999 / £1,699)</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td><strong>Number of Pages</strong></td>
+                <td>1 Page Landing</td>
+                <td><strong style="color:var(--accent-pink)">4 to 7 Multi-Pages</strong></td>
+                <td>Unlimited Bespoke Pages</td>
+              </tr>
+              <tr>
+                <td><strong>Delivery Timeline</strong></td>
+                <td>48 Hours</td>
+                <td>5 to 7 Days</td>
+                <td>10 to 14 Days</td>
+              </tr>
+              <tr>
+                <td><strong>Mobile Responsive Polish</strong></td>
+                <td><span class="tag-yes"><svg class="tbl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Included (100%)</span></td>
+                <td><span class="tag-yes"><svg class="tbl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Included (100%)</span></td>
+                <td><span class="tag-yes"><svg class="tbl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Included (100%)</span></td>
+              </tr>
+              <tr>
+                <td><strong>Google SEO Architecture</strong></td>
+                <td>Essential Meta Tags</td>
+                <td><span class="tag-yes"><svg class="tbl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Local SEO & Schema</span></td>
+                <td><span class="tag-yes"><svg class="tbl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Technical & Schema SEO</span></td>
+              </tr>
+              <tr>
+                <td><strong>WhatsApp Lead Integration</strong></td>
+                <td>Direct 1-Click Link</td>
+                <td><span class="tag-yes"><svg class="tbl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> WhatsApp Lead CRM</span></td>
+                <td><span class="tag-yes"><svg class="tbl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Custom CRM Pipelines</span></td>
+              </tr>
+              <tr>
+                <td><strong>Content Management (CMS)</strong></td>
+                <td>Code Edit by Us</td>
+                <td><span class="tag-yes"><svg class="tbl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Visual Admin CMS</span></td>
+                <td><span class="tag-yes"><svg class="tbl-check" width="13" height="13" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round"><polyline points="20 6 9 17 4 12"></polyline></svg> Custom Client Portal</span></td>
+              </tr>
+              <tr>
+                <td><strong>Hosting & Domain Setup</strong></td>
+                <td>Free 1 Year</td>
+                <td>Free 1 Year</td>
+                <td>Managed Cloud Infrastructure</td>
+              </tr>
+              <tr>
+                <td><strong>Post-Launch Support</strong></td>
+                <td>14 Days</td>
+                <td>30 Days Priority</td>
+                <td>60 Days VIP Dedicated</td>
+              </tr>
+            </tbody>
+          </table>
+        </div>
+
+        <!-- WEBSITE CREATION FAQ -->
+        <div class="pricing-faq">
+          <div class="section-eyebrow">Frequently Asked Questions</div>
+          <h3 style="font-size: 24px; font-weight: 800; letter-spacing: -0.5px;">Everything you need to know before we build.</h3>
+          
+          <div class="faq-grid">
+            <div class="faq-card">
+              <h4>How long does a website take to build?</h4>
+              <p>A 1-page sprint goes live in 48 hours. A multi-page business website takes 5 to 7 days from kick-off to final testing. You get daily WhatsApp updates throughout.</p>
+            </div>
+
+            <div class="faq-card">
+              <h4>Can I start with a 1-page site and upgrade to multi-pages later?</h4>
+              <p>Yes, absolutely. We architect all our builds modularly so you can easily expand with new service pages, case studies, or blogs as your business grows.</p>
+            </div>
+
+            <div class="faq-card">
+              <h4>Are there any hidden monthly agency fees?</h4>
+              <p>Zero. You pay a transparent one-time project fee. Hosting is free for the first year, and you have 100% full intellectual property ownership of your website and code.</p>
+            </div>
+
+            <div class="faq-card">
+              <h4>Will my website be fast on mobile phones?</h4>
+              <p>Every website we engineer achieves 98+ PageSpeed scores on Google Lighthouse and loads in under 1 second worldwide via Vercel Edge networks.</p>
             </div>
           </div>
         </div>
@@ -2567,6 +4076,9 @@
 
     <!-- PROJECT INQUIRY (TELL US ABOUT THE BUILD) -->
     <section class="inquiry-section" id="inquiry">
+      <div class="ots-shell" style="max-width:680px; width:100%; margin: 0 auto;">
+        <div class="page-meta-strip"><span class="page-meta-tag"><span class="dot-live"></span> PAGE 05 / 05 &middot; PROJECT INQUIRY</span><span class="page-meta-extra">ESTIMATE IN 60 SECONDS</span></div>
+      </div>
       <div class="inquiry-card" id="cardContainer">
         
         <div class="sub-header" id="subHeader">PROJECT INQUIRY</div>
@@ -2610,10 +4122,10 @@
           <!-- Estimated Investment Range -->
           <span class="section-title" id="budgetTitle">ESTIMATED INVESTMENT RANGE</span>
           <div class="pills-group" id="budgetGroup">
-            <button type="button" class="pill-btn active" onclick="selectBudget(this)">&lt; £5k</button>
-            <button type="button" class="pill-btn" onclick="selectBudget(this)">£5k - £10k</button>
-            <button type="button" class="pill-btn" onclick="selectBudget(this)">£10k - £25k</button>
-            <button type="button" class="pill-btn" onclick="selectBudget(this)">£25k+</button>
+            <button type="button" class="pill-btn active" onclick="selectBudget(this)">&lt; $1,000</button>
+            <button type="button" class="pill-btn" onclick="selectBudget(this)">$1,000 - $2,500</button>
+            <button type="button" class="pill-btn" onclick="selectBudget(this)">$2,500 - $5,000</button>
+            <button type="button" class="pill-btn" onclick="selectBudget(this)">$5,000+</button>
           </div>
 
           <!-- Project Brief -->
@@ -2731,14 +4243,28 @@
   </footer>
 
 
-  <!-- FLOATING SOCIAL DOCK (WHATSAPP & INSTAGRAM) -->
-  <div class="floating-social-dock">
-    <a href="https://instagram.com/7m.anx0?exln=MTVlNjQwY3oxZXZmcA%3D%3D" class="floating-social-btn insta" target="_blank" rel="noopener" aria-label="Visit Instagram">
-      <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-    </a>
-    <a href="https://wa.me/919929606623" class="floating-social-btn wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
-      <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
-    </a>
+  <!-- UNIFIED FLOATING ACTIONS DOCK: STUDIO AI AGENT (JUST ABOVE) + INSTAGRAM & WHATSAPP LOGOS -->
+  <div class="floating-actions-dock" id="floatingActionsDock">
+    <!-- AI AGENT LAUNCHER (DIRECTLY ABOVE SOCIAL LOGOS) -->
+    <div class="ai-launcher-wrap" id="aiLauncherWrap">
+      <button type="button" class="ai-launcher-btn" id="aiLauncherBtn" onclick="toggleAIAgent()" aria-label="Open Studio AI Assistant">
+        <span class="ai-pulse-dot"></span>
+        <svg class="ai-btn-icon" width="17" height="17" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2" stroke-linecap="round" stroke-linejoin="round">
+          <path d="M21 15a2 2 0 0 1-2 2H7l-4 4V5a2 2 0 0 1 2-2h14a2 2 0 0 1 2 2z"></path>
+        </svg>
+        <span class="ai-btn-label">Studio AI Agent</span>
+      </button>
+    </div>
+
+    <!-- SOCIAL ICONS DOCK (INSTAGRAM & WHATSAPP) -->
+    <div class="floating-social-dock">
+      <a href="https://instagram.com/7m.anx0?exln=MTVlNjQwY3oxZXZmcA%3D%3D" class="floating-social-btn insta" target="_blank" rel="noopener" aria-label="Visit Instagram">
+        <svg viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+      <a href="https://wa.me/919929606623" class="floating-social-btn wa" target="_blank" rel="noopener" aria-label="Chat on WhatsApp">
+        <svg viewBox="0 0 24 24"><path d="M12.031 6.172c-3.181 0-5.767 2.586-5.768 5.766-.001 1.298.38 2.27 1.019 3.287l-.711 2.599 2.674-.702a5.72 5.72 0 0 0 2.784.733h.005c3.18 0 5.767-2.586 5.768-5.766 0-1.543-.601-2.993-1.693-4.085-1.092-1.092-2.542-1.692-4.078-1.692zm6.634 9.873c-.279.789-1.378 1.448-1.897 1.543-.52.095-1.127.135-3.633-.902-3.109-1.287-5.083-4.475-5.237-4.68-.155-.205-1.258-1.674-1.258-3.193 0-1.519.79-2.269 1.073-2.58.283-.311.619-.389.826-.389.206 0 .413.002.593.011.19.009.444-.072.695.53.257.618.88 2.146.957 2.302.077.155.129.336.026.543-.103.207-.155.336-.31.517-.155.181-.326.405-.466.544-.155.155-.316.324-.136.634.18.31.802 1.321 1.722 2.141 1.183 1.054 2.181 1.38 2.49 1.535.31.155.49.13.67-.077.181-.207.774-.904.981-1.214.207-.31.414-.259.697-.155.284.103 1.804.85 2.113 1.006.31.155.517.232.594.362.077.129.077.749-.202 1.538zM12 2C6.477 2 2 6.477 2 12c0 1.891.524 3.66 1.434 5.176L2 22l4.957-1.399C8.423 21.493 10.153 22 12 22c5.523 0 10-4.477 10-10S17.523 2 12 2z"/></svg>
+      </a>
+    </div>
   </div>
 
   <!-- POPUP MODAL (PROJECT INQUIRY) -->
@@ -2793,10 +4319,10 @@
           ESTIMATED INVESTMENT RANGE
         </span>
         <div class="pills-group" id="modalBudgetGroup">
-          <button type="button" class="pill-btn active" onclick="selectModalBudget(this)">&lt; £5k</button>
-          <button type="button" class="pill-btn" onclick="selectModalBudget(this)">£5k - £10k</button>
-          <button type="button" class="pill-btn" onclick="selectModalBudget(this)">£10k - £25k</button>
-          <button type="button" class="pill-btn" onclick="selectModalBudget(this)">£25k+</button>
+          <button type="button" class="pill-btn active" onclick="selectModalBudget(this)">&lt; $1,000</button>
+          <button type="button" class="pill-btn" onclick="selectModalBudget(this)">$1,000 - $2,500</button>
+          <button type="button" class="pill-btn" onclick="selectModalBudget(this)">$2,500 - $5,000</button>
+          <button type="button" class="pill-btn" onclick="selectModalBudget(this)">$5,000+</button>
         </div>
 
         <div class="form-group">
@@ -2812,6 +4338,17 @@
           REPLIES WITHIN 1 WORKING DAY • NO SPAM GUARANTEED
         </div>
       </form>
+    </div>
+  </div>
+
+  <!-- POPUP MODAL (PROJECT CASE STUDY / LIVE PREVIEW) -->
+  <div class="project-modal-overlay" id="projectModal" onclick="if(event.target===this)closeProjectModal()">
+    <div class="project-modal-box">
+      <button class="close-btn" onclick="closeProjectModal()" aria-label="Close modal">&times;</button>
+      
+      <div id="modalProjectContent">
+        <!-- Dynamically populated by openProjectModal() -->
+      </div>
     </div>
   </div>
 
@@ -2862,6 +4399,7 @@
       if (e.key === "Escape") {
         closeModal();
         closeDrawer();
+        closeProjectModal();
       }
     });
 
@@ -2883,7 +4421,7 @@
 
     /* INQUIRY FORM PILLS & SUBMISSION */
     let selectedService = "Software Development";
-    let selectedBudget = "< £5k";
+    let selectedBudget = "< $1,000";
 
     function selectService(btn) {
       document.querySelectorAll('#serviceGroup .pill-btn').forEach(b => b.classList.remove('active'));
@@ -2924,7 +4462,7 @@
 
     /* MODAL INQUIRY PILLS & SUBMISSION */
     let selectedModalService = "Software Development";
-    let selectedModalBudget = "< £5k";
+    let selectedModalBudget = "< $1,000";
 
     function selectModalService(btn) {
       document.querySelectorAll('#modalServiceGroup .pill-btn').forEach(b => b.classList.remove('active'));
@@ -3004,6 +4542,574 @@
         item.addEventListener("mouseleave", () => cursor.classList.remove("active"));
       });
     }
+    /* ========================================================
+       MULTI-PAGE ROUTING WITH FULL BROWSER HISTORY (BACK/FORWARD)
+       ======================================================== */
+    function scrollToSection(targetId, updateActiveNav = true, pushHistory = false) {
+      const cleanId = (targetId || 'top').replace('#', '');
+      const targetSection = document.getElementById(cleanId);
+      
+      if (targetSection) {
+        targetSection.scrollIntoView({ behavior: 'smooth' });
+      }
+
+      if (updateActiveNav) {
+        document.querySelectorAll('.page-nav-link').forEach(link => {
+          if (link.getAttribute('href') === '#' + cleanId) {
+            link.classList.add('active');
+          } else {
+            link.classList.remove('active');
+          }
+        });
+      }
+
+      if (pushHistory) {
+        try {
+          if (window.location.hash !== '#' + cleanId) {
+            history.pushState({ sectionId: cleanId }, '', '#' + cleanId);
+          }
+        } catch(e) {}
+      }
+    }
+
+    function handlePageNav(linkEl, targetId) {
+      scrollToSection(targetId, true, true);
+      closeDrawer();
+    }
+
+    // Native Browser Back & Forward Handler ("back jau to pehle jo khola tha vo khule")
+    window.addEventListener('popstate', function(event) {
+      // If project modal is active, close it on back
+      const modal = document.getElementById('projectModal');
+      if (modal && modal.classList.contains('active')) {
+        closeProjectModal();
+        return;
+      }
+      
+      // Navigate to previous state or previous hash
+      let targetId = 'top';
+      if (event.state && event.state.sectionId) {
+        targetId = event.state.sectionId;
+      } else if (window.location.hash) {
+        targetId = window.location.hash.substring(1);
+      }
+      scrollToSection(targetId, true, false);
+    });
+
+    window.addEventListener('hashchange', function() {
+      const targetId = window.location.hash ? window.location.hash.substring(1) : 'top';
+      scrollToSection(targetId, true, false);
+    });
+
+    // Initialize state on page load
+    window.addEventListener('DOMContentLoaded', () => {
+      const initialHash = window.location.hash ? window.location.hash.substring(1) : 'top';
+      try {
+        history.replaceState({ sectionId: initialHash }, '', window.location.hash || '#top');
+      } catch(e) {}
+
+      if (initialHash && initialHash !== 'top') {
+        setTimeout(() => {
+          scrollToSection(initialHash, true, false);
+        }, 120);
+      }
+    });
+
+    // Scroll-Spy to auto-update active navigation tab on scroll
+    if ('IntersectionObserver' in window) {
+      const pageSections = ['top', 'work', 'pricing', 'do', 'inquiry'];
+      const navObserver = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (entry.isIntersecting) {
+            const id = entry.target.id;
+            document.querySelectorAll('.page-nav-link').forEach(link => {
+              if (link.getAttribute('href') === '#' + id) {
+                link.classList.add('active');
+              } else {
+                link.classList.remove('active');
+              }
+            });
+          }
+        });
+      }, {
+        threshold: 0.25,
+        rootMargin: "-20% 0px -40% 0px"
+      });
+
+      pageSections.forEach(id => {
+        const el = document.getElementById(id);
+        if (el) navObserver.observe(el);
+      });
+    }
+
+    /* ========================================================
+       CURRENCY SWITCHER CONTROLLER ($ USD, £ GBP, ₹ INR)
+       ======================================================== */
+    let currentCurrency = 'USD';
+
+    function setCurrency(curr) {
+      currentCurrency = curr;
+      document.querySelectorAll('.curr-btn').forEach(btn => btn.classList.remove('active'));
+
+      const activeBtn = document.getElementById('btnCurr' + curr);
+      if (activeBtn) activeBtn.classList.add('active');
+
+      const p1 = document.getElementById('planPrice1');
+      const s1 = document.getElementById('planSubPrice1');
+      const p2 = document.getElementById('planPrice2');
+      const s2 = document.getElementById('planSubPrice2');
+      const p3 = document.getElementById('planPrice3');
+      const s3 = document.getElementById('planSubPrice3');
+
+      if (curr === 'USD') {
+        if (p1) p1.textContent = '$499';
+        if (s1) s1.textContent = '/ one-time · £399 · ₹19,999';
+        if (p2) p2.textContent = '$999';
+        if (s2) s2.textContent = '/ one-time · £799 · ₹39,999';
+        if (p3) p3.textContent = '$1,999';
+        if (s3) s3.textContent = '/ one-time · £1,699 · ₹84,999';
+      } else if (curr === 'GBP') {
+        if (p1) p1.textContent = '£399';
+        if (s1) s1.textContent = '/ one-time · $499 · ₹19,999';
+        if (p2) p2.textContent = '£799';
+        if (s2) s2.textContent = '/ one-time · $999 · ₹39,999';
+        if (p3) p3.textContent = '£1,699';
+        if (s3) s3.textContent = '/ one-time · $1,999 · ₹84,999';
+      } else if (curr === 'INR') {
+        if (p1) p1.textContent = '₹19,999';
+        if (s1) s1.textContent = '/ one-time · $499 · £399';
+        if (p2) p2.textContent = '₹39,999';
+        if (s2) s2.textContent = '/ one-time · $999 · £799';
+        if (p3) p3.textContent = '₹84,999';
+        if (s3) s3.textContent = '/ one-time · $1,999 · £1,699';
+      }
+    }
+
+    /* ========================================================
+       STUDIO AI AGENT CONTROLLER & CONVERSATION LOGIC
+       ======================================================== */
+    const aiChatWindow = document.getElementById('aiChatWindow');
+    const aiChatMessages = document.getElementById('aiChatMessages');
+    const aiUserInput = document.getElementById('aiUserInput');
+
+    function toggleAIAgent() {
+      if (!aiChatWindow) return;
+      const isActive = aiChatWindow.classList.contains('active');
+      if (isActive) {
+        aiChatWindow.classList.remove('active');
+        aiChatWindow.setAttribute('aria-hidden', 'true');
+      } else {
+        aiChatWindow.classList.add('active');
+        aiChatWindow.setAttribute('aria-hidden', 'false');
+        setTimeout(() => {
+          if (aiUserInput) aiUserInput.focus();
+        }, 150);
+      }
+    }
+
+    function clearAIAgentChat() {
+      if (!aiChatMessages) return;
+      aiChatMessages.innerHTML = `
+        <div class="ai-msg ai-msg-bot">
+          <p><strong>Chat reset.</strong></p>
+          <p>How can I assist you with your website build or pricing?</p>
+        </div>
+      `;
+    }
+
+    function appendAIMessage(sender, content, actionLink = null) {
+      if (!aiChatMessages) return;
+      const msgDiv = document.createElement('div');
+      msgDiv.className = 'ai-msg ' + (sender === 'user' ? 'ai-msg-user' : 'ai-msg-bot');
+      msgDiv.innerHTML = content;
+
+      if (actionLink) {
+        const actionBtn = document.createElement('a');
+        actionBtn.className = 'ai-msg-action-btn';
+        actionBtn.href = actionLink.url;
+        if (actionLink.target) actionBtn.target = actionLink.target;
+        if (actionLink.onclick) actionBtn.setAttribute('onclick', actionLink.onclick);
+        actionBtn.innerHTML = actionLink.text + ' &rarr;';
+        msgDiv.appendChild(actionBtn);
+      }
+
+      aiChatMessages.appendChild(msgDiv);
+      aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+    }
+
+    function showAITyping() {
+      const typingDiv = document.createElement('div');
+      typingDiv.className = 'ai-typing-indicator';
+      typingDiv.id = 'aiTypingIndicator';
+      typingDiv.innerHTML = `
+        <span class="ai-typing-dot"></span>
+        <span class="ai-typing-dot"></span>
+        <span class="ai-typing-dot"></span>
+      `;
+      aiChatMessages.appendChild(typingDiv);
+      aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+    }
+
+    function hideAITyping() {
+      const typing = document.getElementById('aiTypingIndicator');
+      if (typing) typing.remove();
+    }
+
+    function getAIAgentResponse(query) {
+      const q = query.toLowerCase();
+
+      // Pricing / Cost / $ / packages
+      if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('kitna') || q.includes('paise') || q.includes('dollar') || q.includes('$') || q.includes('package')) {
+        return {
+          text: '<p><strong>Our Transparent Website Packages:</strong></p><ul><li><strong>$499 — One-Page Build:</strong> 48h turnaround, mobile-first, WhatsApp lead funnel, 1-year hosting included.</li><li><strong>$999 — Multi-Page Business (Flagship):</strong> 4 to 7 bespoke pages, local Google SEO & schema, appointment scheduler, admin CMS, 5-7 days.</li><li><strong>$1,999 — Custom Studio & AI:</strong> Unlimited pages, custom AI receptionist, n8n automations, client portal.</li></ul>',
+          action: { text: 'Jump to Pricing & Plans', url: '#pricing', onclick: 'toggleAIAgent(); handlePageNav(null, "pricing")' }
+        };
+      }
+
+      // Multi-Page
+      if (q.includes('multi') || q.includes('page') || q.includes('multipage')) {
+        return {
+          text: '<p><strong>How our Multi-Page Platform ($999) works:</strong></p><p>We build 4 to 7 dedicated pages tailored to your brand: <em>Homepage, About Founder/Team, Services/Treatments Menu, Portfolio & Case Studies, Pricing, Online Booking, and Contact</em>.</p><p>Every page is handcrafted with sub-second loading (&lt;0.8s) and structured Schema SEO so local customers find you immediately on Google.</p>',
+          action: { text: 'View Websites Built', url: '#work', onclick: 'toggleAIAgent(); handlePageNav(null, "work")' }
+        };
+      }
+
+      // Websites Built / Portfolio
+      if (q.includes('work') || q.includes('portfolio') || q.includes('built') || q.includes('client') || q.includes('example') || q.includes('kaam')) {
+        return {
+          text: '<p><strong>Recent Websites Engineered by AR Web:</strong></p><ul><li><strong>Luxe Aesthetics Clinic (London):</strong> +180% consultations booked in 30 days.</li><li><strong>Gary\'s Executive Chauffeur (Dublin):</strong> Real-time distance fare estimator.</li><li><strong>Up The Yard Landscaping (Cabra):</strong> Architectural garden portfolio built in 24 hours.</li><li><strong>Bespoke Living Interiors:</strong> 8-page luxury catalog ranking #1 on Google.</li><li><strong>Apex Commercial Realty:</strong> Closed £4.2M property pipeline in Q1.</li></ul>',
+          action: { text: 'Explore All Case Studies', url: '#work', onclick: 'toggleAIAgent(); handlePageNav(null, "work")' }
+        };
+      }
+
+      // Timeline / Turnaround
+      if (q.includes('time') || q.includes('timeline') || q.includes('fast') || q.includes('how long') || q.includes('duration') || q.includes('kab') || q.includes('din')) {
+        return {
+          text: '<p><strong>Delivery Timelines:</strong></p><ul><li><strong>One-Page Sprint:</strong> Live within 48 Hours.</li><li><strong>Multi-Page Business Website:</strong> Live within 5 to 7 Business Days.</li><li><strong>Custom AI Platform:</strong> 10 to 14 Business Days.</li></ul><p>We work in rapid sprints with zero corporate agency delay.</p>',
+          action: { text: 'Book a 20-min Call', url: 'https://wa.me/919929606623', target: '_blank' }
+        };
+      }
+
+      // Contact / WhatsApp / Anas / Founder
+      if (q.includes('whatsapp') || q.includes('phone') || q.includes('contact') || q.includes('call') || q.includes('anas') || q.includes('email') || q.includes('founder')) {
+        return {
+          text: '<p><strong>Direct Studio Contact:</strong></p><p>AR Web is founded by <strong>Anas Rangrez</strong>. You can connect directly:</p><ul><li>WhatsApp: <strong>+91 99296 06623</strong></li><li>Email: <strong>arweb9929@gmail.com</strong></li></ul><p>We reply within minutes during business hours.</p>',
+          action: { text: 'Chat with Anas on WhatsApp', url: 'https://wa.me/919929606623?text=Hi%20Anas%2C%20I%20chatted%20with%20your%20AI%20agent%20and%20want%20to%20discuss%20a%20website%20build.', target: '_blank' }
+        };
+      }
+
+      // Hindi / Hinglish handling
+      if (q.includes('namaste') || q.includes('kaise') || q.includes('kya') || q.includes('haan') || q.includes('batao') || q.includes('shukriya') || q.includes('theek')) {
+        return {
+          text: '<p>Namaste! AR Web par hum ultra-fast websites aur multi-page platforms design aur develop karte hain.</p><p>Aap direct WhatsApp par bhi Anas se baat kar sakte hain (+91 99296 06623), ya humari transparent pricing ($499 se shuru) check kar sakte hain.</p>',
+          action: { text: 'WhatsApp Par Message Karein', url: 'https://wa.me/919929606623', target: '_blank' }
+        };
+      }
+
+      // Default fallback
+      return {
+        text: '<p>Thank you for asking! AR Web is an independent digital studio specializing in high-performance websites ($499 to $1,999) and custom multi-page business platforms.</p><p>Would you like to review our pricing, see our live portfolio, or discuss your requirements directly with Anas on WhatsApp?</p>',
+        action: { text: 'Chat on WhatsApp (+91 99296 06623)', url: 'https://wa.me/919929606623', target: '_blank' }
+      };
+    }
+
+    function askAIAgent(questionText) {
+      if (!aiChatWindow.classList.contains('active')) {
+        toggleAIAgent();
+      }
+      appendAIMessage('user', questionText);
+      showAITyping();
+
+      setTimeout(() => {
+        hideAITyping();
+        const resp = getAIAgentResponse(questionText);
+        appendAIMessage('bot', resp.text, resp.action);
+      }, 550);
+    }
+
+    function handleAIAgentSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('aiUserInput');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      askAIAgent(text);
+    }
+
+    /* ========================================================
+       PROJECT PREVIEW MODAL DATA & CONTROLLER
+       ======================================================== */
+    const projectModal = document.getElementById("projectModal");
+    const modalProjectContent = document.getElementById("modalProjectContent");
+
+    const projectsData = {
+      luxe: {
+        title: "Luxe Aesthetics & Skin Clinic",
+        url: "luxeaesthetics.co.uk",
+        badge: "Aesthetic Clinic · Multi-Page Build",
+        pages: "6 Custom Multi-Pages",
+        timeline: "5 Days Delivery",
+        location: "London · UK",
+        gradient: "linear-gradient(135deg, #1c1917, #292524)",
+        summary: "High-ticket skin clinic and aesthetic surgery platform featuring bespoke treatment menus, interactive before/after photo sliders, online triage forms, and instant WhatsApp booking.",
+        deliverables: [
+          "6 Custom Multi-Pages (Home, Treatments Menu, Injectables, About Dr. Claire, Before/After Gallery, Contact)",
+          "1-Click WhatsApp consultation triage with pre-filled service tags",
+          "Advanced localized Google SEO targeting high-net-worth London patients",
+          "Speed score 99/100 on Google Lighthouse via Vercel Edge"
+        ],
+        stats: "+180% Online Consultations Booked in 30 Days",
+        testimonial: "“Online consultation booking went up 180% in the first month. The treatment catalog and instant WhatsApp booking make our clinic look world-class.”",
+        author: "Dr. Claire M. · Clinical Director, London"
+      },
+      taxi: {
+        title: "Gary's Executive Chauffeur Fleet",
+        url: "garystaxi.ie",
+        badge: "Commercial Fleet · Multi-Page Build",
+        pages: "5 Custom Multi-Pages",
+        timeline: "4 Days Delivery",
+        location: "Dublin · Nationwide",
+        gradient: "linear-gradient(135deg, #0f172a, #1e293b)",
+        summary: "Nationwide executive transport and private chauffeur booking web application with real-time distance fare estimation, Google Review syndication, and 24/7 direct WhatsApp dispatch.",
+        deliverables: [
+          "5 Custom Multi-Pages (Home, Airport Transfers, Corporate Fleet, Rates, Instant Booking)",
+          "Instant fare calculator estimating Dublin airport & nationwide transfer prices",
+          "Automated Google Business reviews sync pushing 5-star social proof",
+          "Mobile-first interface optimized for travelers on the go"
+        ],
+        stats: "100% Weekend Fleet Booked Out Every Week",
+        testimonial: "“I went out on my own with the 8-seater fleet. They built the multi-page platform with instant fare calculation. I can just focus on driving.”",
+        author: "Gary · Gary's Taxi Fleet, Dublin"
+      },
+      yard: {
+        title: "Up The Yard Architectural Landscaping",
+        url: "uptheyardlandscaping.ie",
+        badge: "Architecture & Gardens · Multi-Page Build",
+        pages: "4 Custom Multi-Pages",
+        timeline: "24 Hours Delivery",
+        location: "Dublin 7 · Ireland",
+        gradient: "linear-gradient(135deg, #064e3b, #065f46)",
+        summary: "High-end visual portfolio showcasing architectural garden designs, patio paving, and residential landscape construction with an instant project estimate funnel.",
+        deliverables: [
+          "4 Custom Multi-Pages (Home, Garden Portfolio, Paving & Patios, Free Quote)",
+          "High-resolution interactive garden gallery with zoom previews",
+          "Instant project inquiry funnel delivering qualified leads directly to WhatsApp",
+          "Built and deployed live inside 24 hours with zero downtime"
+        ],
+        stats: "Delivered in 24 Hours · Weekly Inbound Contracts",
+        testimonial: "“We got our multi-page website live in a day, not a long costly agency headache. We focus on the gardens, while inquiries keep rolling in.”",
+        author: "Pierce & Ethan · Founders, Dublin 7"
+      },
+      kitchen: {
+        title: "Bespoke Kitchen Design & Luxury Living",
+        url: "bespokekitchendesign.com",
+        badge: "Luxury Interiors · Multi-Page Build",
+        pages: "8 Custom Multi-Pages",
+        timeline: "6 Days Delivery",
+        location: "Dublin · Kildare · Meath",
+        gradient: "linear-gradient(135deg, #451a03, #78350f)",
+        summary: "Luxury residential interior design and bespoke kitchen showroom catalog featuring material swatches, virtual kitchen render tours, and high-ranking local SEO journals.",
+        deliverables: [
+          "8 Custom Multi-Pages (Home, Contemporary Kitchens, Classic Living, Material Finishes, Process, Showroom, Journal, Contact)",
+          "Material selector allowing clients to browse quartz, granite, and hardwood finishes",
+          "Localized SEO articles dominating searches in Dublin, Kildare, and Meath",
+          "Digital consultation scheduler integrated with client intake form"
+        ],
+        stats: "#1 Google Search Ranking for Luxury Kitchen Renovations",
+        testimonial: "“AR Web built an 8-page catalogue of kitchens, configured Google SEO, and wrote journal pieces so high-end clients find us immediately.”",
+        author: "Bespoke Design Team · Ireland"
+      },
+      realty: {
+        title: "Apex Prime Commercial Real Estate",
+        url: "apexprimerealty.com",
+        badge: "Commercial Real Estate · Multi-Page Build",
+        pages: "7 Custom Multi-Pages",
+        timeline: "7 Days Delivery",
+        location: "London · Dubai",
+        gradient: "linear-gradient(135deg, #1e1b4b, #312e81)",
+        summary: "Luxury property brokerage platform engineered for ultra-high-net-worth investors, featuring interactive property listing filters, virtual tours, and private VIP viewings.",
+        deliverables: [
+          "7 Custom Multi-Pages (Home, Commercial Properties, Luxury Villas, Off-Plan Developments, Private Advisory, Market Insights, Contact)",
+          "Multi-currency conversion engine (GBP, USD, AED, EUR)",
+          "Private viewing appointment scheduler with VIP verification",
+          "Dynamic PDF brochure download tracking and WhatsApp concierge"
+        ],
+        stats: "£4.2M in High-Value Property Inquiries in Q1",
+        testimonial: "“High-net-worth investors expect perfection. The ultra-fast multi-page layout and virtual floorplans closed over £4.2M in property interest in Q1.”",
+        author: "Marcus Sterling · Managing Partner"
+      },
+      fashion: {
+        title: "Aura Luxury Boutique & E-Commerce",
+        url: "auraboutique.store",
+        badge: "E-Commerce & Retail · Multi-Page Build",
+        pages: "6 Custom Multi-Pages",
+        timeline: "5 Days Delivery",
+        location: "Paris · London",
+        gradient: "linear-gradient(135deg, #4c0519, #831843)",
+        summary: "Editorial high-fashion brand boutique with visual lookbooks, seamless collection filtering, sub-second load times, and frictionless WhatsApp checkout.",
+        deliverables: [
+          "6 Custom Multi-Pages (Home, New Season, Lookbook, Designers, Brand Story, WhatsApp Concierge)",
+          "1-Click WhatsApp direct cart checkout with automatic product SKU tags",
+          "Retina-ready image optimization loading in under 0.7 seconds",
+          "Social proof Instagram live feed syndication"
+        ],
+        stats: "3.4x Mobile Conversion Lift Within 30 Days",
+        testimonial: "“Sub-second loading and direct WhatsApp checkout eliminated customer cart abandonment. Our mobile conversions jumped 3.4x within weeks.”",
+        author: "Elena Rostova · Brand Director"
+      }
+    };
+
+    function openProjectModal(projectId) {
+      const data = projectsData[projectId];
+      if (!data || !projectModal || !modalProjectContent) return;
+
+      modalProjectContent.innerHTML = `
+        <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--accent-pink);font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:8px;">
+          ${data.badge} • ${data.location}
+        </div>
+        <h2 style="font-size:clamp(22px, 3.5vw, 28px);font-weight:800;letter-spacing:-0.5px;margin-bottom:12px;color:var(--text-ink);">
+          ${data.title}
+        </h2>
+        <p style="font-size:14.5px;color:var(--text-muted);line-height:1.6;margin-bottom:20px;">
+          ${data.summary}
+        </p>
+
+        <!-- Mockup Display Frame -->
+        <div style="border-radius:18px;overflow:hidden;border:1px solid var(--card-border);margin-bottom:24px;background:#ffffff;box-shadow:0 12px 30px rgba(0,0,0,0.06);">
+          <div style="background:#f1ede1;padding:10px 14px;display:flex;align-items:center;justify-content:space-between;border-bottom:1px solid rgba(232, 216, 181, 0.8);">
+            <div style="display:flex;gap:6px;">
+              <span style="width:9px;height:9px;border-radius:50%;background:#ff5f56;display:inline-block;"></span>
+              <span style="width:9px;height:9px;border-radius:50%;background:#ffbd2e;display:inline-block;"></span>
+              <span style="width:9px;height:9px;border-radius:50%;background:#27c93f;display:inline-block;"></span>
+            </div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;color:var(--text-muted);background:#fff;padding:2px 14px;border-radius:20px;border:1px solid rgba(232,216,181,0.8);">
+              ${data.url}
+            </div>
+            <span style="font-family:'JetBrains Mono',monospace;font-size:10px;font-weight:700;color:var(--accent-pink);">
+              ${data.pages}
+            </span>
+          </div>
+          <div style="background:${data.gradient};padding:30px 24px;color:#fff;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:11px;text-transform:uppercase;color:#34d399;font-weight:700;margin-bottom:6px;">
+              KEY RESULT: ${data.stats}
+            </div>
+            <h3 style="font-size:22px;font-weight:800;margin-bottom:8px;">${data.title}</h3>
+            <p style="font-size:13px;opacity:0.85;max-width:550px;line-height:1.4;">Architecture: Next.js · Tailwind CSS · Vercel Edge · Fast WhatsApp Lead CRM</p>
+          </div>
+        </div>
+
+        <div style="margin-bottom:20px;">
+          <h4 style="font-size:14px;font-weight:700;text-transform:uppercase;letter-spacing:1px;margin-bottom:12px;color:var(--text-ink);font-family:'JetBrains Mono',monospace;">
+            Deliverables & Features Included:
+          </h4>
+          <ul style="list-style:none;display:flex;flex-direction:column;gap:10px;padding:0;">
+            ${data.deliverables.map(item => `
+              <li style="display:flex;align-items:flex-start;gap:10px;font-size:13.5px;color:var(--text-muted);line-height:1.45;">
+                <svg width="14" height="14" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.5" stroke-linecap="round" stroke-linejoin="round" style="color:var(--accent-pink);flex-shrink:0;margin-top:2px;"><polyline points="20 6 9 17 4 12"></polyline></svg>
+                <span>${item}</span>
+              </li>
+            `).join('')}
+          </ul>
+        </div>
+
+        <div style="background:var(--input-bg);border:1px solid var(--card-border);border-radius:18px;padding:18px 20px;margin-bottom:24px;">
+          <p style="font-size:13.5px;font-style:italic;color:var(--text-ink);line-height:1.5;margin-bottom:8px;">
+            ${data.testimonial}
+          </p>
+          <div style="font-size:12px;font-weight:700;color:var(--accent-pink);font-family:'JetBrains Mono',monospace;">
+            ${data.author}
+          </div>
+        </div>
+
+        <div style="display:flex;gap:12px;flex-wrap:wrap;">
+          <a href="https://wa.me/919929606623?text=${encodeURIComponent('Hi AR Web, I loved the ' + data.title + ' website you built. Can we build something similar for my business?')}" target="_blank" rel="noopener" class="btn-plan btn-plan-dark" style="flex:1;min-width:220px;">
+            Request a Similar Website on WhatsApp →
+          </a>
+          <button type="button" onclick="closeProjectModal()" class="btn-plan btn-plan-outline" style="width:auto;padding:14px 24px;">
+            Close
+          </button>
+        </div>
+      `;
+
+      projectModal.classList.add("active");
+      document.body.style.overflow = "hidden";
+    }
+
+    function closeProjectModal() {
+      if (projectModal) {
+        projectModal.classList.remove("active");
+        if (!contactModal || !contactModal.classList.contains("active")) {
+          if (!mobileDrawer || !mobileDrawer.classList.contains("open")) {
+            document.body.style.overflow = "";
+          }
+        }
+      }
+    }
   </script>
+
+
+
+  <!-- AI AGENT CHAT DIALOG WINDOW -->
+  <div class="ai-chat-window" id="aiChatWindow" aria-hidden="true">
+    <div class="ai-chat-header">
+      <div class="ai-header-left">
+        <div class="ai-avatar-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"></path>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+          </svg>
+        </div>
+        <div>
+          <div class="ai-chat-title">AR Web Studio AI</div>
+          <div class="ai-chat-status"><span class="status-live-dot"></span> Online &middot; Instant Answers</div>
+        </div>
+      </div>
+      <div class="ai-header-actions">
+        <button type="button" class="ai-icon-btn" onclick="clearAIAgentChat()" title="Clear Chat" aria-label="Clear chat">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        </button>
+        <button type="button" class="ai-icon-btn" onclick="toggleAIAgent()" title="Close Chat" aria-label="Close chat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chat Message History -->
+    <div class="ai-chat-messages" id="aiChatMessages">
+      <div class="ai-msg ai-msg-bot">
+        <p><strong>Hello! I am the AR Web Studio Assistant.</strong></p>
+        <p>You can ask me about our website packages in <strong>$</strong>, multi-page delivery timelines, client websites we have built, or instant project estimates.</p>
+      </div>
+    </div>
+
+    <!-- Quick Question Chips -->
+    <div class="ai-quick-chips" id="aiQuickChips">
+      <button type="button" class="ai-chip" onclick="askAIAgent('What are your website packages and prices in $?')">Pricing in $</button>
+      <button type="button" class="ai-chip" onclick="askAIAgent('How does your multi-page website package work?')">Multi-Page Build</button>
+      <button type="button" class="ai-chip" onclick="askAIAgent('Which client websites have you built?')">Websites Built</button>
+      <button type="button" class="ai-chip" onclick="askAIAgent('How fast can you launch my website?')">Timeline</button>
+      <button type="button" class="ai-chip" onclick="askAIAgent('Connect me with Anas on WhatsApp')">Talk to Anas</button>
+    </div>
+
+    <!-- Chat Input Area -->
+    <form class="ai-chat-input-bar" onsubmit="handleAIAgentSubmit(event)">
+      <input type="text" id="aiUserInput" placeholder="Ask in English or Hindi..." autocomplete="off">
+      <button type="submit" class="ai-send-btn" id="aiSendBtn" aria-label="Send message">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+
+    <div class="ai-chat-footer-note">
+      Instant AI &middot; Or WhatsApp Anas: <a href="https://wa.me/919929606623" target="_blank" rel="noopener">+91 99296 06623</a>
+    </div>
+  </div>
+
 </body>
 </html>
