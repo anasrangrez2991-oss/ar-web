@@ -1588,7 +1588,7 @@
       position: fixed;
       bottom: 24px;
       right: 24px;
-      z-index: 998;
+      z-index: 9999;
       display: flex;
       flex-direction: column;
       align-items: flex-end;
@@ -1597,6 +1597,17 @@
     }
     .floating-actions-dock > * {
       pointer-events: auto;
+    }
+
+    .ai-launcher-wrap {
+      display: flex;
+      justify-content: flex-end;
+      pointer-events: auto;
+    }
+
+    .ai-launcher-btn {
+      pointer-events: auto;
+      cursor: pointer;
     }
 
     .floating-social-dock {
@@ -2905,7 +2916,7 @@
       box-shadow: 0 25px 60px rgba(10, 14, 23, 0.18);
       display: flex;
       flex-direction: column;
-      z-index: 999;
+      z-index: 10000;
       overflow: hidden;
       opacity: 0;
       pointer-events: none;
@@ -4267,6 +4278,67 @@
     </div>
   </div>
 
+  
+  <!-- AI AGENT CHAT DIALOG WINDOW -->
+  <div class="ai-chat-window" id="aiChatWindow" aria-hidden="true">
+    <div class="ai-chat-header">
+      <div class="ai-header-left">
+        <div class="ai-avatar-badge">
+          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
+            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"></path>
+            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
+            <line x1="9" y1="9" x2="9.01" y2="9"></line>
+            <line x1="15" y1="9" x2="15.01" y2="9"></line>
+          </svg>
+        </div>
+        <div>
+          <div class="ai-chat-title">AR Web Studio AI</div>
+          <div class="ai-chat-status"><span class="status-live-dot"></span> Online &middot; Instant Answers</div>
+        </div>
+      </div>
+      <div class="ai-header-actions">
+        <button type="button" class="ai-icon-btn" onclick="clearAIAgentChat()" title="Clear Chat" aria-label="Clear chat">
+          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
+        </button>
+        <button type="button" class="ai-icon-btn" onclick="toggleAIAgent()" title="Close Chat" aria-label="Close chat">
+          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
+        </button>
+      </div>
+    </div>
+
+    <!-- Chat Message History -->
+    <div class="ai-chat-messages" id="aiChatMessages">
+      <div class="ai-msg ai-msg-bot">
+        <p><strong>Hello! I am the AR Web Studio Assistant.</strong></p>
+        <p>You can ask me about our website packages in <strong>$</strong>, multi-page delivery timelines, client websites we have built, or instant project estimates.</p>
+      </div>
+    </div>
+
+    <!-- Quick Question Chips -->
+    <div class="ai-quick-chips" id="aiQuickChips">
+      <button type="button" class="ai-chip" onclick="askAIAgent('What are your website packages and prices in $?')">Pricing in $</button>
+      <button type="button" class="ai-chip" onclick="askAIAgent('How does your multi-page website package work?')">Multi-Page Build</button>
+      <button type="button" class="ai-chip" onclick="askAIAgent('Which client websites have you built?')">Websites Built</button>
+      <button type="button" class="ai-chip" onclick="askAIAgent('How fast can you launch my website?')">Timeline</button>
+      <button type="button" class="ai-chip" onclick="askAIAgent('Connect me with Anas on WhatsApp')">Talk to Anas</button>
+    </div>
+
+    <!-- Chat Input Area -->
+    <form class="ai-chat-input-bar" onsubmit="handleAIAgentSubmit(event)">
+      <input type="text" id="aiUserInput" placeholder="Ask in English or Hindi..." autocomplete="off">
+      <button type="submit" class="ai-send-btn" id="aiSendBtn" aria-label="Send message">
+        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
+          <line x1="22" y1="2" x2="11" y2="13"></line>
+          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
+        </svg>
+      </button>
+    </form>
+
+    <div class="ai-chat-footer-note">
+      Instant AI &middot; Or WhatsApp Anas: <a href="https://wa.me/919929606623" target="_blank" rel="noopener">+91 99296 06623</a>
+    </div>
+  </div>
+
   <!-- POPUP MODAL (PROJECT INQUIRY) -->
   <div class="modal-overlay" id="contactModal">
     <div class="modal-box">
@@ -4687,38 +4759,44 @@
 
     /* ========================================================
        STUDIO AI AGENT CONTROLLER & CONVERSATION LOGIC
+       (SPECIALIZED IN WEB ENGINEERING WITH UNIQUE REPLIES)
        ======================================================== */
-    const aiChatWindow = document.getElementById('aiChatWindow');
-    const aiChatMessages = document.getElementById('aiChatMessages');
-    const aiUserInput = document.getElementById('aiUserInput');
+    function getAIChatWindow() {
+      return document.getElementById('aiChatWindow');
+    }
+    function getAIChatMessages() {
+      return document.getElementById('aiChatMessages');
+    }
+    function getAIUserInput() {
+      return document.getElementById('aiUserInput');
+    }
 
     function toggleAIAgent() {
-      if (!aiChatWindow) return;
-      const isActive = aiChatWindow.classList.contains('active');
+      const chatWin = getAIChatWindow();
+      if (!chatWin) return;
+      const isActive = chatWin.classList.contains('active');
       if (isActive) {
-        aiChatWindow.classList.remove('active');
-        aiChatWindow.setAttribute('aria-hidden', 'true');
+        chatWin.classList.remove('active');
+        chatWin.setAttribute('aria-hidden', 'true');
       } else {
-        aiChatWindow.classList.add('active');
-        aiChatWindow.setAttribute('aria-hidden', 'false');
+        chatWin.classList.add('active');
+        chatWin.setAttribute('aria-hidden', 'false');
         setTimeout(() => {
-          if (aiUserInput) aiUserInput.focus();
-        }, 150);
+          const input = getAIUserInput();
+          if (input) input.focus();
+        }, 120);
       }
     }
 
     function clearAIAgentChat() {
-      if (!aiChatMessages) return;
-      aiChatMessages.innerHTML = `
-        <div class="ai-msg ai-msg-bot">
-          <p><strong>Chat reset.</strong></p>
-          <p>How can I assist you with your website build or pricing?</p>
-        </div>
-      `;
+      const msgs = getAIChatMessages();
+      if (!msgs) return;
+      msgs.innerHTML = '<div class="ai-msg ai-msg-bot"><p><strong>Chat reset.</strong></p><p>Ask me anything about website creation, pricing in $, multi-page platforms, or client case studies.</p></div>';
     }
 
     function appendAIMessage(sender, content, actionLink = null) {
-      if (!aiChatMessages) return;
+      const msgs = getAIChatMessages();
+      if (!msgs) return;
       const msgDiv = document.createElement('div');
       msgDiv.className = 'ai-msg ' + (sender === 'user' ? 'ai-msg-user' : 'ai-msg-bot');
       msgDiv.innerHTML = content;
@@ -4733,21 +4811,19 @@
         msgDiv.appendChild(actionBtn);
       }
 
-      aiChatMessages.appendChild(msgDiv);
-      aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      msgs.appendChild(msgDiv);
+      msgs.scrollTop = msgs.scrollHeight;
     }
 
     function showAITyping() {
+      const msgs = getAIChatMessages();
+      if (!msgs) return;
       const typingDiv = document.createElement('div');
       typingDiv.className = 'ai-typing-indicator';
       typingDiv.id = 'aiTypingIndicator';
-      typingDiv.innerHTML = `
-        <span class="ai-typing-dot"></span>
-        <span class="ai-typing-dot"></span>
-        <span class="ai-typing-dot"></span>
-      `;
-      aiChatMessages.appendChild(typingDiv);
-      aiChatMessages.scrollTop = aiChatMessages.scrollHeight;
+      typingDiv.innerHTML = '<span class="ai-typing-dot"></span><span class="ai-typing-dot"></span><span class="ai-typing-dot"></span>';
+      msgs.appendChild(typingDiv);
+      msgs.scrollTop = msgs.scrollHeight;
     }
 
     function hideAITyping() {
@@ -4755,66 +4831,154 @@
       if (typing) typing.remove();
     }
 
-    function getAIAgentResponse(query) {
-      const q = query.toLowerCase();
+    // Pool of UNIQUE off-topic replies when user talks about anything unrelated to web design
+    let offTopicCounter = 0;
+    const offTopicPool = [
+      {
+        en: "<p><strong>My neural circuits are strictly dedicated to web engineering & digital craft!</strong></p><p>While I cannot help with that topic, I can engineer an ultra-fast website, custom multi-page portal, or lead generation engine for your business. Ask me about our <strong>$499 1-Page Sprint</strong> or <strong>$999 Multi-Page Flagship</strong>!</p>",
+        hi: "<p><strong>Main sirf web design aur website engineering ke liye train kiya gaya hoon!</strong></p><p>Main baaki cheezon par charcha nahi kar sakta, lekin aapke business ke liye ultra-fast website ($499 se shuru) ya multi-page portal zaroor bana sakta hoon. Website creation ke baare me kuch bhi poochhein!</p>"
+      },
+      {
+        en: "<p><strong>I specialize exclusively in websites, speed, and conversion funnels.</strong></p><p>I leave other subjects to general chatbots, but if you need a website that loads in under 0.8s, ranks #1 on Google, and captures leads directly to WhatsApp, you are talking to the right studio agent! What kind of website does your brand need?</p>",
+        hi: "<p><strong>Main AR Web ka dedicated studio agent hoon aur sirf websites par focus karta hoon.</strong></p><p>Agar aapko clinic, salon, real estate ya kisi bhi business ke liye modern website ya WhatsApp booking system chahiye, to main poori detail de sakta hoon!</p>"
+      },
+      {
+        en: "<p><strong>Off-topic query detected!</strong></p><p>I am the studio AI for AR Web, built by Anas Rangrez. My only mission is helping clients build high-performance websites ($499 to $1,999) and automated digital systems. Would you like to review our packages or see our live portfolio?</p>",
+        hi: "<p><strong>Yeh topic mere domain se alag hai!</strong></p><p>Mujhe Anas Rangrez ne sirf AR Web studio ke projects, pricing aur web development ke liye design kiya hai. Aap humare live projects dekhna chahenge ya pricing janna chahenge?</p>"
+      },
+      {
+        en: "<p><strong>That sounds interesting, but I only speak 'Web Development'!</strong></p><p>HTML, CSS, UI/UX architecture, Google SEO rankings, and sub-second page performance are my world. Let's talk about building your next website—tell me about your project or deadline!</p>",
+        hi: "<p><strong>Main sirf website development ki bhasha samajhta hoon!</strong></p><p>Fast loading speed, mobile responsive design aur Google ranking mera focus hai. Apni dream website ke baare me poochhein, main turant estimate dunga!</p>"
+      }
+    ];
 
-      // Pricing / Cost / $ / packages
-      if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('kitna') || q.includes('paise') || q.includes('dollar') || q.includes('$') || q.includes('package')) {
+    function checkWebIntent(rawQuery) {
+      const q = rawQuery.toLowerCase().trim();
+
+      // Explicit Web Terms
+      const webTerms = [
+        'web', 'website', 'site', 'page', 'pages', 'landing', 'ui', 'ux', 'design', 'develop',
+        'developer', 'code', 'coding', 'html', 'css', 'javascript', 'frontend', 'speed',
+        'latency', 'fast', 'seo', 'google', 'rank', 'hosting', 'domain', 'vercel',
+        'responsive', 'mobile', 'desktop', 'retina', 'schema', 'cms', 'admin', 'portal'
+      ];
+
+      // Studio, Pricing & Offerings
+      const studioTerms = [
+        'ar web', 'arweb', 'anas', 'rangrez', 'price', 'pricing', 'cost', 'rate', 'dollar',
+        'inr', 'rupee', 'gbp', 'pound', 'package', 'plan', 'quote', 'estimate', 'budget',
+        'portfolio', 'work', 'built', 'client', 'example', 'case study', 'luxe', 'clinic', 'taxi',
+        'chauffeur', 'yard', 'landscaping', 'kitchen', 'bespoke', 'realty', 'apex', 'aura', 'boutique',
+        'whatsapp', 'booking', 'calendar', 'crm', 'form', 'inquiry', 'contact', 'call',
+        'timeline', 'turnaround', 'delivery', 'sprint', 'service', 'offer'
+      ];
+
+      // Hindi / Hinglish web terms
+      const hindiWebTerms = [
+        'kitna', 'kitne', 'paise', 'kharcha', 'banegi', 'banana', 'banaoge', 'kaam', 'dikhao',
+        'kya banate', 'kab tak', 'rate'
+      ];
+
+      if (q.includes('$')) return 'web';
+
+      for (const t of webTerms) {
+        if (new RegExp('\\b' + t + '\\b', 'i').test(q)) return 'web';
+      }
+      for (const t of studioTerms) {
+        if (new RegExp('\\b' + t + '\\b', 'i').test(q)) return 'web';
+      }
+      for (const t of hindiWebTerms) {
+        if (new RegExp('\\b' + t + '\\b', 'i').test(q) || q.includes(t)) return 'web';
+      }
+
+      // Greetings
+      const greetings = ['hi', 'hello', 'hey', 'namaste', 'salam', 'kya hal', 'who are you', 'koun ho'];
+      for (const g of greetings) {
+        if (new RegExp('\\b' + g + '\\b', 'i').test(q)) return 'greeting';
+      }
+
+      return 'offtopic';
+    }
+
+    function getAIAgentResponse(query) {
+      const q = query.toLowerCase().trim();
+      const intent = checkWebIntent(query);
+      const isHindi = (q.includes('kya') || q.includes('hai') || q.includes('batao') || q.includes('kaise') || q.includes('mujhe') || q.includes('aap') || q.includes('tum') || q.includes('nahi') || q.includes('bhai'));
+
+      // If NOT web-related: return a UNIQUE, witty, studio-focused response!
+      if (intent === 'offtopic') {
+        const item = offTopicPool[offTopicCounter % offTopicPool.length];
+        offTopicCounter++;
         return {
-          text: '<p><strong>Our Transparent Website Packages:</strong></p><ul><li><strong>$499 — One-Page Build:</strong> 48h turnaround, mobile-first, WhatsApp lead funnel, 1-year hosting included.</li><li><strong>$999 — Multi-Page Business (Flagship):</strong> 4 to 7 bespoke pages, local Google SEO & schema, appointment scheduler, admin CMS, 5-7 days.</li><li><strong>$1,999 — Custom Studio & AI:</strong> Unlimited pages, custom AI receptionist, n8n automations, client portal.</li></ul>',
-          action: { text: 'Jump to Pricing & Plans', url: '#pricing', onclick: 'toggleAIAgent(); handlePageNav(null, "pricing")' }
+          text: isHindi ? item.hi : item.en,
+          action: { text: "View Website Packages in $ ($499 - $1,999)", url: "#pricing", onclick: "toggleAIAgent(); handlePageNav(null, 'pricing')" }
         };
       }
 
-      // Multi-Page
-      if (q.includes('multi') || q.includes('page') || q.includes('multipage')) {
+      // Greetings
+      if (intent === 'greeting') {
+        if (isHindi) {
+          return {
+            text: '<p>Namaste! Main AR Web Studio ka AI Assistant hoon.</p><p>Hum high-performance websites, 1-page sprints ($499) aur custom multi-page business platforms ($999) banate hain. Website creation ya pricing ke baare me poochhein!</p>',
+            action: { text: "Pricing & Plans Dekhein", url: "#pricing", onclick: "toggleAIAgent(); handlePageNav(null, 'pricing')" }
+          };
+        }
         return {
-          text: '<p><strong>How our Multi-Page Platform ($999) works:</strong></p><p>We build 4 to 7 dedicated pages tailored to your brand: <em>Homepage, About Founder/Team, Services/Treatments Menu, Portfolio & Case Studies, Pricing, Online Booking, and Contact</em>.</p><p>Every page is handcrafted with sub-second loading (&lt;0.8s) and structured Schema SEO so local customers find you immediately on Google.</p>',
-          action: { text: 'View Websites Built', url: '#work', onclick: 'toggleAIAgent(); handlePageNav(null, "work")' }
+          text: '<p><strong>Hello! Welcome to AR Web Studio.</strong></p><p>I am exclusively specialized in our web design, multi-page platforms, and website pricing. How can I help with your project today? Ask me about our <strong>$499 1-Page Sprint</strong>, <strong>$999 Multi-Page Flagship</strong>, or client portfolio.</p>',
+          action: { text: "Explore Website Packages in $", url: "#pricing", onclick: "toggleAIAgent(); handlePageNav(null, 'pricing')" }
+        };
+      }
+
+      // Pricing / Cost / $ / Packages
+      if (q.includes('price') || q.includes('cost') || q.includes('rate') || q.includes('kitna') || q.includes('paise') || q.includes('dollar') || q.includes('$') || q.includes('package') || q.includes('plan') || q.includes('quote')) {
+        return {
+          text: '<p><strong>Transparent Website Packages (in USD $):</strong></p><ul><li><strong>$499 — One-Page Rapid Sprint:</strong> 48h turnaround, mobile-first design, WhatsApp lead capture funnel, 1-year hosting included.</li><li><strong>$999 — Multi-Page Business Platform (Flagship):</strong> 4 to 7 bespoke pages, local Google SEO & schema, appointment scheduler, admin CMS panel, 5 to 7 days delivery.</li><li><strong>$1,999 — Custom Studio & AI Platform:</strong> Unlimited pages, custom AI agent, automated CRM pipelines, client portal.</li></ul>',
+          action: { text: "Jump to Pricing Section", url: "#pricing", onclick: "toggleAIAgent(); handlePageNav(null, 'pricing')" }
+        };
+      }
+
+      // Multi-Page Architecture
+      if (q.includes('multi') || q.includes('page') || q.includes('pages') || q.includes('multipage')) {
+        return {
+          text: '<p><strong>How our Multi-Page Platform ($999) works:</strong></p><p>We build 4 to 7 custom pages tailored to your brand: <em>Homepage, About Founder/Team, Services/Treatments Menu, Portfolio & Case Studies, Pricing, Online Booking, and Contact</em>.</p><p>Every page is handcrafted with sub-second loading (&lt;0.8s) and structured Schema SEO so local customers find you immediately on Google.</p>',
+          action: { text: "View Websites Built", url: "#work", onclick: "toggleAIAgent(); handlePageNav(null, 'work')" }
         };
       }
 
       // Websites Built / Portfolio
-      if (q.includes('work') || q.includes('portfolio') || q.includes('built') || q.includes('client') || q.includes('example') || q.includes('kaam')) {
+      if (q.includes('work') || q.includes('portfolio') || q.includes('built') || q.includes('client') || q.includes('example') || q.includes('case') || q.includes('kaam') || q.includes('dikhao')) {
         return {
-          text: '<p><strong>Recent Websites Engineered by AR Web:</strong></p><ul><li><strong>Luxe Aesthetics Clinic (London):</strong> +180% consultations booked in 30 days.</li><li><strong>Gary\'s Executive Chauffeur (Dublin):</strong> Real-time distance fare estimator.</li><li><strong>Up The Yard Landscaping (Cabra):</strong> Architectural garden portfolio built in 24 hours.</li><li><strong>Bespoke Living Interiors:</strong> 8-page luxury catalog ranking #1 on Google.</li><li><strong>Apex Commercial Realty:</strong> Closed £4.2M property pipeline in Q1.</li></ul>',
-          action: { text: 'Explore All Case Studies', url: '#work', onclick: 'toggleAIAgent(); handlePageNav(null, "work")' }
+          text: '<p><strong>Recent Websites Engineered by AR Web:</strong></p><ul><li><strong>Luxe Aesthetics Clinic (London):</strong> +180% online bookings in 30 days.</li><li><strong>Gary\'s Executive Chauffeur (Dublin):</strong> Real-time distance fare estimator.</li><li><strong>Up The Yard Landscaping (Cabra):</strong> Architectural garden portfolio built in 24 hours.</li><li><strong>Bespoke Living Interiors:</strong> 8-page luxury catalog ranking #1 on Google.</li><li><strong>Apex Commercial Realty:</strong> Closed £4.2M property pipeline in Q1.</li><li><strong>Aura Luxury Boutique:</strong> Direct WhatsApp checkout e-commerce.</li></ul>',
+          action: { text: "Explore All Case Studies", url: "#work", onclick: "toggleAIAgent(); handlePageNav(null, 'work')" }
         };
       }
 
-      // Timeline / Turnaround
-      if (q.includes('time') || q.includes('timeline') || q.includes('fast') || q.includes('how long') || q.includes('duration') || q.includes('kab') || q.includes('din')) {
+      // Timeline / Turnaround Speed
+      if (q.includes('time') || q.includes('timeline') || q.includes('fast') || q.includes('how long') || q.includes('duration') || q.includes('delivery') || q.includes('kab') || q.includes('din') || q.includes('speed')) {
         return {
-          text: '<p><strong>Delivery Timelines:</strong></p><ul><li><strong>One-Page Sprint:</strong> Live within 48 Hours.</li><li><strong>Multi-Page Business Website:</strong> Live within 5 to 7 Business Days.</li><li><strong>Custom AI Platform:</strong> 10 to 14 Business Days.</li></ul><p>We work in rapid sprints with zero corporate agency delay.</p>',
-          action: { text: 'Book a 20-min Call', url: 'https://wa.me/919929606623', target: '_blank' }
+          text: '<p><strong>Rapid Delivery Timelines:</strong></p><ul><li><strong>One-Page Sprint:</strong> Live within 48 Hours.</li><li><strong>Multi-Page Business Website:</strong> Live within 5 to 7 Business Days.</li><li><strong>Custom AI Platform:</strong> 10 to 14 Business Days.</li></ul><p>We work in rapid sprints with zero corporate agency delay.</p>',
+          action: { text: "Book a Call with Anas", url: "https://wa.me/919929606623", target: "_blank" }
         };
       }
 
-      // Contact / WhatsApp / Anas / Founder
+      // Contact / Founder / WhatsApp
       if (q.includes('whatsapp') || q.includes('phone') || q.includes('contact') || q.includes('call') || q.includes('anas') || q.includes('email') || q.includes('founder')) {
         return {
           text: '<p><strong>Direct Studio Contact:</strong></p><p>AR Web is founded by <strong>Anas Rangrez</strong>. You can connect directly:</p><ul><li>WhatsApp: <strong>+91 99296 06623</strong></li><li>Email: <strong>arweb9929@gmail.com</strong></li></ul><p>We reply within minutes during business hours.</p>',
-          action: { text: 'Chat with Anas on WhatsApp', url: 'https://wa.me/919929606623?text=Hi%20Anas%2C%20I%20chatted%20with%20your%20AI%20agent%20and%20want%20to%20discuss%20a%20website%20build.', target: '_blank' }
+          action: { text: "Chat with Anas on WhatsApp", url: "https://wa.me/919929606623?text=Hi%20Anas%2C%20I%20chatted%20with%20your%20AI%20agent%20and%20want%20to%20discuss%20a%20website%20build.", target: "_blank" }
         };
       }
 
-      // Hindi / Hinglish handling
-      if (q.includes('namaste') || q.includes('kaise') || q.includes('kya') || q.includes('haan') || q.includes('batao') || q.includes('shukriya') || q.includes('theek')) {
-        return {
-          text: '<p>Namaste! AR Web par hum ultra-fast websites aur multi-page platforms design aur develop karte hain.</p><p>Aap direct WhatsApp par bhi Anas se baat kar sakte hain (+91 99296 06623), ya humari transparent pricing ($499 se shuru) check kar sakte hain.</p>',
-          action: { text: 'WhatsApp Par Message Karein', url: 'https://wa.me/919929606623', target: '_blank' }
-        };
-      }
-
-      // Default fallback
+      // General Web Design Query
       return {
-        text: '<p>Thank you for asking! AR Web is an independent digital studio specializing in high-performance websites ($499 to $1,999) and custom multi-page business platforms.</p><p>Would you like to review our pricing, see our live portfolio, or discuss your requirements directly with Anas on WhatsApp?</p>',
-        action: { text: 'Chat on WhatsApp (+91 99296 06623)', url: 'https://wa.me/919929606623', target: '_blank' }
+        text: '<p>AR Web is an independent digital studio specializing in high-performance websites ($499 to $1,999) and custom multi-page business platforms.</p><p>Tell me about your business or what kind of website you need, and I will outline the exact pages, timeline, and quote!</p>',
+        action: { text: "Chat on WhatsApp (+91 99296 06623)", url: "https://wa.me/919929606623", target: "_blank" }
       };
     }
 
     function askAIAgent(questionText) {
-      if (!aiChatWindow.classList.contains('active')) {
+      const chatWin = getAIChatWindow();
+      if (chatWin && !chatWin.classList.contains('active')) {
         toggleAIAgent();
       }
       appendAIMessage('user', questionText);
@@ -4824,12 +4988,12 @@
         hideAITyping();
         const resp = getAIAgentResponse(questionText);
         appendAIMessage('bot', resp.text, resp.action);
-      }, 550);
+      }, 450);
     }
 
     function handleAIAgentSubmit(e) {
-      e.preventDefault();
-      const input = document.getElementById('aiUserInput');
+      if (e) e.preventDefault();
+      const input = getAIUserInput();
       if (!input) return;
       const text = input.value.trim();
       if (!text) return;
@@ -4837,6 +5001,14 @@
       input.value = '';
       askAIAgent(text);
     }
+
+    // Attach event listeners when DOM is loaded
+    document.addEventListener('DOMContentLoaded', () => {
+      const launcherBtn = document.getElementById('aiLauncherBtn');
+      if (launcherBtn) {
+        launcherBtn.onclick = toggleAIAgent;
+      }
+    });
 
     /* ========================================================
        PROJECT PREVIEW MODAL DATA & CONTROLLER
@@ -5051,65 +5223,6 @@
 
 
 
-  <!-- AI AGENT CHAT DIALOG WINDOW -->
-  <div class="ai-chat-window" id="aiChatWindow" aria-hidden="true">
-    <div class="ai-chat-header">
-      <div class="ai-header-left">
-        <div class="ai-avatar-badge">
-          <svg width="18" height="18" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2">
-            <path d="M12 2a10 10 0 0 1 10 10c0 5.523-4.477 10-10 10S2 17.523 2 12A10 10 0 0 1 12 2z"></path>
-            <path d="M8 14s1.5 2 4 2 4-2 4-2"></path>
-            <line x1="9" y1="9" x2="9.01" y2="9"></line>
-            <line x1="15" y1="9" x2="15.01" y2="9"></line>
-          </svg>
-        </div>
-        <div>
-          <div class="ai-chat-title">AR Web Studio AI</div>
-          <div class="ai-chat-status"><span class="status-live-dot"></span> Online &middot; Instant Answers</div>
-        </div>
-      </div>
-      <div class="ai-header-actions">
-        <button type="button" class="ai-icon-btn" onclick="clearAIAgentChat()" title="Clear Chat" aria-label="Clear chat">
-          <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><polyline points="3 6 5 6 21 6"></polyline><path d="M19 6v14a2 2 0 0 1-2 2H7a2 2 0 0 1-2-2V6m3 0V4a2 2 0 0 1 2-2h4a2 2 0 0 1 2 2v2"></path></svg>
-        </button>
-        <button type="button" class="ai-icon-btn" onclick="toggleAIAgent()" title="Close Chat" aria-label="Close chat">
-          <svg width="16" height="16" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2"><line x1="18" y1="6" x2="6" y2="18"></line><line x1="6" y1="6" x2="18" y2="18"></line></svg>
-        </button>
-      </div>
-    </div>
-
-    <!-- Chat Message History -->
-    <div class="ai-chat-messages" id="aiChatMessages">
-      <div class="ai-msg ai-msg-bot">
-        <p><strong>Hello! I am the AR Web Studio Assistant.</strong></p>
-        <p>You can ask me about our website packages in <strong>$</strong>, multi-page delivery timelines, client websites we have built, or instant project estimates.</p>
-      </div>
-    </div>
-
-    <!-- Quick Question Chips -->
-    <div class="ai-quick-chips" id="aiQuickChips">
-      <button type="button" class="ai-chip" onclick="askAIAgent('What are your website packages and prices in $?')">Pricing in $</button>
-      <button type="button" class="ai-chip" onclick="askAIAgent('How does your multi-page website package work?')">Multi-Page Build</button>
-      <button type="button" class="ai-chip" onclick="askAIAgent('Which client websites have you built?')">Websites Built</button>
-      <button type="button" class="ai-chip" onclick="askAIAgent('How fast can you launch my website?')">Timeline</button>
-      <button type="button" class="ai-chip" onclick="askAIAgent('Connect me with Anas on WhatsApp')">Talk to Anas</button>
-    </div>
-
-    <!-- Chat Input Area -->
-    <form class="ai-chat-input-bar" onsubmit="handleAIAgentSubmit(event)">
-      <input type="text" id="aiUserInput" placeholder="Ask in English or Hindi..." autocomplete="off">
-      <button type="submit" class="ai-send-btn" id="aiSendBtn" aria-label="Send message">
-        <svg width="15" height="15" viewBox="0 0 24 24" fill="none" stroke="currentColor" stroke-width="2.2" stroke-linecap="round" stroke-linejoin="round">
-          <line x1="22" y1="2" x2="11" y2="13"></line>
-          <polygon points="22 2 15 22 11 13 2 9 22 2"></polygon>
-        </svg>
-      </button>
-    </form>
-
-    <div class="ai-chat-footer-note">
-      Instant AI &middot; Or WhatsApp Anas: <a href="https://wa.me/919929606623" target="_blank" rel="noopener">+91 99296 06623</a>
-    </div>
-  </div>
 
 </body>
 </html>
