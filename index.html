@@ -7,11 +7,11 @@
   
   <!-- Tailwind CSS CDN -->
   <script src="https://cdn.tailwindcss.com"></script>
-  
-  <!-- Google Fonts: Newsreader (Editorial Serif), Plus Jakarta Sans (Clean Modern Sans) & JetBrains Mono -->
+
+  <!-- Google Fonts: Newsreader (Editorial Serif), Plus Jakarta Sans & JetBrains Mono -->
   <link rel="preconnect" href="https://fonts.googleapis.com">
   <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600&family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400;1,6..72,500;1,6..72,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
+  <link href="https://fonts.googleapis.com/css2?family=JetBrains+Mono:wght@400;500;600;700&family=Newsreader:ital,opsz,wght@1,6..72,300;1,6..72,400;1,6..72,500;1,6..72,600&family=Plus+Jakarta+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet">
 
   <script>
     tailwind.config = {
@@ -41,12 +41,13 @@
             },
             olive: {
               DEFAULT: '#405B4D',
+              dark: '#2E4238',
               light: '#EBF2EE',
             }
           },
           boxShadow: {
-            'card': '0 20px 40px -15px rgba(24, 23, 22, 0.05), 0 0 1px 1px rgba(24, 23, 22, 0.05)',
-            'dock': '0 25px 50px -12px rgba(16, 15, 14, 0.25), 0 0 0 1px rgba(255, 255, 255, 0.1)',
+            'soft-luxury': '0 20px 40px -15px rgba(24, 23, 22, 0.05), 0 0 1px 1px rgba(24, 23, 22, 0.04)',
+            'floating-dock': '0 20px 50px -10px rgba(16, 15, 14, 0.25), 0 0 0 1px rgba(24, 23, 22, 0.08)',
           }
         }
       }
@@ -57,15 +58,19 @@
     body {
       background-color: #FAF8F5;
       color: #181716;
-      font-feature-settings: "cv02", "cv03", "cv04", "cv11";
+      overflow-x: hidden;
     }
-
     .grid-subtle {
-      background-image: radial-gradient(rgba(24, 23, 22, 0.05) 1px, transparent 1px);
+      background-image: radial-gradient(rgba(24, 23, 22, 0.04) 1px, transparent 1px);
       background-size: 28px 28px;
     }
-
-    /* Multi-Page SPA Transitions */
+    .no-scrollbar::-webkit-scrollbar {
+      display: none;
+    }
+    .no-scrollbar {
+      -ms-overflow-style: none;
+      scrollbar-width: none;
+    }
     .page-view {
       display: none;
       opacity: 0;
@@ -75,157 +80,191 @@
       display: block;
       opacity: 1;
     }
-
-    /* Custom Refined Scrollbar */
-    ::-webkit-scrollbar {
-      width: 6px;
-    }
-    ::-webkit-scrollbar-track {
-      background: #FAF8F5;
-    }
-    ::-webkit-scrollbar-thumb {
-      background: #D9CFC4;
-      border-radius: 9999px;
-    }
-    ::-webkit-scrollbar-thumb:hover {
-      background: #B85D43;
-    }
-
-    /* Pulse dot animation */
-    @keyframes subtlePulse {
-      0%, 100% { opacity: 1; transform: scale(1); }
-      50% { opacity: 0.5; transform: scale(0.92); }
-    }
-    .animate-subtle-pulse {
-      animation: subtlePulse 2.5s infinite ease-in-out;
-    }
   </style>
 </head>
-<body class="grid-subtle min-h-screen antialiased flex flex-col justify-between selection:bg-terracotta selection:text-white">
+<body class="grid-subtle min-h-screen antialiased flex flex-col justify-between selection:bg-terracotta selection:text-white pb-28">
 
-  <!-- ================= TOP HEADER (arweb_ + Book a call + 3-Line Menu) ================= -->
-  <header class="sticky top-0 z-40 backdrop-blur-md bg-linen-50/90 border-b border-charcoal-900/10 transition-all">
-    <div class="max-w-6xl mx-auto px-6 h-20 flex items-center justify-between">
+  <!-- ================= TOP HEADER (Clean Spacing, Single-Line CTA, 3-Line Menu) ================= -->
+  <header class="fixed top-0 inset-x-0 z-50 backdrop-blur-md bg-linen-50/90 border-b border-charcoal-900/10">
+    <div class="max-w-7xl mx-auto px-6 h-20 flex items-center justify-between">
       
       <!-- Brand Logo -->
-      <a href="#home" onclick="navigateTo('home'); return false;" class="text-2xl font-bold tracking-tight text-charcoal-950 flex items-center gap-0.5 group">
+      <a href="#home" onclick="navigateTo('home'); return false;" class="text-2xl font-bold tracking-tight text-charcoal-950 flex items-center group">
         <span>arweb</span><span class="text-terracotta font-serif transition-transform group-hover:scale-125">_</span>
-        <span class="ml-2 text-[10px] uppercase tracking-widest font-mono font-bold text-charcoal-900/40 border border-charcoal-900/10 px-2 py-0.5 rounded-full">Studio</span>
       </a>
 
-      <!-- Desktop Nav Links -->
+      <!-- Desktop Nav Directory Links -->
       <nav class="hidden md:flex items-center gap-7 text-xs font-semibold tracking-wide uppercase text-charcoal-900/70">
-        <a href="#builds" onclick="navigateTo('builds'); return false;" id="nav-builds" class="hover:text-terracotta transition">Builds</a>
+        <a href="#about" onclick="navigateTo('about'); return false;" id="nav-about" class="hover:text-terracotta transition">Manifesto</a>
+        <a href="#builds" onclick="navigateTo('builds'); return false;" id="nav-builds" class="hover:text-terracotta transition">Builds ($499+)</a>
         <a href="#retainers" onclick="navigateTo('retainers'); return false;" id="nav-retainers" class="hover:text-terracotta transition">Retainers</a>
-        <a href="#works" onclick="navigateTo('works'); return false;" id="nav-works" class="hover:text-terracotta transition">Works</a>
-        <a href="#terms" onclick="navigateTo('terms'); return false;" id="nav-terms" class="hover:text-terracotta transition">Governance</a>
-        <a href="#faq" onclick="navigateTo('faq'); return false;" id="nav-faq" class="hover:text-terracotta transition">FAQ</a>
+        <a href="#works" onclick="navigateTo('works'); return false;" id="nav-works" class="hover:text-terracotta transition">Selected Works</a>
         <a href="#contact" onclick="navigateTo('contact'); return false;" id="nav-contact" class="hover:text-terracotta transition">Inquiry</a>
       </nav>
 
-      <!-- Right Actions: Book a Call + 3-Line Hamburger Menu -->
-      <div class="flex items-center gap-3">
+      <!-- Right Controls: Book a Call + 3-Line Menu -->
+      <div class="flex items-center gap-4 sm:gap-5">
         <a href="https://wa.me/919929606623?text=Inquiry:%20Schedule%20a%20Technical%20Consultation" target="_blank"
-           class="inline-flex items-center justify-center px-5 py-2.5 rounded-full text-xs font-semibold tracking-wide bg-charcoal-950 text-white hover:bg-terracotta transition shadow-sm">
+           class="whitespace-nowrap px-6 py-2.5 rounded-full text-xs font-semibold tracking-wide bg-charcoal-950 text-white hover:bg-terracotta transition-all shadow-sm">
           Book a Call
         </a>
 
-        <!-- 3-Line Hamburger Button -->
+        <!-- 3-Line Hamburger Menu Button -->
         <button id="menu-btn" onclick="toggleMenu()" 
                 class="w-11 h-11 rounded-full border border-charcoal-900/15 flex flex-col items-center justify-center gap-1.5 hover:bg-linen-100 transition focus:outline-none"
-                aria-label="Toggle Navigation Menu">
-          <span class="w-5 h-[2px] bg-charcoal-950 transition-transform duration-300"></span>
-          <span class="w-5 h-[2px] bg-charcoal-950 transition-opacity duration-300"></span>
-          <span class="w-5 h-[2px] bg-charcoal-950 transition-transform duration-300"></span>
+                aria-label="Toggle Navigation">
+          <span class="w-5 h-[2px] bg-charcoal-950"></span>
+          <span class="w-5 h-[2px] bg-charcoal-950"></span>
+          <span class="w-5 h-[2px] bg-charcoal-950"></span>
         </button>
       </div>
 
     </div>
   </header>
 
-  <!-- ================= SLIDE-OUT STUDIO DRAWER (3-Line Menu Overlay with Blur) ================= -->
+  <!-- ================= SLIDE-OUT STUDIO DRAWER (MODERN DIRECTORY) ================= -->
   <div id="drawer" class="fixed inset-0 z-50 pointer-events-none opacity-0 transition-opacity duration-300">
-    <!-- Backdrop with blur -->
-    <div class="absolute inset-0 bg-charcoal-950/40 backdrop-blur-sm" onclick="toggleMenu()"></div>
+    <div class="absolute inset-0 bg-charcoal-950/60 backdrop-blur-md" onclick="toggleMenu()"></div>
 
-    <!-- Drawer Panel -->
-    <div id="drawer-panel" class="absolute top-0 right-0 w-full max-w-md h-full bg-[#FAF8F5] p-8 sm:p-10 shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 pointer-events-auto border-l border-charcoal-900/10 overflow-y-auto">
+    <div id="drawer-panel" class="absolute top-0 right-0 w-full max-w-lg h-full bg-[#FAF8F5] p-6 sm:p-10 shadow-2xl flex flex-col justify-between transform translate-x-full transition-transform duration-300 ease-out pointer-events-auto border-l border-charcoal-900/10 overflow-y-auto">
+      
       <div>
-        <div class="flex items-center justify-between pb-8 border-b border-charcoal-900/10">
-          <span class="text-xs font-bold tracking-widest uppercase text-charcoal-900/40 font-mono">Studio Index</span>
-          <button onclick="toggleMenu()" class="text-xs uppercase font-bold tracking-wider text-charcoal-900 hover:text-terracotta">
-            [x] Close
+        <div class="flex items-center justify-between pb-6 border-b border-charcoal-900/10">
+          <div class="flex items-center gap-2">
+            <span class="text-[10px] font-mono uppercase tracking-[0.25em] font-bold text-charcoal-900/60">INDEX // ARWEB.STUDIO</span>
+          </div>
+          
+          <button onclick="toggleMenu()" 
+                  class="w-9 h-9 rounded-full border border-charcoal-900/15 flex items-center justify-center text-xs font-semibold text-charcoal-950 hover:bg-charcoal-950 hover:text-white transition transform hover:rotate-90 duration-200"
+                  aria-label="Close Navigation">
+            <svg class="w-3.5 h-3.5 fill-none stroke-current stroke-2" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M6 18L18 6M6 6l12 12"/></svg>
           </button>
         </div>
 
-        <nav class="mt-8 flex flex-col space-y-5">
-          <a href="#home" onclick="navigateTo('home'); toggleMenu(); return false;" class="text-xl font-bold text-charcoal-950 hover:text-terracotta transition flex items-center justify-between">
-            <span>01. Home &amp; Ethos</span>
-            <span class="text-xs font-mono font-normal text-charcoal-900/50">Overview</span>
+        <nav class="mt-4 flex flex-col divide-y divide-charcoal-900/5">
+          
+          <!-- 01 Studio Manifesto -->
+          <a href="#about" onclick="navigateTo('about'); toggleMenu(); return false;" class="group py-4 flex items-center justify-between hover:px-2 rounded-xl transition-all duration-200">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-xs text-charcoal-900/40 group-hover:text-terracotta transition">01</span>
+              <span class="text-xl sm:text-2xl font-bold tracking-tight text-charcoal-950 group-hover:text-terracotta transition">Studio Manifesto</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] uppercase font-mono tracking-wider px-2.5 py-1 rounded-full bg-charcoal-900/5 text-charcoal-900/60 group-hover:bg-terracotta group-hover:text-white transition">001 // Ethos</span>
+              <span class="text-charcoal-900/30 group-hover:text-terracotta group-hover:translate-x-1 transition transform duration-200">→</span>
+            </div>
           </a>
-          <a href="#builds" onclick="navigateTo('builds'); toggleMenu(); return false;" class="text-xl font-bold text-charcoal-950 hover:text-terracotta transition flex items-center justify-between">
-            <span>02. Development Builds</span>
-            <span class="text-xs font-mono font-normal text-charcoal-900/50">from $499</span>
+
+          <!-- 02 Digital Flagships -->
+          <a href="#builds" onclick="navigateTo('builds'); toggleMenu(); return false;" class="group py-4 flex items-center justify-between hover:px-2 rounded-xl transition-all duration-200">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-xs text-charcoal-900/40 group-hover:text-terracotta transition">02</span>
+              <span class="text-xl sm:text-2xl font-bold tracking-tight text-charcoal-950 group-hover:text-terracotta transition">Digital Flagships</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-mono tracking-wider px-2.5 py-1 rounded-full bg-terracotta/10 text-terracotta font-semibold group-hover:bg-terracotta group-hover:text-white transition">Fixed · $499+</span>
+              <span class="text-charcoal-900/30 group-hover:text-terracotta group-hover:translate-x-1 transition transform duration-200">→</span>
+            </div>
           </a>
-          <a href="#retainers" onclick="navigateTo('retainers'); toggleMenu(); return false;" class="text-xl font-bold text-charcoal-950 hover:text-terracotta transition flex items-center justify-between">
-            <span>03. Management Retainers</span>
-            <span class="text-xs font-mono font-normal text-charcoal-900/50">from $299/mo</span>
+
+          <!-- 03 Continuous Engineering Retainers -->
+          <a href="#retainers" onclick="navigateTo('retainers'); toggleMenu(); return false;" class="group py-4 flex items-center justify-between hover:px-2 rounded-xl transition-all duration-200">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-xs text-charcoal-900/40 group-hover:text-terracotta transition">03</span>
+              <span class="text-xl sm:text-2xl font-bold tracking-tight text-charcoal-950 group-hover:text-terracotta transition">Continuous Engineering</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] font-mono tracking-wider px-2.5 py-1 rounded-full bg-olive/10 text-olive font-semibold group-hover:bg-olive group-hover:text-white transition">Retainer · $299/mo</span>
+              <span class="text-charcoal-900/30 group-hover:text-olive group-hover:translate-x-1 transition transform duration-200">→</span>
+            </div>
           </a>
-          <a href="#works" onclick="navigateTo('works'); toggleMenu(); return false;" class="text-xl font-bold text-charcoal-950 hover:text-terracotta transition flex items-center justify-between">
-            <span>04. Selected Works</span>
-            <span class="text-xs font-mono font-normal text-charcoal-900/50">Case Studies</span>
+
+          <!-- 04 Curated Archives -->
+          <a href="#works" onclick="navigateTo('works'); toggleMenu(); return false;" class="group py-4 flex items-center justify-between hover:px-2 rounded-xl transition-all duration-200">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-xs text-charcoal-900/40 group-hover:text-terracotta transition">04</span>
+              <span class="text-xl sm:text-2xl font-bold tracking-tight text-charcoal-950 group-hover:text-terracotta transition">Curated Archives</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] uppercase font-mono tracking-wider px-2.5 py-1 rounded-full bg-charcoal-900/5 text-charcoal-900/60 group-hover:bg-charcoal-950 group-hover:text-white transition">Proof of Work</span>
+              <span class="text-charcoal-900/30 group-hover:text-charcoal-950 group-hover:translate-x-1 transition transform duration-200">→</span>
+            </div>
           </a>
-          <a href="#terms" onclick="navigateTo('terms'); toggleMenu(); return false;" class="text-xl font-bold text-charcoal-950 hover:text-terracotta transition flex items-center justify-between">
-            <span>05. Terms &amp; Governance</span>
-            <span class="text-xs font-mono font-normal text-charcoal-900/50">SLA &amp; IP</span>
+
+          <!-- 05 Commission an Engine / Inquiry -->
+          <a href="#contact" onclick="navigateTo('contact'); toggleMenu(); return false;" class="group py-4 flex items-center justify-between hover:px-2 rounded-xl transition-all duration-200">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-xs text-charcoal-900/40 group-hover:text-terracotta transition">05</span>
+              <span class="text-xl sm:text-2xl font-bold tracking-tight text-charcoal-950 group-hover:text-terracotta transition">Project Inquiry ($)</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] uppercase font-mono tracking-wider px-2.5 py-1 rounded-full bg-terracotta/10 text-terracotta font-semibold group-hover:bg-terracotta group-hover:text-white transition">Get Estimate</span>
+              <span class="text-charcoal-900/30 group-hover:text-terracotta group-hover:translate-x-1 transition transform duration-200">→</span>
+            </div>
           </a>
-          <a href="#faq" onclick="navigateTo('faq'); toggleMenu(); return false;" class="text-xl font-bold text-charcoal-950 hover:text-terracotta transition flex items-center justify-between">
-            <span>06. Studio FAQ</span>
-            <span class="text-xs font-mono font-normal text-charcoal-900/50">Deliverables</span>
+
+          <!-- 06 Direct WhatsApp Line -->
+          <a href="https://wa.me/919929606623?text=Inquiry:%20Commission%20a%20Bespoke%20Digital%20Engine" target="_blank" class="group py-4 flex items-center justify-between hover:px-2 rounded-xl transition-all duration-200">
+            <div class="flex items-baseline gap-3">
+              <span class="font-mono text-xs text-charcoal-900/40 group-hover:text-terracotta transition">06</span>
+              <span class="text-xl sm:text-2xl font-bold tracking-tight text-charcoal-950 group-hover:text-terracotta transition">Direct WhatsApp Line</span>
+            </div>
+            <div class="flex items-center gap-2">
+              <span class="text-[10px] uppercase font-mono tracking-wider px-2.5 py-1 rounded-full bg-olive/15 text-olive font-semibold group-hover:bg-olive group-hover:text-white transition">Direct Line</span>
+              <span class="text-charcoal-900/30 group-hover:text-olive group-hover:translate-x-1 transition transform duration-200">→</span>
+            </div>
           </a>
-          <a href="#contact" onclick="navigateTo('contact'); toggleMenu(); return false;" class="text-xl font-bold text-charcoal-950 hover:text-terracotta transition flex items-center justify-between">
-            <span>07. Project Inquiry</span>
-            <span class="text-xs font-mono font-normal text-charcoal-900/50">Direct Scope</span>
-          </a>
+
         </nav>
       </div>
 
-      <div class="border-t border-charcoal-900/10 pt-8 mt-10">
-        <p class="text-[11px] text-charcoal-900/50 uppercase tracking-widest font-mono font-semibold mb-2">Direct Studio Consultation</p>
-        <p class="text-xs text-charcoal-900/70">Lead Engineer: <strong class="text-charcoal-950">Anas Rangrez</strong></p>
-        
-        <!-- Clean WhatsApp Action with Official SVG Logo (No raw phone text) -->
-        <a href="https://wa.me/919929606623?text=Hi%20Anas,%20I'm%20reaching%20out%20via%20the%20arweb_%20menu" target="_blank"
-           class="mt-4 flex items-center justify-center gap-2.5 py-3 rounded-full bg-charcoal-950 text-white text-xs font-semibold tracking-wider uppercase hover:bg-terracotta transition shadow-sm">
-          <svg class="w-4 h-4 fill-current text-white" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-          <span>Chat on WhatsApp</span>
-        </a>
+      <!-- Bottom Studio Card -->
+      <div class="mt-8 pt-6 border-t border-charcoal-900/10">
+        <div class="bg-white p-5 rounded-2xl border border-charcoal-900/10 shadow-sm flex flex-col gap-3">
+          <div class="flex items-center justify-between">
+            <span class="text-[10px] font-mono uppercase tracking-widest text-charcoal-900/60 font-semibold">Live Operational Status</span>
+            <span class="text-xs font-mono text-charcoal-900/40">&lt; 2hr Response</span>
+          </div>
+          <div>
+            <p class="text-[11px] text-charcoal-900/50 uppercase tracking-widest font-bold">Principal Engineer</p>
+            <p class="text-sm font-bold text-charcoal-950">Anas Rangrez</p>
+          </div>
+          <a href="https://wa.me/919929606623?text=Direct%20Inquiry:%20Consultation%20with%20Anas%20Rangrez" target="_blank"
+             class="w-full py-3 px-4 rounded-xl bg-charcoal-950 text-white text-xs font-semibold uppercase tracking-wider flex items-center justify-center gap-2 hover:bg-terracotta transition-all shadow-md">
+            <svg class="w-4 h-4 fill-current text-emerald-400" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+            Direct WhatsApp Consultation
+          </a>
+        </div>
       </div>
+
     </div>
   </div>
 
   <!-- ================= MAIN MULTI-PAGE CONTAINER ================= -->
-  <main class="flex-grow">
+  <main class="pt-20">
 
-    <!-- PAGE VIEW: HOME -->
+    <!-- ================= PAGE 1: HOME ================= -->
     <div id="page-home" class="page-view active">
-
-      <!-- HERO SECTION -->
-      <section class="max-w-4xl mx-auto px-6 pt-16 pb-20 text-center">
-        <div class="inline-flex items-center gap-2 px-3.5 py-1.5 rounded-full bg-olive/10 border border-olive/20 text-olive text-[11px] font-semibold tracking-wide uppercase mb-8">
-          <span class="w-2 h-2 rounded-full bg-olive animate-subtle-pulse"></span>
+      
+      <!-- CLEAN LUXURY EDITORIAL HERO SECTION (NO 3D PINNING) -->
+      <section class="max-w-5xl mx-auto px-6 pt-16 sm:pt-24 pb-16 text-center">
+        
+        <!-- Status Pill (No pulse dots) -->
+        <div class="inline-flex items-center gap-2 px-4 py-1.5 rounded-full bg-olive/10 border border-olive/20 text-olive text-[11px] font-semibold tracking-wide uppercase mb-8">
           Available for Select Q4 / Q1 Engagements
         </div>
 
+        <!-- Main Headline -->
         <h1 class="text-4xl sm:text-6xl md:text-7xl font-bold tracking-tight text-charcoal-950 leading-[1.1] mb-6">
           <span class="font-serif italic font-normal text-terracotta">Bespoke</span> Digital Design &amp; High-Performance Engineering.
         </h1>
 
         <p class="text-base sm:text-lg text-charcoal-900/70 max-w-2xl mx-auto leading-relaxed mb-10">
           We engineer ultra-fast web architectures, refined design identities, and automated acquisition engines for modern businesses globally.
-          <span class="block text-xs uppercase tracking-widest text-charcoal-900/50 mt-3 font-semibold font-mono">Led by Anas Rangrez</span>
+          <span class="block text-xs uppercase tracking-widest text-charcoal-900/50 mt-3 font-semibold">Led by Anas Rangrez</span>
         </p>
 
+        <!-- CTAs -->
         <div class="flex flex-col sm:flex-row items-center justify-center gap-4">
           <a href="#builds" onclick="navigateTo('builds'); return false;" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-charcoal-950 text-white font-medium text-xs uppercase tracking-wider hover:bg-terracotta transition shadow-md">
             View Project Engagements (from $499)
@@ -235,125 +274,158 @@
           </a>
         </div>
 
-        <!-- Performance Metrics Banner (No emojis, sleek SVG) -->
-        <div class="inline-flex items-center gap-3.5 px-5 py-2.5 rounded-full bg-linen-100 border border-charcoal-900/10 text-xs text-charcoal-900/70 mt-12">
-          <span class="font-semibold text-terracotta flex items-center gap-1.5">
-            <svg class="w-3.5 h-3.5 fill-current" viewBox="0 0 24 24"><path d="M13 2L3 14h9l-1 8 10-12h-9l1-8z"/></svg>
-            Performance SLA: 100/100 Core Web Vitals
-          </span>
-          <span class="text-charcoal-900/20">•</span>
+        <!-- Live Performance Metric Banner (No emojis) -->
+        <div class="inline-flex flex-wrap items-center justify-center gap-3 sm:gap-4 px-5 py-2.5 rounded-full bg-linen-100 border border-charcoal-900/10 text-xs text-charcoal-900/70 mt-12">
+          <span class="font-semibold text-terracotta">Performance SLA: 100/100 Core Web Vitals</span>
+          <span class="text-charcoal-900/20 hidden sm:inline">•</span>
           <span>Global Edge Distributed</span>
-          <span class="text-charcoal-900/20">•</span>
+          <span class="text-charcoal-900/20 hidden sm:inline">•</span>
           <span>Zero-Bloat Code</span>
         </div>
+
       </section>
 
-      <!-- SECTION: STUDIO PRINCIPLES & PHILOSOPHY -->
-      <section class="max-w-6xl mx-auto px-6 py-20 border-t border-charcoal-900/10">
-        <div class="max-w-2xl mb-14">
-          <span class="text-xs uppercase tracking-widest font-bold text-terracotta font-mono">Engineering Ethos</span>
-          <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2 font-sans">
-            Why Ambitious Brands Build With <span class="font-serif italic font-normal text-terracotta">arweb_</span>
-          </h2>
-          <p class="text-sm text-charcoal-900/70 mt-3">
-            Most agencies sell bloated WordPress themes with dozens of plugins that break. We engineer pristine, custom-coded web architectures that load instantly and never slow down.
-          </p>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-3 gap-8">
+      <!-- Signature Studio Highlights Overview -->
+      <section class="max-w-6xl mx-auto px-6 py-16 border-t border-charcoal-900/10">
+        <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
           
-          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
-            <span class="text-2xl font-serif text-terracotta italic font-semibold">01</span>
-            <h3 class="text-lg font-bold text-charcoal-950 mt-4">Zero-Bloat Architecture</h3>
-            <p class="text-xs sm:text-sm text-charcoal-900/70 mt-2 leading-relaxed">
-              Engineered without clumsy third-party page builders. Clean semantic HTML, custom micro-interactions, and edge-distributed asset delivery ensuring sub-second global load times.
-            </p>
-          </div>
-
-          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
-            <span class="text-2xl font-serif text-terracotta italic font-semibold">02</span>
-            <h3 class="text-lg font-bold text-charcoal-950 mt-4">Editorial Visual Identity</h3>
-            <p class="text-xs sm:text-sm text-charcoal-900/70 mt-2 leading-relaxed">
-              Carefully tuned typography, warm architectural color grading, and bespoke layout geometry that elevates your brand from generic web templates to luxury industry authority.
-            </p>
-          </div>
-
-          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
-            <span class="text-2xl font-serif text-terracotta italic font-semibold">03</span>
-            <h3 class="text-lg font-bold text-charcoal-950 mt-4">Automated Lead Engines</h3>
-            <p class="text-xs sm:text-sm text-charcoal-900/70 mt-2 leading-relaxed">
-              Integrated WhatsApp conversion triggers, dynamic AI studio concierges, and instant CRM form pipelines that transform passive visitors into paying business inquiries.
-            </p>
-          </div>
-
-        </div>
-      </section>
-
-      <!-- SELECTED WORKS PREVIEW -->
-      <section class="max-w-6xl mx-auto px-6 py-20 border-t border-charcoal-900/10">
-        <div class="flex flex-col md:flex-row md:items-end justify-between mb-12">
-          <div>
-            <span class="text-xs uppercase tracking-widest font-bold text-olive font-mono">Selected Deployments</span>
-            <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2">
-              Recent Client Architectures
-            </h2>
-          </div>
-          <a href="#works" onclick="navigateTo('works'); return false;" class="text-xs font-semibold uppercase tracking-wider text-terracotta hover:underline mt-4 md:mt-0">
-            View All Case Studies →
-          </a>
-        </div>
-
-        <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
-          <!-- Project 1 -->
-          <div onclick="openCaseStudy(0)" class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between cursor-pointer hover:border-terracotta/40 transition group">
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between text-xs text-charcoal-900/50 mb-3">
-                <span class="uppercase tracking-widest font-mono font-semibold">Interior &amp; Architecture</span>
-                <span class="text-olive font-mono font-bold">100/100 Speed Score</span>
-              </div>
-              <h3 class="text-2xl font-bold text-charcoal-950 group-hover:text-terracotta transition">Auréa Living Studio</h3>
+              <span class="text-xs uppercase tracking-widest font-bold text-terracotta">First Principles</span>
+              <h3 class="text-xl font-bold text-charcoal-950 mt-2">Zero-Bloat Codebase</h3>
               <p class="text-xs sm:text-sm text-charcoal-900/70 mt-2 leading-relaxed">
-                Minimalist editorial portfolio with high-resolution image compression, dynamic lookbook layout, and automated client consultation booking.
+                No slow WordPress plugins, bloated themes, or page builder weight. We hand-code digital engines that load in under 500ms.
               </p>
             </div>
-            <div class="mt-6 pt-6 border-t border-charcoal-900/10 flex items-center justify-between text-xs">
-              <span class="font-semibold text-charcoal-900">Outcome: +240% Lead Inquiries</span>
-              <span class="text-terracotta font-bold group-hover:underline">Case Study →</span>
-            </div>
+            <a href="#about" onclick="navigateTo('about'); return false;" class="mt-6 text-xs font-semibold text-terracotta hover:underline">
+              Read Studio Manifesto →
+            </a>
           </div>
 
-          <!-- Project 2 -->
-          <div onclick="openCaseStudy(1)" class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between cursor-pointer hover:border-terracotta/40 transition group">
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between">
             <div>
-              <div class="flex items-center justify-between text-xs text-charcoal-900/50 mb-3">
-                <span class="uppercase tracking-widest font-mono font-semibold">Private Advisory</span>
-                <span class="text-olive font-mono font-bold">4ms Latency Edge</span>
-              </div>
-              <h3 class="text-2xl font-bold text-charcoal-950 group-hover:text-terracotta transition">Apex Capital Engine</h3>
+              <span class="text-xs uppercase tracking-widest font-bold text-olive">Fixed Investment</span>
+              <h3 class="text-xl font-bold text-charcoal-950 mt-2">Transparent Pricing ($)</h3>
               <p class="text-xs sm:text-sm text-charcoal-900/70 mt-2 leading-relaxed">
-                Corporate digital gateway engineered with bespoke interactive fee calculators, technical security audit, and encrypted CRM pipeline.
+                Fixed packages from $499 single-page to $999 multi-page flagships. Complete source code and IP transfer upon deployment.
               </p>
             </div>
-            <div class="mt-6 pt-6 border-t border-charcoal-900/10 flex items-center justify-between text-xs">
-              <span class="font-semibold text-charcoal-900">Outcome: 0.8s First Contentful Paint</span>
-              <span class="text-terracotta font-bold group-hover:underline">Case Study →</span>
-            </div>
+            <a href="#builds" onclick="navigateTo('builds'); return false;" class="mt-6 text-xs font-semibold text-olive hover:underline">
+              Inspect Fixed Builds →
+            </a>
           </div>
+
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between">
+            <div>
+              <span class="text-xs uppercase tracking-widest font-bold text-charcoal-950">Active Care</span>
+              <h3 class="text-xl font-bold text-charcoal-950 mt-2">Continuous Retainers</h3>
+              <p class="text-xs sm:text-sm text-charcoal-900/70 mt-2 leading-relaxed">
+                Ongoing speed preservation, SSL upkeep, routine updates, and direct SLA response handled personally by Anas Rangrez.
+              </p>
+            </div>
+            <a href="#retainers" onclick="navigateTo('retainers'); return false;" class="mt-6 text-xs font-semibold text-charcoal-950 hover:underline">
+              Explore Retainers ($299/mo) →
+            </a>
+          </div>
+
         </div>
       </section>
 
     </div>
 
-    <!-- PAGE VIEW: BUILDS (FIXED SCOPE PACKAGES) -->
+    <!-- ================= PAGE 2: ABOUT / MANIFESTO ================= -->
+    <div id="page-about" class="page-view">
+      <section class="max-w-6xl mx-auto px-6 py-16">
+        <div class="grid grid-cols-1 lg:grid-cols-12 gap-12 items-start">
+          
+          <!-- Left Column: Studio Narrative -->
+          <div class="lg:col-span-5">
+            <span class="text-xs uppercase tracking-widest font-bold text-terracotta">Studio Dossier</span>
+            <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2 font-sans leading-tight">
+              Engineered for High-Performance <span class="font-serif italic font-normal text-terracotta">Digital Capital.</span>
+            </h2>
+            <p class="text-xs sm:text-sm text-charcoal-900/70 mt-4 leading-relaxed">
+              Most web agencies rely on bloated drag-and-drop templates, overloaded WordPress databases, and dozens of third-party plugins that degrade speed and compromise security.
+            </p>
+            <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
+              At <strong class="text-charcoal-950 font-semibold">arweb_</strong>, founded by Anas Rangrez, we construct bespoke digital flagships from first principles. We balance editorial luxury typography with rigorous computer science—delivering websites that load under 500 milliseconds and convert high-ticket prospects.
+            </p>
+            
+            <div class="mt-6 pt-6 border-t border-charcoal-900/10 flex items-center gap-6 text-xs text-charcoal-900/60">
+              <div>
+                <span class="block text-xl font-bold text-charcoal-950">100/100</span>
+                <span class="text-[11px] uppercase tracking-wider">Lighthouse Score</span>
+              </div>
+              <div class="h-8 w-px bg-charcoal-900/10"></div>
+              <div>
+                <span class="block text-xl font-bold text-charcoal-950">&lt; 0.5s</span>
+                <span class="text-[11px] uppercase tracking-wider">Global Edge Latency</span>
+              </div>
+              <div class="h-8 w-px bg-charcoal-900/10"></div>
+              <div>
+                <span class="block text-xl font-bold text-charcoal-950">0%</span>
+                <span class="text-[11px] uppercase tracking-wider">Template Bloat</span>
+              </div>
+            </div>
+
+            <div class="mt-8">
+              <a href="#contact" onclick="navigateTo('contact'); return false;" class="inline-flex items-center gap-2 px-6 py-3 rounded-full bg-charcoal-950 text-white text-xs uppercase tracking-wider font-semibold hover:bg-terracotta transition shadow-sm">
+                Discuss Your Architecture →
+              </a>
+            </div>
+          </div>
+
+          <!-- Right Column: 4 Pillars -->
+          <div class="lg:col-span-7 grid grid-cols-1 sm:grid-cols-2 gap-6">
+            
+            <div class="p-6 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+              <span class="text-terracotta font-serif italic text-xl font-bold">01</span>
+              <h4 class="font-bold text-charcoal-950 text-sm mt-2">Zero-Bloat Engineering</h4>
+              <p class="text-xs text-charcoal-900/70 mt-2 leading-relaxed">
+                Clean semantic markup, optimized critical rendering paths, and tree-shaken asset bundles ensure flawless performance across mobile networks.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+              <span class="text-terracotta font-serif italic text-xl font-bold">02</span>
+              <h4 class="font-bold text-charcoal-950 text-sm mt-2">Editorial Typographic Hierarchy</h4>
+              <p class="text-xs text-charcoal-900/70 mt-2 leading-relaxed">
+                Carefully paired editorial serif and modern sans-serif typography that communicates luxury positioning and institutional credibility.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+              <span class="text-terracotta font-serif italic text-xl font-bold">03</span>
+              <h4 class="font-bold text-charcoal-950 text-sm mt-2">Automated Acquisition Pipelines</h4>
+              <p class="text-xs text-charcoal-900/70 mt-2 leading-relaxed">
+                Direct integration with WhatsApp business channels, interactive concierge interfaces, and frictionless inquiry funnels that accelerate conversions.
+              </p>
+            </div>
+
+            <div class="p-6 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+              <span class="text-terracotta font-serif italic text-xl font-bold">04</span>
+              <h4 class="font-bold text-charcoal-950 text-sm mt-2">Edge-Cloud Resilience</h4>
+              <p class="text-xs text-charcoal-900/70 mt-2 leading-relaxed">
+                Static and serverless deployments across global edge CDNs ensure 99.99% uptime, zero database crash vulnerability, and native DDoS protection.
+              </p>
+            </div>
+
+          </div>
+
+        </div>
+      </section>
+    </div>
+
+    <!-- ================= PAGE 3: DIGITAL BUILDS ($499+) ================= -->
     <div id="page-builds" class="page-view">
-      <section class="max-w-6xl mx-auto px-6 py-20">
+      <section class="max-w-6xl mx-auto px-6 py-16">
         <div class="max-w-2xl mb-14">
-          <span class="text-xs uppercase tracking-widest font-bold text-terracotta font-mono">Engineering Engagements</span>
-          <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2">
-            Fixed-Scope Development Architecture
+          <span class="text-xs uppercase tracking-widest font-bold text-terracotta">Fixed Investment</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2 font-sans">
+            Web Development Architecture
           </h2>
           <p class="text-sm text-charcoal-900/70 mt-3">
-            Engineered from first principles in pure TypeScript, Tailwind, and high-performance HTML. Complete code ownership with zero monthly dependencies unless requested.
+            Flat fee, full code ownership, and zero mandatory monthly dependencies.
           </p>
         </div>
 
@@ -362,31 +434,20 @@
           <!-- Launchpad ($499) -->
           <div class="bg-white rounded-3xl p-8 border border-charcoal-900/10 flex flex-col justify-between shadow-sm">
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50 font-mono">Tier 01</span>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50">Tier 01</span>
               <h3 class="text-2xl font-bold text-charcoal-950 mt-1">Launchpad</h3>
-              <p class="text-xs text-charcoal-900/70 mt-2">Single-page digital showcase optimized for conversion speed and brand positioning.</p>
+              <p class="text-xs text-charcoal-900/70 mt-2">Single-page modern showcase engineered for lead capture and conversion.</p>
               
               <div class="mt-6 pb-6 border-b border-charcoal-900/10">
-                <span class="text-4xl font-bold text-charcoal-950 font-mono">$499</span>
-                <span class="text-xs text-charcoal-900/50 font-medium uppercase tracking-wider">/ project</span>
+                <span class="text-4xl font-bold text-charcoal-950">$499</span>
+                <span class="text-xs text-charcoal-900/50 font-medium uppercase tracking-wider">/ one-time</span>
               </div>
 
               <ul class="mt-6 space-y-3.5 text-xs text-charcoal-900/80">
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Tailored single-page bespoke architecture
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 100/100 Core Web Vitals performance rating
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Automated inquiry &amp; lead capture pipeline
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Cross-platform mobile optimization
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> <strong>Standard Delivery: 4–6 Days</strong>
-                </li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Tailored single-page bespoke architecture</li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> 100/100 Core Web Vitals speed rating</li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Automated WhatsApp lead capture pipeline</li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> <strong>Standard Delivery: 4–6 Days</strong></li>
               </ul>
             </div>
 
@@ -398,36 +459,26 @@
 
           <!-- Studio Flagship ($999 - Featured) -->
           <div class="bg-charcoal-950 text-linen-50 rounded-3xl p-8 border-2 border-terracotta flex flex-col justify-between shadow-xl relative scale-100 md:-translate-y-2">
-            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-terracotta text-white px-3.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest font-mono shadow-sm">
-              Recommended Architecture
+            <div class="absolute -top-3.5 left-1/2 -translate-x-1/2 bg-terracotta text-white px-3.5 py-1 rounded-full text-[10px] font-bold uppercase tracking-widest shadow-sm">
+              Recommended
             </div>
 
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-linen-200/50 font-mono">Tier 02</span>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-linen-200/50">Tier 02</span>
               <h3 class="text-2xl font-bold text-white mt-1">Studio Flagship</h3>
-              <p class="text-xs text-linen-200/70 mt-2">Comprehensive multi-page digital platform engineered for recognized agencies and brands.</p>
+              <p class="text-xs text-linen-200/70 mt-2">Comprehensive multi-page platform engineered for recognized brands.</p>
               
               <div class="mt-6 pb-6 border-b border-white/10">
-                <span class="text-4xl font-bold text-white font-mono">$999</span>
-                <span class="text-xs text-linen-200/50 font-medium uppercase tracking-wider">/ project</span>
+                <span class="text-4xl font-bold text-white">$999</span>
+                <span class="text-xs text-linen-200/50 font-medium uppercase tracking-wider">/ one-time</span>
               </div>
 
               <ul class="mt-6 space-y-3.5 text-xs text-linen-100">
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Up to 5 bespoke multi-page templates
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Embedded Studio AI Concierge configuration
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Micro-interactions &amp; custom design motions
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Advanced on-page technical SEO &amp; Schema markup
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> <strong>Standard Delivery: 10–14 Days</strong>
-                </li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Up to 5 custom-designed pages</li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Editorial luxury typography & custom layouts</li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Direct inquiry & WhatsApp funnel configuration</li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Advanced Technical SEO & Schema</li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> <strong>Standard Delivery: 10–14 Days</strong></li>
               </ul>
             </div>
 
@@ -440,37 +491,26 @@
           <!-- Custom Enterprise ($1,899+) -->
           <div class="bg-white rounded-3xl p-8 border border-charcoal-900/10 flex flex-col justify-between shadow-sm">
             <div>
-              <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50 font-mono">Tier 03</span>
-              <h3 class="text-2xl font-bold text-charcoal-950 mt-1">Enterprise &amp; Scale</h3>
-              <p class="text-xs text-charcoal-900/70 mt-2">Custom-developed web applications, dynamic CMS, or bespoke transaction workflows.</p>
+              <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50">Tier 03</span>
+              <h3 class="text-2xl font-bold text-charcoal-950 mt-1">Enterprise & Scale</h3>
+              <p class="text-xs text-charcoal-900/70 mt-2">Custom-developed web applications, dynamic CMS, or bespoke bookings.</p>
               
               <div class="mt-6 pb-6 border-b border-charcoal-900/10">
-                <span class="text-4xl font-bold text-charcoal-950 font-mono">$1,899+</span>
+                <span class="text-4xl font-bold text-charcoal-950">$1,899+</span>
                 <span class="text-xs text-charcoal-900/50 font-medium uppercase tracking-wider">/ bespoke</span>
               </div>
 
               <ul class="mt-6 space-y-3.5 text-xs text-charcoal-900/80">
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 10+ pages, custom database logic, or booking systems
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Headless CMS or editorial publishing pipeline
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> CRM, webhooks &amp; automated operations pipeline
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 30-day post-deployment engineering warranty
-                </li>
-                <li class="flex items-start gap-2.5">
-                  <svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> <strong>Standard Delivery: 3–4 Weeks</strong>
-                </li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> 10+ pages, custom database logic & booking</li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Headless CMS or editorial publishing system</li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> 30-day post-deployment dedicated support</li>
+                <li class="flex items-start gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> <strong>Standard Delivery: 3–4 Weeks</strong></li>
               </ul>
             </div>
 
             <a href="https://wa.me/919929606623?text=Inquiry:%20Schedule%20Enterprise%20Architecture%20Discussion" target="_blank"
                class="mt-8 block text-center py-3 px-5 rounded-full border border-charcoal-950/20 text-charcoal-950 font-semibold text-xs uppercase tracking-wider hover:bg-charcoal-950 hover:text-white transition">
-              Inquire Enterprise ($1,899+)
+              Inquire Enterprise ($1,899)
             </a>
           </div>
 
@@ -478,16 +518,16 @@
       </section>
     </div>
 
-    <!-- PAGE VIEW: RETAINERS (MONTHLY MANAGEMENT) -->
+    <!-- ================= PAGE 4: CONTINUOUS RETAINERS ($299/mo) ================= -->
     <div id="page-retainers" class="page-view">
-      <section class="max-w-6xl mx-auto px-6 py-20">
+      <section class="max-w-6xl mx-auto px-6 py-16">
         <div class="max-w-2xl mb-14">
-          <span class="text-xs uppercase tracking-widest font-bold text-olive font-mono">Infrastructure &amp; Retainers</span>
+          <span class="text-xs uppercase tracking-widest font-bold text-olive">Infrastructure & Retainers</span>
           <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2">
-            Continuous Engineering &amp; Retainer Agreements
+            Continuous Management Retainers
           </h2>
           <p class="text-sm text-charcoal-900/70 mt-3">
-            Guaranteed infrastructure health, performance preservation, and ongoing interface iteration handled directly by Anas Rangrez.
+            Guaranteed infrastructure health, speed preservation (100/100), and direct iterations handled personally by Anas Rangrez.
           </p>
         </div>
 
@@ -498,19 +538,18 @@
             <div>
               <div class="flex items-center justify-between">
                 <h4 class="font-bold text-charcoal-950 text-base">Core Infrastructure</h4>
-                <span class="px-2.5 py-1 rounded-full bg-linen-100 text-[10px] font-bold uppercase tracking-wider text-charcoal-900 font-mono">Base</span>
+                <span class="px-2.5 py-1 rounded-full bg-linen-100 text-[10px] font-bold uppercase tracking-wider text-charcoal-900">Base</span>
               </div>
               <div class="mt-4 mb-4">
-                <span class="text-3xl font-bold text-charcoal-950 font-mono">$299</span>
+                <span class="text-3xl font-bold text-charcoal-950">$299</span>
                 <span class="text-xs text-charcoal-900/50 font-medium">/ month</span>
               </div>
-              <p class="text-xs text-charcoal-900/70 mb-4">Baseline technical upkeep ensuring 100% uptime, active security, and ongoing speed audits.</p>
+              <p class="text-xs text-charcoal-900/70 mb-4">Baseline technical upkeep ensuring 100% uptime, active security, and speed preservation.</p>
               <ul class="space-y-3 text-xs text-charcoal-900/80 border-t border-charcoal-900/10 pt-4">
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Edge cloud deployment &amp; SSL protocol auditing</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Daily automated cloud snapshots &amp; integrity scans</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Core Web Vitals speed score preservation (95–100)</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Up to 4 hours of monthly editorial and content iterations</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 99.9% Automated uptime monitoring</li>
+                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Edge deployment & SSL certificate upkeep</li>
+                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Daily automated cloud snapshots & integrity scans</li>
+                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Core Web Vitals speed score preservation</li>
+                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Up to 4 hours of monthly updates/edits</li>
               </ul>
             </div>
             <a href="https://wa.me/919929606623?text=Inquiry:%20Initiate%20$299/mo%20Core%20Retainer" target="_blank"
@@ -519,24 +558,23 @@
             </a>
           </div>
 
-          <!-- Growth Retainer ($499 - Recommended) -->
+          <!-- Growth Retainer ($499) -->
           <div class="p-8 rounded-3xl bg-linen-100 border border-olive/30 shadow-sm relative flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between">
-                <h4 class="font-bold text-charcoal-950 text-base">Growth &amp; Iteration</h4>
-                <span class="px-2.5 py-1 rounded-full bg-olive text-white text-[10px] font-bold uppercase tracking-widest font-mono">Recommended</span>
+                <h4 class="font-bold text-charcoal-950 text-base">Growth & Iteration</h4>
+                <span class="px-2.5 py-1 rounded-full bg-olive text-white text-[10px] font-bold uppercase tracking-widest">Recommended</span>
               </div>
               <div class="mt-4 mb-4">
-                <span class="text-3xl font-bold text-charcoal-950 font-mono">$499</span>
+                <span class="text-3xl font-bold text-charcoal-950">$499</span>
                 <span class="text-xs text-charcoal-900/50 font-medium">/ month</span>
               </div>
               <p class="text-xs text-charcoal-900/70 mb-4">For active businesses requiring regular landing page creation, UI adjustments, and SEO growth.</p>
               <ul class="space-y-3 text-xs text-charcoal-900/80 border-t border-charcoal-900/10 pt-4">
-                <li class="flex items-center gap-2 font-medium text-charcoal-950"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> All Core Infrastructure deliverables included</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Up to 10 hours of monthly custom design and engineering</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Monthly technical SEO health &amp; indexation report</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Priority communications SLA (&lt; 2-hour response)</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Conversion rate optimization and form enhancements</li>
+                <li class="flex items-center gap-2 font-medium text-charcoal-950"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> All Core Infrastructure included</li>
+                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Up to 10 hours monthly engineering</li>
+                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Monthly SEO audit & indexation tracking</li>
+                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Priority WhatsApp SLA (&lt; 2hr response)</li>
               </ul>
             </div>
             <a href="https://wa.me/919929606623?text=Inquiry:%20Initiate%20$499/mo%20Growth%20Retainer" target="_blank"
@@ -545,23 +583,22 @@
             </a>
           </div>
 
-          <!-- Dedicated Webmaster ($899 - VIP) -->
+          <!-- Dedicated Webmaster ($899) -->
           <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between">
             <div>
               <div class="flex items-center justify-between">
                 <h4 class="font-bold text-charcoal-950 text-base">Fractional Webmaster</h4>
-                <span class="px-2.5 py-1 rounded-full bg-linen-100 text-[10px] font-bold uppercase tracking-wider text-charcoal-900 font-mono">VIP</span>
+                <span class="px-2.5 py-1 rounded-full bg-linen-100 text-[10px] font-bold uppercase tracking-wider text-charcoal-900">VIP</span>
               </div>
               <div class="mt-4 mb-4">
-                <span class="text-3xl font-bold text-charcoal-950 font-mono">$899</span>
+                <span class="text-3xl font-bold text-charcoal-950">$899</span>
                 <span class="text-xs text-charcoal-900/50 font-medium">/ month</span>
               </div>
               <p class="text-xs text-charcoal-900/70 mb-4">Complete technical outsourcing. Anas Rangrez serves as your dedicated lead digital engineer.</p>
               <ul class="space-y-3 text-xs text-charcoal-900/80 border-t border-charcoal-900/10 pt-4">
-                <li class="flex items-center gap-2 font-medium text-charcoal-950"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Unlimited routine UI adjustments and maintenance</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Custom API, CRM, and automated pipeline maintenance</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> 1-hour critical emergency incident SLA</li>
-                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 fill-current text-terracotta shrink-0" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z" clip-rule="evenodd"/></svg> Bi-weekly executive engineering sync</li>
+                <li class="flex items-center gap-2 font-medium text-charcoal-950"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Unlimited routine UI adjustments and updates</li>
+                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> Custom API, CRM, and automated pipeline maintenance</li>
+                <li class="flex items-center gap-2"><svg class="w-3.5 h-3.5 text-olive shrink-0 stroke-[2.5]" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" d="M4.5 12.75l6 6 9-13.5"/></svg> 1-hour critical emergency response SLA</li>
               </ul>
             </div>
             <a href="https://wa.me/919929606623?text=Inquiry:%20Initiate%20$899/mo%20Fractional%20Webmaster%20Retainer" target="_blank"
@@ -574,90 +611,86 @@
       </section>
     </div>
 
-    <!-- PAGE VIEW: WORKS (CURATED CASE STUDIES) -->
+    <!-- ================= PAGE 5: SELECTED WORKS ================= -->
     <div id="page-works" class="page-view">
-      <section class="max-w-6xl mx-auto px-6 py-20">
+      <section class="max-w-6xl mx-auto px-6 py-16">
         <div class="max-w-2xl mb-14">
-          <span class="text-xs uppercase tracking-widest font-bold text-olive font-mono">Portfolio &amp; Telemetry</span>
-          <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2">
-            Engineered Case Studies
+          <span class="text-xs uppercase tracking-widest font-bold text-olive">Selected Deployments</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2 font-sans">
+            Proven Architectural Benchmarks
           </h2>
           <p class="text-sm text-charcoal-900/70 mt-3">
-            Click any deployment to inspect the architectural decisions, Core Web Vitals audit, and commercial performance.
+            Every website is built with clean custom code—delivering 100/100 Google Lighthouse scores and instant conversions.
           </p>
         </div>
 
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           
-          <!-- Study 0 -->
-          <div onclick="openCaseStudy(0)" class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between cursor-pointer hover:border-terracotta/40 transition group">
+          <div onclick="openCaseStudy(0)" class="cursor-pointer p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between hover:border-terracotta/50 transition duration-300">
             <div>
               <div class="flex items-center justify-between text-xs text-charcoal-900/50 mb-3">
-                <span class="uppercase tracking-widest font-mono font-semibold">Interior &amp; Architecture</span>
-                <span class="text-olive font-mono font-bold">100/100 Speed Score</span>
+                <span class="uppercase tracking-widest font-semibold">Luxury Architecture</span>
+                <span class="text-olive font-bold">100/100 Speed Score</span>
               </div>
-              <h3 class="text-2xl font-bold text-charcoal-950 group-hover:text-terracotta transition">Auréa Living Studio</h3>
+              <h3 class="text-2xl font-bold text-charcoal-950">The Sovereign Estate</h3>
               <p class="text-xs sm:text-sm text-charcoal-900/70 mt-2 leading-relaxed">
-                Minimalist editorial portfolio with high-resolution image compression, dynamic lookbook layout, and automated client consultation booking.
+                High-converting luxury property portfolio with confidential consultation pipelines, fast-loading imagery, and zero lag.
               </p>
             </div>
             <div class="mt-6 pt-6 border-t border-charcoal-900/10 flex items-center justify-between text-xs">
-              <span class="font-semibold text-charcoal-900">Outcome: +240% Lead Inquiries</span>
-              <span class="text-terracotta font-bold group-hover:underline">Inspect Architecture →</span>
+              <span class="font-semibold text-charcoal-900">Conversion Lift: +240%</span>
+              <span class="text-terracotta font-bold">Inspect Build →</span>
             </div>
           </div>
 
-          <!-- Study 1 -->
-          <div onclick="openCaseStudy(1)" class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between cursor-pointer hover:border-terracotta/40 transition group">
+          <div onclick="openCaseStudy(1)" class="cursor-pointer p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between hover:border-terracotta/50 transition duration-300">
             <div>
               <div class="flex items-center justify-between text-xs text-charcoal-900/50 mb-3">
-                <span class="uppercase tracking-widest font-mono font-semibold">Private Advisory</span>
-                <span class="text-olive font-mono font-bold">4ms Latency Edge</span>
+                <span class="uppercase tracking-widest font-semibold">Private Advisory</span>
+                <span class="text-olive font-bold">4ms Latency Edge</span>
               </div>
-              <h3 class="text-2xl font-bold text-charcoal-950 group-hover:text-terracotta transition">Apex Capital Engine</h3>
+              <h3 class="text-2xl font-bold text-charcoal-950">Apex Capital Engine</h3>
               <p class="text-xs sm:text-sm text-charcoal-900/70 mt-2 leading-relaxed">
-                Corporate digital gateway engineered with bespoke interactive fee calculators, technical security audit, and encrypted CRM pipeline.
+                Corporate digital gateway engineered with bespoke interactive fee calculators and encrypted automated CRM pipelines.
               </p>
             </div>
             <div class="mt-6 pt-6 border-t border-charcoal-900/10 flex items-center justify-between text-xs">
-              <span class="font-semibold text-charcoal-900">Outcome: 0.8s First Contentful Paint</span>
-              <span class="text-terracotta font-bold group-hover:underline">Inspect Architecture →</span>
+              <span class="font-semibold text-charcoal-900">Load Time: 0.8s</span>
+              <span class="text-terracotta font-bold">Inspect Build →</span>
             </div>
           </div>
 
-          <!-- Study 2 -->
-          <div onclick="openCaseStudy(2)" class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between cursor-pointer hover:border-terracotta/40 transition group">
+          <div onclick="openCaseStudy(2)" class="cursor-pointer p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between hover:border-terracotta/50 transition duration-300">
             <div>
               <div class="flex items-center justify-between text-xs text-charcoal-900/50 mb-3">
-                <span class="uppercase tracking-widest font-mono font-semibold">Autonomous Software</span>
-                <span class="text-olive font-mono font-bold">14k Daily Tasks</span>
+                <span class="uppercase tracking-widest font-semibold">Autonomous Software & AI</span>
+                <span class="text-olive font-bold">99/100 Benchmark</span>
               </div>
-              <h3 class="text-2xl font-bold text-charcoal-950 group-hover:text-terracotta transition">Velion AI Workflow</h3>
+              <h3 class="text-2xl font-bold text-charcoal-950">Velion AI Workflow</h3>
               <p class="text-xs sm:text-sm text-charcoal-900/70 mt-2 leading-relaxed">
-                High-throughput conversational AI pipeline and interactive product tour built with Tailwind, TypeScript, and edge computing.
+                High-throughput telemetry and conversational AI pipeline built for modern SaaS acquisition and live interactive product demonstrations.
               </p>
             </div>
             <div class="mt-6 pt-6 border-t border-charcoal-900/10 flex items-center justify-between text-xs">
-              <span class="font-semibold text-charcoal-900">Outcome: 3.4x Demo Signups</span>
-              <span class="text-terracotta font-bold group-hover:underline">Inspect Architecture →</span>
+              <span class="font-semibold text-charcoal-900">Daily Tasks: 14,000</span>
+              <span class="text-terracotta font-bold">Inspect Build →</span>
             </div>
           </div>
 
-          <!-- Study 3 -->
-          <div onclick="openCaseStudy(3)" class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between cursor-pointer hover:border-terracotta/40 transition group">
+          <div onclick="openCaseStudy(3)" class="cursor-pointer p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm flex flex-col justify-between hover:border-terracotta/50 transition duration-300">
             <div>
               <div class="flex items-center justify-between text-xs text-charcoal-900/50 mb-3">
-                <span class="uppercase tracking-widest font-mono font-semibold">Luxury Horology</span>
-                <span class="text-olive font-mono font-bold">0.4s Global Load</span>
+                <span class="uppercase tracking-widest font-semibold">Luxury Horology & Craft</span>
+                <span class="text-olive font-bold">0.4s Global Load</span>
               </div>
-              <h3 class="text-2xl font-bold text-charcoal-950 group-hover:text-terracotta transition">Lumina Heritage Atelier</h3>
+              <h3 class="text-2xl font-bold text-charcoal-950">Lumina Heritage Atelier</h3>
               <p class="text-xs sm:text-sm text-charcoal-900/70 mt-2 leading-relaxed">
-                Bespoke timekeeper gallery with high-fidelity canvas zoom micro-interactions and direct VIP private concierge booking integration.
+                Artisanal horology flagship showcasing bespoke timepieces, encrypted private client bookings, and high-fidelity product imagery.
               </p>
             </div>
             <div class="mt-6 pt-6 border-t border-charcoal-900/10 flex items-center justify-between text-xs">
-              <span class="font-semibold text-charcoal-900">Outcome: $420k Collector Pipeline</span>
-              <span class="text-terracotta font-bold group-hover:underline">Inspect Architecture →</span>
+              <span class="font-semibold text-charcoal-900">Pipeline: $420k Collector Value</span>
+              <span class="text-terracotta font-bold">Inspect Build →</span>
             </div>
           </div>
 
@@ -665,84 +698,91 @@
       </section>
     </div>
 
-    <!-- PAGE VIEW: TERMS & GOVERNANCE -->
+    <!-- ================= PAGE 6: TERMS & GOVERNANCE (SLA) ================= -->
     <div id="page-terms" class="page-view">
-      <section class="max-w-6xl mx-auto px-6 py-20">
-        <div class="max-w-2xl mb-14">
-          <span class="text-xs uppercase tracking-widest font-bold text-terracotta font-mono">Governance &amp; Service Legal Agreements</span>
-          <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2">
-            Terms of Engagement &amp; Retainer Governance
+      <section class="max-w-6xl mx-auto px-6 py-16">
+        <div class="max-w-3xl mb-16">
+          <span class="text-xs uppercase tracking-widest font-bold text-olive">Studio Governance & Legal Standards</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2 font-sans">
+            Terms of Service, Governance & SLA
           </h2>
-          <p class="text-sm text-charcoal-900/70 mt-3">
-            Clear, transparent guidelines designed to protect both the client and the studio. No ambiguity, no surprises.
+          <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
+            Transparent contractual standards governing all bespoke digital builds and continuous management retainers commissioned through <strong class="text-charcoal-950">arweb_</strong>.
           </p>
         </div>
 
+        <!-- 8 Complete Clauses (NO CIRCLE DOTS - PURE CLEAN ARCHITECTURAL TYPOGRAPHY) -->
         <div class="grid grid-cols-1 md:grid-cols-2 gap-8">
           
-          <!-- Term 01 -->
-          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10">
-            <h4 class="text-base font-bold text-charcoal-950 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-terracotta"></span>
-              1. 100% Intellectual Property &amp; Code Ownership
-            </h4>
+          <!-- Clause 01 -->
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50 block mb-2 font-mono">Clause 01</span>
+            <h4 class="text-base font-bold text-charcoal-950">100% Intellectual Property & Source Code Ownership</h4>
             <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
-              Upon final invoice clearance, 100% of the custom codebase, repository rights, custom assets, and deployment access belong entirely to you. You are never locked into our systems, and can host wherever you choose.
+              Upon clearance of final milestone payments, complete legal ownership of all bespoke source code, markup repositories, custom design assets, and database configurations is transferred to the client. The client is never bound by proprietary studio locks or licensing royalties.
             </p>
           </div>
 
-          <!-- Term 02 -->
-          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10">
-            <h4 class="text-base font-bold text-charcoal-950 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-terracotta"></span>
-              2. Revision Rounds &amp; Scope Architecture
-            </h4>
+          <!-- Clause 02 -->
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50 block mb-2 font-mono">Clause 02</span>
+            <h4 class="text-base font-bold text-charcoal-950">Scope Architecture & Milestone Approvals</h4>
             <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
-              Every development build includes two structured milestone revisions (Wireframe/Architecture phase &amp; Final Pre-Launch polish). Any major architectural pivot outside initial agreed briefs is scoped as an add-on sprint.
+              Engagements are governed by a strictly defined project brief. Build stages proceed through Wireframe Proof, Bespoke Design Interface, Edge Engineering, and Deployment Testing. Fundamental structural changes outside the agreed sprint scope will be separately estimated and billed.
             </p>
           </div>
 
-          <!-- Term 03 -->
-          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10">
-            <h4 class="text-base font-bold text-charcoal-950 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-olive"></span>
-              3. Retainer Service Level Agreement (SLA)
-            </h4>
+          <!-- Clause 03 -->
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50 block mb-2 font-mono">Clause 03</span>
+            <h4 class="text-base font-bold text-charcoal-950">Service Level Agreement (SLA) for Retainers</h4>
             <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
-              For clients on our monthly retainers ($299, $499, $899): routine content requests are deployed within 24 to 48 hours. Critical infrastructure outages receive sub-1-hour emergency response prioritization.
+              Subscribers to our monthly management retainers ($299, $499, $899/month) receive direct access to Anas Rangrez. Routine content updates and performance audits are fulfilled within 24 to 48 business hours. Critical production downtime issues receive emergency response within under 1 hour.
             </p>
           </div>
 
-          <!-- Term 04 -->
-          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10">
-            <h4 class="text-base font-bold text-charcoal-950 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-olive"></span>
-              4. Retainer Cancellation &amp; Invoicing
-            </h4>
+          <!-- Clause 04 -->
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50 block mb-2 font-mono">Clause 04</span>
+            <h4 class="text-base font-bold text-charcoal-950">Retainer Invoicing & Cancellation Policy</h4>
             <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
-              All monthly retainers operate on a month-to-month basis with zero lock-in contracts. You may pause or terminate the agreement anytime with a simple 14-day notice prior to the subsequent billing cycle.
+              All maintenance and retainer subscriptions are billed monthly in advance and operate on an open, month-to-month commitment. Retainers may be paused or terminated without penalty upon 14 days written notice prior to the beginning of the next recurring billing cycle.
             </p>
           </div>
 
-          <!-- Term 05 -->
-          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10">
-            <h4 class="text-base font-bold text-charcoal-950 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-charcoal-900"></span>
-              5. Transparent Hosting &amp; Zero Markup
-            </h4>
+          <!-- Clause 05 -->
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50 block mb-2 font-mono">Clause 05</span>
+            <h4 class="text-base font-bold text-charcoal-950">Speed SLA Benchmark & Guarantee</h4>
             <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
-              We deploy on industry-standard cloud providers (Vercel, Cloudflare Edge, AWS). Your domain and direct cloud accounts remain in your name, ensuring absolute operational control.
+              Every digital flagship delivered by arweb_ is contractually guaranteed to achieve 95+ to 100/100 Core Web Vitals on desktop and mobile upon initial deployment on edge infrastructure. We do not approve builds with unoptimized rendering pipelines.
             </p>
           </div>
 
-          <!-- Term 06 -->
-          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10">
-            <h4 class="text-base font-bold text-charcoal-950 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-charcoal-900"></span>
-              6. Mutual Confidentiality (NDA Standard)
-            </h4>
+          <!-- Clause 06 -->
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50 block mb-2 font-mono">Clause 06</span>
+            <h4 class="text-base font-bold text-charcoal-950">Confidentiality & Non-Disclosure (NDA)</h4>
             <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
-              All proprietary business figures, backend database logic, API credentials, and trade data shared with arweb_ studio are legally protected under our mutual non-disclosure policy.
+              All client strategic documentation, proprietary brand data, unreleased product blueprints, and technical architecture shared with arweb_ remain under strict mutual confidentiality throughout and following project completion.
+            </p>
+          </div>
+
+          <!-- Clause 07 -->
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50 block mb-2 font-mono">Clause 07</span>
+            <h4 class="text-base font-bold text-charcoal-950">Third-Party SaaS & Infrastructure Accounts</h4>
+            <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
+              Hosting accounts (Cloudflare, Vercel, AWS), custom domains, and CRM/payment gateways (Stripe, Resend) are registered directly in the client's legal entity name. arweb_ configures and maintains the systems but never holds client credentials hostage.
+            </p>
+          </div>
+
+          <!-- Clause 08 -->
+          <div class="p-8 rounded-3xl bg-white border border-charcoal-900/10 shadow-sm">
+            <span class="text-[11px] font-bold uppercase tracking-wider text-charcoal-900/50 block mb-2 font-mono">Clause 08</span>
+            <h4 class="text-base font-bold text-charcoal-950">Post-Launch Warranty Period</h4>
+            <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
+              All bespoke builds include a complimentary 14-day post-launch warranty covering bug remediation, browser rendering discrepancies, and DNS configuration adjustments to ensure seamless live operations.
             </p>
           </div>
 
@@ -750,132 +790,154 @@
       </section>
     </div>
 
-    <!-- PAGE VIEW: FAQ -->
-    <div id="page-faq" class="page-view">
-      <section class="max-w-4xl mx-auto px-6 py-20">
-        <div class="text-center mb-14">
-          <span class="text-xs uppercase tracking-widest font-bold text-olive font-mono">Common Inquiries</span>
-          <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2">
-            Frequently Answered Questions
-          </h2>
-        </div>
-
-        <div class="space-y-4">
-          
-          <details class="group bg-white p-6 rounded-2xl border border-charcoal-900/10 [&_summary::-webkit-details-marker]:hidden" open>
-            <summary class="flex items-center justify-between cursor-pointer font-bold text-sm text-charcoal-950">
-              <span>How fast can my website be designed and deployed?</span>
-              <span class="transition duration-300 group-open:-rotate-180 text-terracotta"><svg class="w-3.5 h-3.5 fill-current text-terracotta transition-transform duration-300 group-open:rotate-180" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span>
-            </summary>
-            <p class="mt-4 text-xs sm:text-sm text-charcoal-900/70 leading-relaxed border-t border-charcoal-900/10 pt-4">
-              Our single-page $499 Launchpad typically ships within 4 to 6 business days. The $999 Studio Flagship multi-page platform ships in 10 to 14 days after receiving initial content and brand assets.
-            </p>
-          </details>
-
-          <details class="group bg-white p-6 rounded-2xl border border-charcoal-900/10 [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex items-center justify-between cursor-pointer font-bold text-sm text-charcoal-950">
-              <span>Why should I choose custom engineering over WordPress or Wix?</span>
-              <span class="transition duration-300 group-open:-rotate-180 text-terracotta"><svg class="w-3.5 h-3.5 fill-current text-terracotta transition-transform duration-300 group-open:rotate-180" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span>
-            </summary>
-            <p class="mt-4 text-xs sm:text-sm text-charcoal-900/70 leading-relaxed border-t border-charcoal-900/10 pt-4">
-              WordPress and drag-and-drop builders load dozens of bloated scripts, plugins, and databases that make websites slow, insecure, and vulnerable to hacks. We write pure, high-performance code that achieves 100/100 Google Core Web Vitals, ranks higher in SEO, and loads in less than 500 milliseconds.
-            </p>
-          </details>
-
-          <details class="group bg-white p-6 rounded-2xl border border-charcoal-900/10 [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex items-center justify-between cursor-pointer font-bold text-sm text-charcoal-950">
-              <span>Do I have to pay monthly fees if I only purchase a website build?</span>
-              <span class="transition duration-300 group-open:-rotate-180 text-terracotta"><svg class="w-3.5 h-3.5 fill-current text-terracotta transition-transform duration-300 group-open:rotate-180" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span>
-            </summary>
-            <p class="mt-4 text-xs sm:text-sm text-charcoal-900/70 leading-relaxed border-t border-charcoal-900/10 pt-4">
-              No. All our website development builds ($499, $999, $1,899+) are 100% one-time flat investments. Monthly care retainers ($299/mo) are completely optional for clients who want us to actively manage their ongoing updates, SEO, and cloud infrastructure.
-            </p>
-          </details>
-
-          <details class="group bg-white p-6 rounded-2xl border border-charcoal-900/10 [&_summary::-webkit-details-marker]:hidden">
-            <summary class="flex items-center justify-between cursor-pointer font-bold text-sm text-charcoal-950">
-              <span>What is included in the intellectual property handoff?</span>
-              <span class="transition duration-300 group-open:-rotate-180 text-terracotta"><svg class="w-3.5 h-3.5 fill-current text-terracotta transition-transform duration-300 group-open:rotate-180" viewBox="0 0 20 20"><path fill-rule="evenodd" d="M5.293 7.293a1 1 0 011.414 0L10 10.586l3.293-3.293a1 1 0 111.414 1.414l-4 4a1 1 0 01-1.414 0l-4-4a1 1 0 010-1.414z" clip-rule="evenodd"/></svg></span>
-            </summary>
-            <p class="mt-4 text-xs sm:text-sm text-charcoal-900/70 leading-relaxed border-t border-charcoal-900/10 pt-4">
-              You receive full Git repository access, compiled static builds, design source files, domain DNS routing configurations, and SSL certificate documentation. You have 100% full ownership forever.
-            </p>
-          </details>
-
-        </div>
-      </section>
-    </div>
-
-    <!-- PAGE VIEW: PROJECT INQUIRY (CUSTOM SCOPE CALCULATOR) -->
+    <!-- ================= PAGE 7: PROJECT INQUIRY ($) ================= -->
     <div id="page-contact" class="page-view">
-      <section class="max-w-4xl mx-auto px-6 py-20">
-        <div class="max-w-2xl mb-12">
-          <span class="text-xs uppercase tracking-widest font-bold text-terracotta font-mono">Commission Brief</span>
-          <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2">
-            Initiate Project Consultation
+      <section class="max-w-4xl mx-auto px-6 py-16">
+        <div class="text-center max-w-2xl mx-auto mb-12">
+          <span class="text-xs uppercase tracking-widest font-bold text-terracotta">Commission an Engine</span>
+          <h2 class="text-3xl sm:text-4xl font-bold text-charcoal-950 mt-2 font-sans">
+            Initiate Project Inquiry ($)
           </h2>
-          <p class="text-sm text-charcoal-900/70 mt-3">
-            Configure your technical scope below. Your specification is immediately forwarded to Anas Rangrez on WhatsApp for priority scheduling.
+          <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">
+            Select your preferred engagement parameters. Anas Rangrez reviews every brief personally and responds within 2 business hours.
           </p>
         </div>
 
-        <form id="projectInquiryForm" onsubmit="submitInquiryToWhatsApp(event)" class="bg-white p-8 sm:p-10 rounded-3xl border border-charcoal-900/10 shadow-sm space-y-6">
-          
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-charcoal-900/70 mb-2">Your Name or Entity</label>
-              <input type="text" id="clientName" required placeholder="e.g. Marcus Vance"
-                     class="w-full bg-linen-50 border border-charcoal-900/15 rounded-xl px-4 py-3 text-sm text-charcoal-950 focus:border-terracotta focus:outline-none transition">
+        <div class="bg-white rounded-3xl p-8 sm:p-12 border border-charcoal-900/10 shadow-sm">
+          <form onsubmit="handleInquirySubmit(event)" class="space-y-6">
+            
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal-900/70 mb-2 font-mono">Your Name</label>
+                <input type="text" id="inq-name" required placeholder="Alexander Vance"
+                       class="w-full bg-linen-50 border border-charcoal-900/15 rounded-xl px-4 py-3 text-xs sm:text-sm text-charcoal-950 focus:border-terracotta focus:outline-none transition">
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal-900/70 mb-2 font-mono">Email Address</label>
+                <input type="email" id="inq-email" required placeholder="alexander@company.com"
+                       class="w-full bg-linen-50 border border-charcoal-900/15 rounded-xl px-4 py-3 text-xs sm:text-sm text-charcoal-950 focus:border-terracotta focus:outline-none transition">
+              </div>
             </div>
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-charcoal-900/70 mb-2">Business Email</label>
-              <input type="email" id="clientEmail" required placeholder="name@company.com"
-                     class="w-full bg-linen-50 border border-charcoal-900/15 rounded-xl px-4 py-3 text-sm text-charcoal-950 focus:border-terracotta focus:outline-none transition">
-            </div>
-          </div>
 
-          <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-6">
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal-900/70 mb-2 font-mono">Target Engagement Tier</label>
+                <select id="inq-tier" class="w-full bg-linen-50 border border-charcoal-900/15 rounded-xl px-4 py-3 text-xs sm:text-sm text-charcoal-950 focus:border-terracotta focus:outline-none transition">
+                  <option value="$499 Launchpad Single-Page">$499 - Launchpad Single-Page</option>
+                  <option value="$999 Studio Flagship Multi-Page" selected>$999 - Studio Flagship Multi-Page</option>
+                  <option value="$1,899+ Custom Enterprise">$1,899+ - Custom Enterprise</option>
+                  <option value="$299/mo Core Retainer">$299/mo - Core Management Retainer</option>
+                  <option value="$499/mo Growth Retainer">$499/mo - Growth Management Retainer</option>
+                  <option value="$899/mo VIP Webmaster">$899/mo - Fractional Webmaster</option>
+                </select>
+              </div>
+              <div>
+                <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal-900/70 mb-2 font-mono">Target Delivery Timeline</label>
+                <select id="inq-timeline" class="w-full bg-linen-50 border border-charcoal-900/15 rounded-xl px-4 py-3 text-xs sm:text-sm text-charcoal-950 focus:border-terracotta focus:outline-none transition">
+                  <option value="Standard Sprint (1-2 Weeks)">Standard Sprint (1–2 Weeks)</option>
+                  <option value="Urgent Deployment (&lt; 7 Days)">Urgent Deployment (&lt; 7 Days)</option>
+                  <option value="Flexible / Strategic Planning">Flexible / Strategic Planning</option>
+                </select>
+              </div>
+            </div>
+
             <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-charcoal-900/70 mb-2">Target Development Tier</label>
-              <select id="selectedBuildTier" class="w-full bg-linen-50 border border-charcoal-900/15 rounded-xl px-4 py-3 text-sm text-charcoal-950 focus:border-terracotta focus:outline-none transition">
-                <option value="Launchpad ($499 USD - Single Page)">Launchpad ($499 USD — Single Page)</option>
-                <option value="Studio Flagship ($999 USD - Multi-Page Recommended)" selected>Studio Flagship ($999 USD — Multi-Page)</option>
-                <option value="Enterprise & Scale ($1,899+ USD - Custom Web App)">Enterprise &amp; Scale ($1,899+ USD — Bespoke App)</option>
-              </select>
+              <label class="block text-xs font-semibold uppercase tracking-wider text-charcoal-900/70 mb-2 font-mono">Project Objectives & Scope Overview</label>
+              <textarea id="inq-details" rows="4" required placeholder="Describe your brand, key conversion objectives, required pages, or existing site url..."
+                        class="w-full bg-linen-50 border border-charcoal-900/15 rounded-xl px-4 py-3 text-xs sm:text-sm text-charcoal-950 focus:border-terracotta focus:outline-none transition"></textarea>
             </div>
-            <div>
-              <label class="block text-xs font-bold uppercase tracking-wider text-charcoal-900/70 mb-2">Continuous Management Retainer?</label>
-              <select id="selectedRetainerTier" class="w-full bg-linen-50 border border-charcoal-900/15 rounded-xl px-4 py-3 text-sm text-charcoal-950 focus:border-terracotta focus:outline-none transition">
-                <option value="None (One-time build only)">No Retainer Needed (One-time build only)</option>
-                <option value="Core Infrastructure ($299/mo)">Core Infrastructure ($299/mo)</option>
-                <option value="Growth & Iteration ($499/mo Recommended)">Growth &amp; Iteration ($499/mo Recommended)</option>
-                <option value="Fractional Webmaster ($899/mo VIP)">Fractional Webmaster ($899/mo VIP)</option>
-              </select>
+
+            <div class="flex flex-col sm:flex-row items-center justify-between gap-4 pt-4 border-t border-charcoal-900/10">
+              <span class="text-xs text-charcoal-900/50 font-mono">Confidential Brief • 100% NDA Protected</span>
+              <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-charcoal-950 text-white font-semibold text-xs uppercase tracking-wider hover:bg-terracotta transition shadow-md">
+                Transmit Inquiry via WhatsApp →
+              </button>
             </div>
-          </div>
 
-          <div>
-            <label class="block text-xs font-bold uppercase tracking-wider text-charcoal-900/70 mb-2">Project Brief &amp; Key Goals</label>
-            <textarea id="projectDetails" rows="4" required placeholder="Describe your brand, existing website or reference links, and primary conversion objectives..."
-                      class="w-full bg-linen-50 border border-charcoal-900/15 rounded-xl p-4 text-sm text-charcoal-950 focus:border-terracotta focus:outline-none transition"></textarea>
-          </div>
-
-          <div class="pt-4 flex flex-col sm:flex-row items-center justify-between gap-4 border-t border-charcoal-900/10">
-            <div class="text-xs text-charcoal-900/60 flex items-center gap-2">
-              <span class="w-2 h-2 rounded-full bg-olive animate-subtle-pulse"></span>
-              <span>Direct WhatsApp forward to Lead Engineer Anas Rangrez</span>
-            </div>
-            <button type="submit" class="w-full sm:w-auto px-8 py-3.5 rounded-full bg-charcoal-950 text-white font-semibold text-xs uppercase tracking-wider hover:bg-terracotta transition shadow-md flex items-center justify-center gap-2">
-              <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-              <span>Transmit Scope via WhatsApp</span>
-            </button>
-          </div>
-
-        </form>
+          </form>
+        </div>
       </section>
     </div>
 
   </main>
+
+  <!-- ================= MODERN CLEAN FOOTER (TERMS NEXT TO ARWEB_) ================= -->
+  <footer class="border-t border-charcoal-900/10 py-12 bg-linen-100/60 mt-16">
+    <div class="max-w-7xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-charcoal-900/60">
+      
+      <!-- Brand & Terms Placement: "TERMS KO ARWEB LIKHA HA NA NICHE VHA LIKHO" -->
+      <div class="flex flex-wrap items-center gap-3 sm:gap-4">
+        <a href="#home" onclick="navigateTo('home'); return false;" class="font-bold text-charcoal-950 text-base flex items-center group">
+          arweb<span class="text-terracotta font-serif">_</span>
+        </a>
+        <span class="text-charcoal-900/30">/</span>
+        <a href="#terms" onclick="navigateTo('terms'); return false;" class="text-xs font-semibold text-charcoal-950 hover:text-terracotta transition underline underline-offset-4">
+          Terms &amp; Governance (SLA)
+        </a>
+        <span class="text-charcoal-900/30">/</span>
+        <span class="text-xs text-charcoal-900/50">Founded by Anas Rangrez</span>
+      </div>
+
+      <!-- Right Footer Actions: WhatsApp Official SVG (NO RAW PHONE NUMBERS IN TEXT) -->
+      <div class="flex items-center gap-6">
+        <span class="text-charcoal-900/40 font-mono">© 2026 arweb_. All rights reserved.</span>
+        <a href="https://wa.me/919929606623" target="_blank" class="hover:text-terracotta font-semibold text-charcoal-950 flex items-center gap-1.5 transition">
+          <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+          <span>Chat on WhatsApp</span>
+        </a>
+      </div>
+
+    </div>
+  </footer>
+
+  <!-- ================= FIXED BOTTOM CONCIERGE & SOCIAL ACTIONS ================= -->
+  <div class="fixed bottom-6 inset-x-0 z-40 flex flex-col items-center pointer-events-none px-4">
+    
+    <!-- Quick Filter Chips -->
+    <div class="pointer-events-auto flex items-center gap-2 mb-2 overflow-x-auto max-w-lg w-full no-scrollbar px-2 py-1 justify-center sm:justify-start">
+      <button onclick="sendQuickAiQuery('What is your pricing?')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-charcoal-900/15 text-[11px] font-medium text-charcoal-950 hover:bg-charcoal-950 hover:text-white transition shadow-sm font-mono">
+        Pricing Packages
+      </button>
+      <button onclick="sendQuickAiQuery('Tell me about your $999 multi page package')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-charcoal-900/15 text-[11px] font-medium text-charcoal-950 hover:bg-charcoal-950 hover:text-white transition shadow-sm font-mono">
+        Multi-Page Scope
+      </button>
+      <button onclick="sendQuickAiQuery('What is your Core Web Vitals SLA?')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-charcoal-900/15 text-[11px] font-medium text-charcoal-950 hover:bg-charcoal-950 hover:text-white transition shadow-sm font-mono">
+        Speed &amp; SLA
+      </button>
+      <button onclick="sendQuickAiQuery('How do monthly retainers work?')" class="whitespace-nowrap px-3.5 py-1.5 rounded-full bg-white/95 backdrop-blur-md border border-charcoal-900/15 text-[11px] font-medium text-charcoal-950 hover:bg-charcoal-950 hover:text-white transition shadow-sm font-mono">
+        Retainers ($299/mo)
+      </button>
+    </div>
+
+    <!-- Concierge Input Pill + Instagram & WhatsApp Official Icons -->
+    <div class="pointer-events-auto flex items-center gap-2 max-w-lg w-full">
+      
+      <!-- Input Pill -->
+      <form onsubmit="handleConciergeSubmit(event)" class="flex-grow bg-white/95 backdrop-blur-xl border border-charcoal-900/15 rounded-full p-1.5 pl-5 shadow-2xl flex items-center justify-between gap-2">
+        <input id="ai-input" type="text" placeholder="Ask about websites, pricing, tech stack, SLA..." 
+               class="bg-transparent text-xs text-charcoal-950 w-full focus:outline-none placeholder:text-charcoal-900/40" />
+        <button type="submit" 
+                class="px-5 py-2.5 rounded-full bg-charcoal-950 text-white font-semibold text-xs uppercase tracking-wider hover:bg-terracotta transition shrink-0 shadow-sm">
+          Ask AI
+        </button>
+      </form>
+
+      <!-- Instagram Official SVG Icon -->
+      <a href="https://instagram.com/7m.anx0?exln=MTVlNjQwY3oxZXZmcA%3D%3D" target="_blank"
+         title="Visit Studio Instagram"
+         class="w-10 h-10 rounded-full bg-charcoal-950/90 text-white flex items-center justify-center hover:bg-terracotta transition hover:scale-105 shadow-xl shrink-0">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+      </a>
+
+      <!-- WhatsApp Official SVG Icon -->
+      <a href="https://wa.me/919929606623?text=Hi%20Anas,%20I'd%20like%20to%20discuss%20a%20website%20project" target="_blank"
+         title="Direct WhatsApp Consultation"
+         class="w-10 h-10 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white flex items-center justify-center hover:scale-105 transition shadow-xl shrink-0">
+        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
+      </a>
+
+    </div>
+  </div>
 
   <!-- ================= CASE STUDY DETAIL MODAL ================= -->
   <div id="caseStudyModal" class="fixed inset-0 z-50 flex items-center justify-center p-4 bg-charcoal-950/50 backdrop-blur-sm opacity-0 pointer-events-none transition-opacity duration-300">
@@ -905,7 +967,6 @@
           <div>
             <h4 class="text-sm font-bold text-charcoal-950 flex items-center gap-1.5">
               <span>arweb_ Studio AI</span>
-              <span class="w-2 h-2 rounded-full bg-olive animate-subtle-pulse"></span>
             </h4>
             <p class="text-[10px] text-charcoal-900/50 font-mono">Bespoke Web Engineering Intelligence</p>
           </div>
@@ -958,66 +1019,12 @@
     </div>
   </div>
 
-  <!-- ================= FLOATING GLASS DOCK (AI AGENT DIRECTLY ABOVE INSTAGRAM & WHATSAPP) ================= -->
-  <div class="fixed bottom-6 right-6 z-40 flex flex-col items-end gap-3 pointer-events-none">
-    
-    <!-- 1. STUDIO AI AGENT BUTTON (JUST ABOVE LOGOS) -->
-    <button onclick="openAiStudioModal()"
-            title="Open Studio AI Agent"
-            class="pointer-events-auto flex items-center gap-2.5 px-4 py-2.5 rounded-full bg-charcoal-950 text-white shadow-dock border border-white/15 hover:bg-terracotta transition group transform hover:-translate-y-0.5">
-      <span class="w-2 h-2 rounded-full bg-olive animate-subtle-pulse"></span>
-      <span class="text-xs font-semibold tracking-wide">Studio AI Agent</span>
-      <span class="text-[10px] font-mono opacity-60 bg-white/10 px-1.5 py-0.5 rounded">Chat</span>
-    </button>
-
-    <!-- 2. SOCIAL ACTION ICONS (INSTAGRAM + WHATSAPP WITH CLEAN LOGOS) -->
-    <div class="pointer-events-auto flex items-center gap-2 bg-charcoal-950/95 backdrop-blur-xl border border-white/15 p-1.5 rounded-full shadow-dock">
-      
-      <!-- Instagram Official SVG Icon (No handle text) -->
-      <a href="https://instagram.com/7m.anx0?exln=MTVlNjQwY3oxZXZmcA%3D%3D" target="_blank"
-         title="Visit Studio Instagram"
-         class="w-9 h-9 rounded-full bg-white/5 hover:bg-white/20 text-white flex items-center justify-center transition hover:scale-105">
-        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
-      </a>
-
-      <!-- WhatsApp Official SVG Icon (No phone number text) -->
-      <a href="https://wa.me/919929606623?text=Hi%20Anas,%20I'd%20like%20to%20discuss%20a%20website%20project" target="_blank"
-         title="Direct WhatsApp Consultation"
-         class="w-9 h-9 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white flex items-center justify-center transition hover:scale-105 shadow-sm">
-        <svg class="w-4 h-4 fill-current" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-      </a>
-
-    </div>
-  </div>
-
-  <!-- ================= FOOTER ================= -->
-  <footer class="border-t border-charcoal-900/10 py-14 bg-linen-100/50">
-    <div class="max-w-6xl mx-auto px-6 flex flex-col sm:flex-row items-center justify-between gap-6 text-xs text-charcoal-900/60">
-      <div>
-        <p class="font-bold text-charcoal-950 text-sm">arweb<span class="text-terracotta">_</span> studio</p>
-        <p class="mt-1">High-Performance Web Engineering. Founded by Anas Rangrez.</p>
-        <p class="mt-0.5 text-charcoal-900/40 font-mono">© 2026 arweb_. All rights reserved.</p>
-      </div>
-      <div class="flex items-center gap-6">
-        <a href="#terms" onclick="navigateTo('terms'); return false;" class="hover:text-charcoal-950 transition">Terms &amp; SLA</a>
-        <a href="#builds" onclick="navigateTo('builds'); return false;" class="hover:text-charcoal-950 transition">Builds ($499-$1,899)</a>
-        <a href="#retainers" onclick="navigateTo('retainers'); return false;" class="hover:text-charcoal-950 transition">Retainers ($299/mo)</a>
-        
-        <!-- Official WhatsApp Link (No visible phone number) -->
-        <a href="https://wa.me/919929606623" target="_blank" class="hover:text-terracotta font-semibold text-charcoal-950 flex items-center gap-1.5 transition">
-          <svg class="w-3.5 h-3.5 fill-current text-emerald-700" viewBox="0 0 24 24"><path d="M.057 24l1.687-6.163c-1.041-1.804-1.588-3.849-1.587-5.946.003-6.556 5.338-11.891 11.893-11.891 3.181.001 6.167 1.24 8.413 3.488 2.245 2.248 3.481 5.236 3.48 8.414-.003 6.557-5.338 11.892-11.893 11.892-1.99-.001-3.951-.5-5.688-1.448l-6.305 1.654zm6.597-3.807c1.676.995 3.276 1.591 5.392 1.592 5.448 0 9.886-4.434 9.889-9.885.002-5.462-4.415-9.89-9.881-9.892-5.452 0-9.887 4.434-9.889 9.884-.001 2.225.651 3.891 1.746 5.634l-.999 3.648 3.742-.981z"/></svg>
-          <span>Chat on WhatsApp</span>
-        </a>
-      </div>
-    </div>
-  </footer>
-
   <!-- ================= CLIENT JAVASCRIPT CONTROLLERS ================= -->
   <script>
     /* ========================================================
        1. MULTI-PAGE SPA ROUTER WITH POPSTATE HISTORY
        ======================================================== */
-    const validPages = ['home', 'builds', 'retainers', 'works', 'terms', 'faq', 'contact'];
+    const validPages = ['home', 'about', 'builds', 'retainers', 'works', 'terms', 'contact'];
     let currentPage = 'home';
 
     function navigateTo(pageId, pushState = true) {
@@ -1054,23 +1061,23 @@
       window.scrollTo({ top: 0, behavior: 'smooth' });
     }
 
-    // Handle browser Back / Forward buttons
+    // Handle browser Back / Forward buttons (POPSTATE)
     window.addEventListener('popstate', (event) => {
-      // 1. If AI modal is open, close it
+      // 1. Close AI modal if open
       const aiModal = document.getElementById('aiStudioModal');
       if (aiModal && !aiModal.classList.contains('pointer-events-none')) {
         closeAiStudioModal();
         return;
       }
 
-      // 2. If Case study modal is open, close it
+      // 2. Close Case study modal if open
       const csModal = document.getElementById('caseStudyModal');
       if (csModal && !csModal.classList.contains('pointer-events-none')) {
         closeCaseStudyModal();
         return;
       }
 
-      // 3. If Drawer is open, close it
+      // 3. Close Drawer if open
       const drawer = document.getElementById('drawer');
       if (drawer && !drawer.classList.contains('pointer-events-none')) {
         toggleMenu();
@@ -1115,14 +1122,14 @@
        ======================================================== */
     const caseStudies = [
       {
-        title: "Auréa Living Studio",
-        category: "Interior & Architecture",
+        title: "The Sovereign Estate",
+        category: "Luxury Architecture & Real Estate",
         metric: "+240% Inquiries",
         speed: "100/100 Core Web Vitals",
         fcp: "0.4s FCP",
-        desc: "Minimalist editorial portfolio engineered with next-gen image compression, dynamic lookbook layout, and automated client consultation booking.",
-        details: "Prior to our rebuild, Auréa's WordPress website suffered from 4.2-second load times and high bounce rates. We engineered a bespoke, zero-bloat static architecture with pre-compressed AVIF imagery and direct WhatsApp consultation routing.",
-        stack: "Tailwind CSS, Vanilla TypeScript, Cloudflare Edge",
+        desc: "Minimalist property showcase with high-resolution imagery, confidential consultation pipelines, and zero lag.",
+        details: "Engineered for an international real estate syndication. Replaced clumsy page-builders with a clean semantic static architecture, boosting high-net-worth client acquisition by 240%.",
+        stack: "Semantic HTML5, Tailwind CSS, Cloudflare Edge",
         cta: "Commission Similar Architecture"
       },
       {
@@ -1131,7 +1138,7 @@
         metric: "0.8s First Contentful Paint",
         speed: "4ms Global Edge Latency",
         fcp: "0.5s FCP",
-        desc: "Corporate digital gateway engineered with bespoke interactive fee calculators, technical security audit, and encrypted CRM pipeline.",
+        desc: "Corporate digital gateway engineered with bespoke interactive fee calculators and encrypted automated CRM pipelines.",
         details: "Built for private equity partners requiring absolute discretion and institutional aesthetic. Features mathematical client return estimators, TLS 1.3 strict encryption headers, and sub-second multi-page transitions.",
         stack: "Semantic HTML5, PostCSS, Vercel Edge Networks",
         cta: "Commission Enterprise Gateway"
@@ -1143,7 +1150,7 @@
         speed: "99/100 Desktop Benchmark",
         fcp: "0.6s FCP",
         desc: "High-throughput telemetry and conversational AI pipeline built for modern SaaS acquisition and live interactive product demonstrations.",
-        details: "Replaced an off-the-shelf theme with custom canvas shaders, low-latency micro-interactions, and real-time product demonstration modules that quadrupled user demo bookings.",
+        details: "Custom canvas shaders, low-latency micro-interactions, and real-time product demonstration modules that quadrupled user demo bookings.",
         stack: "Next.js Static Export, Tailwind CSS, Stripe",
         cta: "Commission SaaS Engine"
       },
@@ -1153,64 +1160,61 @@
         metric: "$420k Collector Pipeline",
         speed: "0.4s Global Load",
         fcp: "0.3s FCP",
-        desc: "Bespoke timekeeper gallery with high-fidelity canvas zoom micro-interactions and direct VIP private concierge booking integration.",
-        details: "Curated for collectors demanding tactile digital luxury. Features bespoke typography pairing Newsreader with Plus Jakarta Sans, high-DPI zoom mechanics, and direct private line consultation booking.",
-        stack: "Modern CSS Grid, Vanilla JS, Netlify Edge",
-        cta: "Commission Bespoke Atelier"
+        desc: "Artisanal horology flagship showcasing bespoke timepieces, encrypted private client bookings, and high-fidelity product imagery.",
+        details: "Bespoke editorial grid architecture designed with Newsreader serif typography, custom macro zoom photo viewer, and private concierge appointment scheduling.",
+        stack: "HTML5, Tailwind CSS, AWS CloudFront",
+        cta: "Commission Atelier Experience"
       }
     ];
 
     function openCaseStudy(index) {
-      const data = caseStudies[index];
-      if (!data) return;
+      const cs = caseStudies[index];
+      if (!cs) return;
 
       const modal = document.getElementById('caseStudyModal');
       const box = document.getElementById('caseStudyBox');
       const content = document.getElementById('csModalContent');
+      if (!modal || !content) return;
 
       content.innerHTML = `
-        <div class="mb-4">
-          <span class="text-xs uppercase font-mono font-bold tracking-widest text-olive">${data.category}</span>
-          <h3 class="text-2xl sm:text-3xl font-bold text-charcoal-950 mt-1 font-serif">${data.title}</h3>
+        <span class="text-xs uppercase tracking-widest font-mono text-terracotta font-semibold">${cs.category}</span>
+        <h3 class="text-2xl sm:text-3xl font-bold text-charcoal-950 mt-1 font-serif">${cs.title}</h3>
+        <p class="text-xs sm:text-sm text-charcoal-900/70 mt-3 leading-relaxed">${cs.desc}</p>
+        
+        <div class="grid grid-cols-3 gap-3 my-6 p-4 rounded-2xl bg-linen-100 border border-charcoal-900/10 text-center font-mono text-xs">
+          <div>
+            <span class="block text-terracotta font-bold text-sm">${cs.metric}</span>
+            <span class="text-[10px] text-charcoal-900/50 uppercase">Impact</span>
+          </div>
+          <div>
+            <span class="block text-olive font-bold text-sm">${cs.speed}</span>
+            <span class="text-[10px] text-charcoal-900/50 uppercase">Score</span>
+          </div>
+          <div>
+            <span class="block text-charcoal-950 font-bold text-sm">${cs.fcp}</span>
+            <span class="text-[10px] text-charcoal-900/50 uppercase">Speed</span>
+          </div>
         </div>
 
-        <div class="grid grid-cols-3 gap-3 my-6 p-4 rounded-2xl bg-linen-100 border border-charcoal-900/10 text-center">
-          <div>
-            <div class="text-[10px] uppercase font-mono text-charcoal-900/50">Speed Score</div>
-            <div class="text-sm sm:text-base font-bold font-mono text-olive mt-0.5">${data.speed}</div>
-          </div>
-          <div>
-            <div class="text-[10px] uppercase font-mono text-charcoal-900/50">Performance</div>
-            <div class="text-sm sm:text-base font-bold font-mono text-terracotta mt-0.5">${data.fcp}</div>
-          </div>
-          <div>
-            <div class="text-[10px] uppercase font-mono text-charcoal-900/50">Commercial Impact</div>
-            <div class="text-sm sm:text-base font-bold font-mono text-charcoal-950 mt-0.5">${data.metric}</div>
-          </div>
-        </div>
-
-        <div class="space-y-4 text-xs sm:text-sm text-charcoal-900/75 leading-relaxed">
-          <p>${data.desc}</p>
-          <p>${data.details}</p>
-          <div class="pt-2">
-            <span class="text-xs font-bold text-charcoal-950 uppercase font-mono">Architecture Stack:</span>
-            <span class="text-xs font-mono text-charcoal-900/70 ml-1">${data.stack}</span>
-          </div>
+        <div class="space-y-4 text-xs sm:text-sm text-charcoal-900/80 leading-relaxed border-t border-charcoal-900/10 pt-4">
+          <p><strong class="text-charcoal-950">Architectural Narrative:</strong> ${cs.details}</p>
+          <p><strong class="text-charcoal-950">Engineering Stack:</strong> <code class="font-mono text-xs bg-linen-200 px-2 py-0.5 rounded text-charcoal-900">${cs.stack}</code></p>
         </div>
 
         <div class="mt-8 pt-6 border-t border-charcoal-900/10 flex flex-col sm:flex-row items-center justify-between gap-4">
-          <span class="text-xs text-charcoal-900/50 font-mono">100% Code Ownership • Zero Bloat</span>
-          <a href="https://wa.me/919929606623?text=Inquiry:%20Discuss%20project%20similar%20to%20${encodeURIComponent(data.title)}" target="_blank"
-             class="w-full sm:w-auto px-6 py-2.5 rounded-full bg-charcoal-950 text-white font-semibold text-xs uppercase tracking-wider hover:bg-terracotta transition shadow-sm text-center">
-            ${data.cta}
+          <a href="https://wa.me/919929606623?text=Inquiry:%20Discuss%20project%20similar%20to%20${encodeURIComponent(cs.title)}" target="_blank"
+             class="w-full sm:w-auto px-6 py-3 rounded-full bg-charcoal-950 text-white font-semibold text-xs uppercase tracking-wider hover:bg-terracotta transition text-center shadow-md">
+            ${cs.cta}
           </a>
+          <button onclick="closeCaseStudyModal()" class="text-xs text-charcoal-900/50 hover:text-charcoal-950 font-mono">
+            Close Benchmark [ESC]
+          </button>
         </div>
       `;
 
       modal.classList.remove('opacity-0', 'pointer-events-none');
-      box.classList.remove('translate-y-4');
-      box.classList.add('translate-y-0');
-      history.pushState({ modal: 'casestudy', index: index }, '', '#casestudy-' + index);
+      if (box) box.classList.remove('translate-y-4');
+      history.pushState({ modal: 'casestudy', index: index }, '', '#works');
     }
 
     function closeCaseStudyModal() {
@@ -1221,7 +1225,7 @@
       if (box) box.classList.add('translate-y-4');
     }
 
-    document.getElementById('caseStudyModal').addEventListener('click', (e) => {
+    const csModalEl = document.getElementById('caseStudyModal'); if (csModalEl) csModalEl.addEventListener('click', (e) => {
       if (e.target === document.getElementById('caseStudyModal')) {
         closeCaseStudyModal();
       }
@@ -1252,15 +1256,60 @@
       const modal = document.getElementById('aiStudioModal');
       const box = document.getElementById('aiStudioBox');
       if (!modal) return;
+
       modal.classList.add('opacity-0', 'pointer-events-none');
-      if (box) box.classList.add('translate-y-8');
+      if (box) {
+        box.classList.remove('translate-y-0');
+        box.classList.add('translate-y-8');
+      }
     }
 
-    document.getElementById('aiStudioModal').addEventListener('click', (e) => {
+    const aiModalEl = document.getElementById('aiStudioModal'); if (aiModalEl) aiModalEl.addEventListener('click', (e) => {
       if (e.target === document.getElementById('aiStudioModal')) {
         closeAiStudioModal();
       }
     });
+
+    document.addEventListener('keydown', (e) => {
+      if (e.key === 'Escape') {
+        closeAiStudioModal();
+        closeCaseStudyModal();
+      }
+    });
+
+    function handleConciergeSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('ai-input');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      sendQuickAiQuery(text);
+    }
+
+    function handleAiSubmit(e) {
+      e.preventDefault();
+      const input = document.getElementById('aiMessageInput');
+      if (!input) return;
+      const text = input.value.trim();
+      if (!text) return;
+
+      input.value = '';
+      sendQuickAiQuery(text);
+    }
+
+    function sendQuickAiQuery(text) {
+      openAiStudioModal();
+      appendChatMessage('user', text);
+      showAiTyping();
+
+      setTimeout(() => {
+        hideAiTyping();
+        const responseData = processAiStudioQuery(text);
+        appendChatMessage('assistant', responseData.text, responseData.action);
+      }, 500);
+    }
 
     function clearAiChat() {
       const log = document.getElementById('aiChatLog');
@@ -1271,52 +1320,11 @@
             a
           </div>
           <div class="bg-white border border-charcoal-900/10 rounded-2xl rounded-tl-sm p-4 text-charcoal-900/85 shadow-sm leading-relaxed max-w-[85%]">
-            <p class="font-bold text-charcoal-950">Conversation refreshed.</p>
-            <p class="mt-1">I am ready to assist with your website architecture, speed audit, and package selections.</p>
+            <p class="font-bold text-charcoal-950">Chat history cleared.</p>
+            <p class="mt-1">How can I assist you regarding bespoke web engineering, pricing, retainers, or studio architecture?</p>
           </div>
         </div>
       `;
-    }
-
-    function appendChatMessage(sender, htmlContent, actionBtn = null) {
-      const log = document.getElementById('aiChatLog');
-      if (!log) return;
-
-      const msgDiv = document.createElement('div');
-      msgDiv.className = sender === 'user' ? 'flex justify-end' : 'flex items-start gap-3';
-
-      if (sender === 'user') {
-        msgDiv.innerHTML = `
-          <div class="bg-charcoal-950 text-white rounded-2xl rounded-tr-sm p-3.5 text-xs sm:text-sm max-w-[85%] shadow-sm leading-relaxed">
-            ${htmlContent}
-          </div>
-        `;
-      } else {
-        let actionMarkup = '';
-        if (actionBtn) {
-          actionMarkup = `
-            <div class="mt-3 pt-2.5 border-t border-charcoal-900/10">
-              <a href="${actionBtn.url}" ${actionBtn.onclick ? `onclick="${actionBtn.onclick}"` : ''} target="${actionBtn.url.startsWith('http') ? '_blank' : '_self'}"
-                 class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-charcoal-950 text-white text-[11px] font-semibold uppercase tracking-wider hover:bg-terracotta transition">
-                <span>${actionBtn.text}</span>
-                <span>→</span>
-              </a>
-            </div>
-          `;
-        }
-        msgDiv.innerHTML = `
-          <div class="w-6 h-6 rounded-full bg-charcoal-950 text-white flex items-center justify-center text-[10px] font-serif shrink-0 mt-0.5">
-            a
-          </div>
-          <div class="bg-white border border-charcoal-900/10 rounded-2xl rounded-tl-sm p-4 text-charcoal-900/85 shadow-sm leading-relaxed max-w-[85%]">
-            ${htmlContent}
-            ${actionMarkup}
-          </div>
-        `;
-      }
-
-      log.appendChild(msgDiv);
-      log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' });
     }
 
     function showAiTyping() {
@@ -1329,14 +1337,13 @@
         <div class="w-6 h-6 rounded-full bg-charcoal-950 text-white flex items-center justify-center text-[10px] font-serif shrink-0 mt-0.5">
           a
         </div>
-        <div class="bg-white border border-charcoal-900/10 rounded-2xl rounded-tl-sm px-4 py-3 text-xs text-charcoal-900/50 shadow-sm flex items-center gap-1.5">
-          <span class="w-1.5 h-1.5 rounded-full bg-charcoal-900/40 animate-pulse"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-charcoal-900/40 animate-pulse" style="animation-delay: 0.2s"></span>
-          <span class="w-1.5 h-1.5 rounded-full bg-charcoal-900/40 animate-pulse" style="animation-delay: 0.4s"></span>
+        <div class="bg-white border border-charcoal-900/10 rounded-2xl rounded-tl-sm px-4 py-3 text-charcoal-900/50 shadow-sm flex items-center gap-1 font-mono text-xs">
+          <span>Analyzing architecture</span>
+          <span class="inline-block animate-pulse">...</span>
         </div>
       `;
       log.appendChild(typing);
-      log.scrollTo({ top: log.scrollHeight, behavior: 'smooth' });
+      log.scrollTop = log.scrollHeight;
     }
 
     function hideAiTyping() {
@@ -1344,162 +1351,184 @@
       if (typing) typing.remove();
     }
 
-    // Unique rotating responses for off-topic queries
-    let offTopicIndex = 0;
-    const offTopicResponses = [
-      "<p><strong>Off-topic query detected.</strong></p><p class='mt-1'>I am the studio AI for arweb_, engineered by Anas Rangrez. My neural parameters are strictly dedicated to high-performance website design and digital architecture. How can we elevate your digital presence?</p>",
-      "<p><strong>That sounds interesting, but I only speak 'Web Engineering'.</strong></p><p class='mt-1'>I don't follow general trivia, sports, recipes, or outside topics. Let's focus on building you an ultra-fast website that drives paying clients. Would you like to explore our $499 or $999 packages?</p>",
-      "<p><strong>Outside engineering parameters.</strong></p><p class='mt-1'>My processors are calibrated exclusively for digital design, sub-second load times, and conversion architecture. I leave other topics to general chatbots. Tell me about your business or the website you wish to build!</p>",
-      "<p><strong>Strict studio focus.</strong></p><p class='mt-1'>I specialize strictly in bespoke web engineering, Core Web Vitals optimization, and business acquisition engines. I cannot answer general queries, but I can certainly help you craft a 100/100 speed-score website. Where shall we begin?</p>",
-      "<p><strong>While intriguing, that falls outside my scope!</strong></p><p class='mt-1'>I am here exclusively to guide your website design, technical stack, and retainer agreements. Check out our packages below or ask me about our multi-page builds.</p>"
-    ];
+    function appendChatMessage(sender, text, action = null) {
+      const log = document.getElementById('aiChatLog');
+      if (!log) return;
 
-    function checkIsWebIntent(raw) {
-      const q = raw.toLowerCase().trim();
-      const webKeywords = [
-        'web', 'website', 'build', 'page', 'site', 'landing', 'design', 'dev', 'developer',
-        'portfolio', 'studio', 'agency', 'frontend', 'code', 'html', 'css', 'tailwind', 'js',
-        'javascript', 'typescript', 'react', 'next', 'speed', 'performance', 'vitals', 'score',
-        'latency', 'fast', 'seo', 'google', 'rank', 'hosting', 'domain', 'vercel', 'aws',
-        'price', 'pricing', 'cost', 'rate', 'quote', 'package', 'dollar', 'usd', 'budget',
-        'launchpad', 'flagship', 'enterprise', '499', '999', '1899', '299', '899', 'anas', 'rangrez',
-        'work', 'case', 'study', 'aurea', 'apex', 'velion', 'lumina', 'contact', 'hire',
-        'timeline', 'days', 'delivery', 'guarantee', 'sla', 'terms', 'contract', 'ip',
-        'ownership', 'revision', 'faq', 'question', 'wordpress', 'wix', 'squarespace', 'custom',
-        'retainer', 'maintenance', 'monthly', 'care', 'infrastructure', 'inquiry', 'call', 'consultation'
-      ];
-      if (q.includes('$')) return 'web';
-      for (const k of webKeywords) {
-        if (q.includes(k)) return 'web';
+      const msg = document.createElement('div');
+      if (sender === 'user') {
+        msg.className = 'flex justify-end';
+        msg.innerHTML = `
+          <div class="bg-charcoal-950 text-white rounded-2xl rounded-tr-sm p-3.5 max-w-[85%] shadow-sm leading-relaxed text-xs sm:text-sm">
+            ${escapeHtml(text)}
+          </div>
+        `;
+      } else {
+        msg.className = 'flex items-start gap-3';
+        let actionBtn = '';
+        if (action) {
+          if (action.link.startsWith('#')) {
+            actionBtn = `
+              <div class="mt-3 pt-3 border-t border-charcoal-900/10">
+                <button onclick="closeAiStudioModal(); navigateTo('${action.link.replace('#', '')}');" 
+                        class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-charcoal-950 text-white text-[11px] font-semibold uppercase tracking-wider hover:bg-terracotta transition shadow-sm font-mono">
+                  ${action.label} →
+                </button>
+              </div>
+            `;
+          } else {
+            actionBtn = `
+              <div class="mt-3 pt-3 border-t border-charcoal-900/10">
+                <a href="${action.link}" target="_blank" 
+                   class="inline-flex items-center gap-1.5 px-3.5 py-1.5 rounded-full bg-emerald-700 hover:bg-emerald-600 text-white text-[11px] font-semibold uppercase tracking-wider transition shadow-sm font-mono">
+                  ${action.label} →
+                </a>
+              </div>
+            `;
+          }
+        }
+
+        msg.innerHTML = `
+          <div class="w-6 h-6 rounded-full bg-charcoal-950 text-white flex items-center justify-center text-[10px] font-serif shrink-0 mt-0.5">
+            a
+          </div>
+          <div class="bg-white border border-charcoal-900/10 rounded-2xl rounded-tl-sm p-4 text-charcoal-900/85 shadow-sm leading-relaxed max-w-[85%] text-xs sm:text-sm">
+            ${text}
+            ${actionBtn}
+          </div>
+        `;
       }
-      return 'offtopic';
+
+      log.appendChild(msg);
+      log.scrollTop = log.scrollHeight;
     }
 
-    function generateAiResponse(queryText) {
-      const q = queryText.toLowerCase().trim();
-      const intent = checkIsWebIntent(queryText);
-
-      if (intent === 'offtopic') {
-        const resp = offTopicResponses[offTopicIndex % offTopicResponses.length];
-        offTopicIndex++;
-        return {
-          text: resp,
-          action: { text: "View Website Packages ($499 - $1,899+)", url: "#builds", onclick: "navigateTo('builds'); closeAiStudioModal();" }
-        };
-      }
-
-      // Web-related intelligent responses
-      if (q.includes('price') || q.includes('cost') || q.includes('package') || q.includes('499') || q.includes('999') || q.includes('1899') || q.includes('$')) {
-        return {
-          text: "<p><strong>Our Transparent Website Packages (in USD $):</strong></p><ul class='mt-1.5 space-y-1 list-disc list-inside text-xs'><li><strong>$499 — Launchpad:</strong> High-converting single-page showcase. Ships in 4–6 days.</li><li><strong>$999 — Studio Flagship (Recommended):</strong> Complete multi-page platform (up to 5 pages), AI concierge, technical SEO. Ships in 10–14 days.</li><li><strong>$1,899+ — Enterprise &amp; Scale:</strong> Custom web apps, database logic, dynamic CMS. Ships in 3–4 weeks.</li></ul><p class='mt-2'>All packages include 100% intellectual property ownership with zero monthly dependencies unless requested.</p>",
-          action: { text: "Explore Fixed Builds", url: "#builds", onclick: "navigateTo('builds'); closeAiStudioModal();" }
-        };
-      }
-
-      if (q.includes('retainer') || q.includes('monthly') || q.includes('maintenance') || q.includes('299') || q.includes('899')) {
-        return {
-          text: "<p><strong>Continuous Engineering &amp; Retainer Agreements:</strong></p><ul class='mt-1.5 space-y-1 list-disc list-inside text-xs'><li><strong>$299/mo — Core Infrastructure:</strong> Baseline security, 100% uptime monitoring, speed score preservation, 4 hrs updates.</li><li><strong>$499/mo — Growth &amp; Iteration (Recommended):</strong> 10 hrs engineering, regular landing page iterations, SEO audits.</li><li><strong>$899/mo — Fractional Webmaster:</strong> Unlimited routine UI adjustments, 1-hr emergency response, executive syncs.</li></ul><p class='mt-2'>All retainers are month-to-month with no lock-ins.</p>",
-          action: { text: "View Retainer Details", url: "#retainers", onclick: "navigateTo('retainers'); closeAiStudioModal();" }
-        };
-      }
-
-      if (q.includes('speed') || q.includes('performance') || q.includes('vitals') || q.includes('100') || q.includes('slow') || q.includes('fast')) {
-        return {
-          text: "<p><strong>100/100 Core Web Vitals Guarantee:</strong></p><p class='mt-1'>Unlike agencies that wrap heavy WordPress themes, arweb_ writes clean, handwritten HTML, Tailwind CSS, and edge-distributed scripts. Every site achieves sub-500ms global loads and perfect Google PageSpeed scores, directly improving SEO and user conversion.</p>",
-          action: { text: "Inspect Case Studies", url: "#works", onclick: "navigateTo('works'); closeAiStudioModal();" }
-        };
-      }
-
-      if (q.includes('multi page') || q.includes('5 page') || q.includes('flagship')) {
-        return {
-          text: "<p><strong>Studio Flagship ($999 USD):</strong></p><p class='mt-1'>Our flagship package provides up to 5 custom-designed page architectures (Home, About/Ethos, Services/Work, Pricing, Contact/Inquiry), full responsive optimization, on-page Schema markup, micro-interactions, and 100/100 speed metrics delivered in 10 to 14 days.</p>",
-          action: { text: "Review Flagship Scope", url: "#builds", onclick: "navigateTo('builds'); closeAiStudioModal();" }
-        };
-      }
-
-      if (q.includes('work') || q.includes('case') || q.includes('portfolio') || q.includes('aurea') || q.includes('apex')) {
-        return {
-          text: "<p><strong>Recent Works &amp; Verified Telemetry:</strong></p><ul class='mt-1.5 space-y-1 list-disc list-inside text-xs'><li><strong>Auréa Living Studio:</strong> Minimalist architectural portfolio (+240% inquiries, 100/100 score).</li><li><strong>Apex Capital Engine:</strong> Private equity gateway (4ms edge latency, 0.8s FCP).</li><li><strong>Velion AI Workflow:</strong> SaaS telemetry platform (14,000 daily tasks).</li><li><strong>Lumina Heritage:</strong> Luxury watchmaker atelier ($420k collector pipeline).</li></ul>",
-          action: { text: "View Case Studies", url: "#works", onclick: "navigateTo('works'); closeAiStudioModal();" }
-        };
-      }
-
-      if (q.includes('timeline') || q.includes('time') || q.includes('day') || q.includes('how long')) {
-        return {
-          text: "<p><strong>Standard Delivery Timelines:</strong></p><ul class='mt-1.5 space-y-1 list-disc list-inside text-xs'><li><strong>Launchpad ($499):</strong> 4 to 6 business days.</li><li><strong>Studio Flagship ($999):</strong> 10 to 14 business days.</li><li><strong>Enterprise &amp; Scale ($1,899+):</strong> 3 to 4 weeks.</li></ul><p class='mt-2'>Two structured revision rounds are included with every project build.</p>",
-          action: { text: "Book Project Call", url: "https://wa.me/919929606623?text=Inquiry:%20Schedule%20a%20Technical%20Consultation" }
-        };
-      }
-
-      // Default web studio guidance
-      return {
-        text: "<p><strong>Welcome to arweb_ studio.</strong></p><p class='mt-1'>Founded and led by <strong>Anas Rangrez</strong>, we engineer ultra-fast bespoke digital identities and high-converting web engines. All builds are flat fixed-fee investments ($499 to $1,899+) with full code ownership.</p><p class='mt-2 text-xs text-charcoal-900/60'>How would you like to proceed?</p>",
-        action: { text: "Chat on WhatsApp", url: "https://wa.me/919929606623?text=Hi%20Anas,%20I'd%20like%20to%20discuss%20a%20website%20project" }
-      };
-    }
-
-    function sendQuickAiQuery(text) {
-      appendChatMessage('user', text);
-      showAiTyping();
-      setTimeout(() => {
-        hideAiTyping();
-        const resp = generateAiResponse(text);
-        appendChatMessage('ai', resp.text, resp.action);
-      }, 350);
-    }
-
-    function handleAiSubmit(e) {
-      e.preventDefault();
-      const input = document.getElementById('aiMessageInput');
-      if (!input) return;
-      const text = input.value.trim();
-      if (!text) return;
-
-      appendChatMessage('user', text);
-      input.value = '';
-
-      showAiTyping();
-      setTimeout(() => {
-        hideAiTyping();
-        const resp = generateAiResponse(text);
-        appendChatMessage('ai', resp.text, resp.action);
-      }, 400);
+    function escapeHtml(str) {
+      return str.replace(/&/g, '&amp;').replace(/</g, '&lt;').replace(/>/g, '&gt;').replace(/"/g, '&quot;');
     }
 
     /* ========================================================
-       5. PROJECT INQUIRY FORM SUBMISSION TO WHATSAPP
+       5. STRICT DOMAIN INTENT CLASSIFIER & ROTATING REPLIES
        ======================================================== */
-    function submitInquiryToWhatsApp(e) {
-      e.preventDefault();
-      const name = document.getElementById('clientName')?.value || 'Client';
-      const email = document.getElementById('clientEmail')?.value || 'Not provided';
-      const build = document.getElementById('selectedBuildTier')?.value || 'Launchpad';
-      const retainer = document.getElementById('selectedRetainerTier')?.value || 'None';
-      const details = document.getElementById('projectDetails')?.value || 'No additional details.';
+    let offtopicRotationIndex = 0;
+    const offTopicResponses = [
+      {
+        text: "<strong>Off-topic query detected.</strong><br><br>I am the studio AI for <strong>arweb_</strong>, engineered by Anas Rangrez. My neural parameters are strictly calibrated for web engineering, Core Web Vitals performance, pricing, and digital architecture.<br><br>Let's focus on your website project.",
+        action: { label: "View Website Packages ($499 - $1,899+)", link: "#builds" }
+      },
+      {
+        text: "<strong>Out of studio scope.</strong><br><br>My intelligence is exclusively dedicated to arweb_ web infrastructure, custom software design, and digital conversion funnels. I do not provide commentary on external topics.<br><br>Would you like to examine our multi-page website packages or speed standards?",
+        action: { label: "Explore Studio Flagship ($999)", link: "#builds" }
+      },
+      {
+        text: "<strong>Web Architecture Inquiries Only.</strong><br><br>At arweb_, we construct high-speed, bespoke digital flagships that convert high-ticket prospects. I am tuned to answer questions regarding our tech stack, pricing architecture, and SLAs.<br><br>How can we engineer your next web deployment?",
+        action: { label: "Inspect Retainers ($299/mo)", link: "#retainers" }
+      },
+      {
+        text: "<strong>Specialized Intelligence Notice.</strong><br><br>I am not a general conversational bot. I represent Anas Rangrez's engineering studio. I can assist you with custom website quotes, Core Web Vitals guarantees, and continuous retainers.<br><br>Let's discuss how we can accelerate your business online.",
+        action: { label: "Initiate Project Inquiry", link: "#contact" }
+      }
+    ];
 
-      const message = 
-        "*NEW ARWEB_ PROJECT INQUIRY*%0A%0A" +
-        `*Client Name:* ${encodeURIComponent(name)}%0A` +
-        `*Client Email:* ${encodeURIComponent(email)}%0A` +
-        `*Selected Build:* ${encodeURIComponent(build)}%0A` +
-        `*Monthly Retainer:* ${encodeURIComponent(retainer)}%0A%0A` +
-        `*Project Brief:*%0A${encodeURIComponent(details)}%0A%0A` +
-        "_Submitted via arweb_ high-ticket studio platform._";
+    function processAiStudioQuery(rawText) {
+      const q = rawText.toLowerCase().trim();
 
-      window.open(`https://wa.me/919929606623?text=${message}`, '_blank');
+      // Explicit Web / Studio Domain Keywords
+      const webKeywords = [
+        'web', 'website', 'page', 'site', 'build', 'pricing', 'price', 'cost', 'dollar', '$',
+        'rate', 'package', 'launchpad', 'flagship', 'enterprise', 'retainer', 'maintenance',
+        'speed', 'lighthouse', 'sla', 'anas', 'rangrez', 'arweb', 'studio', 'portfolio',
+        'work', 'works', 'case study', 'term', 'terms', 'clause', 'sla', 'contract',
+        'code', 'html', 'css', 'tailwind', 'javascript', 'seo', 'domain', 'hosting',
+        'cloudflare', 'vercel', 'server', 'edge', 'responsive', 'mobile', 'quote',
+        'inquiry', 'consult', 'consultation', 'hire', 'book', 'call', 'contact', 'whatsapp',
+        'conversion', 'design', 'ui', 'ux', 'typography', 'font', 'audit', 'latency'
+      ];
+
+      const isWebRelated = webKeywords.some(keyword => q.includes(keyword));
+
+      if (!isWebRelated) {
+        const resp = offTopicResponses[offtopicRotationIndex % offTopicResponses.length];
+        offtopicRotationIndex++;
+        return resp;
+      }
+
+      // Domain Topic Matching:
+      // 1. Pricing & Packages
+      if (q.includes('pricing') || q.includes('price') || q.includes('cost') || q.includes('package') || q.includes('rate') || q.includes('$') || q.includes('how much')) {
+        return {
+          text: "<strong>Fixed Web Development Architecture:</strong><br><br>• <strong>Launchpad ($499):</strong> Bespoke single-page digital engine, 100/100 Core Web Vitals, WhatsApp lead integration. (4–6 Days Delivery).<br><br>• <strong>Studio Flagship ($999 - Most Popular):</strong> Full bespoke multi-page platform (up to 5 pages), editorial luxury typography, technical SEO, and conversion pipelines. (10–14 Days Delivery).<br><br>• <strong>Enterprise &amp; Scale ($1,899+):</strong> Bespoke applications, 10+ pages, custom database architecture, headless CMS, and 30-day post-launch dedicated warranty.<br><br><em>All packages include 100% IP &amp; source code ownership transferred to you upon clearance.</em>",
+          action: { label: "View Fixed Packages", link: "#builds" }
+        };
+      }
+
+      // 2. Retainers & Maintenance
+      if (q.includes('retainer') || q.includes('maintenance') || q.includes('monthly') || q.includes('support') || q.includes('care')) {
+        return {
+          text: "<strong>Continuous Engineering Retainers:</strong><br><br>• <strong>Core Infrastructure ($299/mo):</strong> 100% uptime preservation, SSL upkeep, automated cloud backups, 100/100 speed monitoring, and up to 4 hrs of routine edits.<br><br>• <strong>Growth &amp; Iteration ($499/mo):</strong> Up to 10 hrs monthly engineering, continuous landing page iteration, technical SEO audits, and priority WhatsApp response SLA (&lt; 2hr).<br><br>• <strong>Fractional Webmaster ($899/mo):</strong> Complete technical outsourcing with unlimited routine updates, custom API maintenance, and 1-hour critical response.<br><br><em>All retainers are month-to-month with no long-term lock-ins.</em>",
+          action: { label: "View Retainer Tiers", link: "#retainers" }
+        };
+      }
+
+      // 3. Multi-page scope
+      if (q.includes('multi page') || q.includes('multipage') || q.includes('pages') || q.includes('5 pages')) {
+        return {
+          text: "<strong>Multi-Page Studio Flagship ($999):</strong><br><br>Our flagship package includes up to 5 custom-designed architectural pages (e.g. Home, Dossier/About, Services/Capabilities, Case Studies/Portfolio, and Conversion Inquiries).<br><br>Every sub-page is individually engineered for sub-second transitions, editorial luxury styling, and mobile responsiveness with zero framework bloat.",
+          action: { label: "Commission Studio Flagship ($999)", link: "#builds" }
+        };
+      }
+
+      // 4. Speed & SLA
+      if (q.includes('speed') || q.includes('lighthouse') || q.includes('sla') || q.includes('fast') || q.includes('performance') || q.includes('latency')) {
+        return {
+          text: "<strong>Performance SLA &amp; Speed Benchmark:</strong><br><br>We contractually guarantee a <strong>100/100 Core Web Vitals score</strong> on desktop and mobile.<br><br>• Global Edge Latency: &lt; 0.5s<br>• First Contentful Paint: 0.3s–0.6s<br>• Zero bloated WordPress plugins, drag-and-drop builders, or heavy database bottlenecks.<br><br>Your website loads instantly across all global networks.",
+          action: { label: "Review SLA Clauses", link: "#terms" }
+        };
+      }
+
+      // 5. Terms & IP Ownership
+      if (q.includes('term') || q.includes('legal') || q.includes('ip') || q.includes('contract') || q.includes('rights') || q.includes('ownership')) {
+        return {
+          text: "<strong>Studio Governance &amp; SLA Standards:</strong><br><br>• <strong>100% IP &amp; Code Ownership:</strong> Transferred to you upon final invoice clearance. No recurring license royalties or vendor lock-in.<br>• <strong>Milestone Sprints:</strong> Wireframe Proof → Bespoke Design → Edge Engineering → Deployment.<br>• <strong>SLA Response:</strong> Retainer clients receive &lt; 2hr response on WhatsApp and &lt; 1hr emergency resolution for production issues.<br>• <strong>Cancellation:</strong> Retainers operate month-to-month with 14 days written notice.",
+          action: { label: "Review All 8 Legal Clauses", link: "#terms" }
+        };
+      }
+
+      // 6. About Anas Rangrez & Ethos
+      if (q.includes('anas') || q.includes('rangrez') || q.includes('who') || q.includes('founder') || q.includes('ethos') || q.includes('about')) {
+        return {
+          text: "<strong>About arweb_ &amp; Anas Rangrez:</strong><br><br>arweb_ is an independent web engineering studio founded by <strong>Anas Rangrez</strong>. We construct bespoke digital flagships from first principles, balancing editorial luxury typography with rigorous computer science.<br><br>We specialize in sub-second loading speeds, high-converting acquisition funnels, and enterprise-grade edge deployments.",
+          action: { label: "Read Studio Dossier", link: "#about" }
+        };
+      }
+
+      // Default Web Response
+      return {
+        text: "<strong>Welcome to arweb_ studio.</strong><br><br>Founded and led by Anas Rangrez, we engineer ultra-fast bespoke digital identities and high-converting acquisition engines.<br><br>How can we assist you today? You can inquire about our <strong>$499 Launchpad</strong>, <strong>$999 Multi-Page Flagship</strong>, our <strong>100/100 Core Web Vitals SLA</strong>, or monthly retainers.",
+        action: { label: "Chat on WhatsApp", link: "https://wa.me/919929606623?text=Hi%20Anas,%20I'd%20like%20to%20discuss%20a%20website%20project" }
+      };
     }
 
-    // Close Modals on Escape key
-    document.addEventListener('keydown', (e) => {
-      if (e.key === 'Escape') {
-        closeCaseStudyModal();
-        closeAiStudioModal();
-        const drawer = document.getElementById('drawer');
-        if (drawer && !drawer.classList.contains('pointer-events-none')) {
-          toggleMenu();
-        }
-      }
-    });
+    /* ========================================================
+       6. INQUIRY FORM DISPATCHER
+       ======================================================== */
+    function handleInquirySubmit(e) {
+      e.preventDefault();
+      const name = document.getElementById('inq-name').value.trim();
+      const email = document.getElementById('inq-email').value.trim();
+      const tier = document.getElementById('inq-tier').value;
+      const timeline = document.getElementById('inq-timeline').value;
+      const details = document.getElementById('inq-details').value.trim();
+
+      const msg = encodeURIComponent(`*New Project Inquiry for arweb_*
+
+Name: ${name}
+Email: ${email}
+Package Tier: ${tier}
+Target Timeline: ${timeline}
+Project Details: ${details}`);
+      window.open(`https://wa.me/919929606623?text=${msg}`, '_blank');
+    }
   </script>
 
 </body>
